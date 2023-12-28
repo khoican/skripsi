@@ -1,4 +1,4 @@
-import Navigation from "../../components/Navbar/Navigation";
+import Navigation from "../../components/user/Navbar/Navigation";
 
 function Home() {
     return (
