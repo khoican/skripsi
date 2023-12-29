@@ -1,4 +1,4 @@
-import LogoImage from "../../assets/img/Logo Image.png";
+import LogoImage from "../../../assets/img/Logo Image.png";
 
 const Logo = () => {
     return (

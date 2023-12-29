@@ -1,28 +1,13 @@
-import { Squares2X2Icon, ShoppingBagIcon, ShoppingCartIcon, ListBulletIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
-import LogoIMG from "../../components/SidebarDashboard/Logo"
-import SidebarMenu from "../../components/SidebarDashboard/listMenu"
-import DropdownMenu from "../../components/DropdownProfileMenu/Dropdown"
+import { ShoppingBagIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import DropdownMenu from "../../components/Dashboard/DropdownProfileMenu"
+import Sidebar from "../../components/Dashboard/Sidebar"
+import ListBestSellerProduct from "../../components/Dashboard/ListBestSellerProduct"
+import Table from '../../components/Dashboard/Table';
 
 function Dashboard() {
     return (
         <>
-            <div
-                id="sideNav"
-                className="lg:block hidden bg-white w-64 h-screen fixed rounded-none border-none">
-                <div className="pt-4 pr-4 pl-4">
-                    <div className="flex justify-center pb-4">
-                        <LogoIMG />
-                    </div>
-                    <h2 className="text-center font-bold text-lg">AS-SAKINAH MART</h2>
-                    <p className="text-center font-bold text-sm">KOPWAN AISIYAH JEMBER</p>
-                </div>
-                <div className="p-4 space-y-4">
-                    <SidebarMenu menu="Dashboard" icon={<Squares2X2Icon className='w-5'/>} variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-dark-green active:bg-dark-green" />
-                    <SidebarMenu menu="Product" icon={<ShoppingBagIcon className='w-5'/>} variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"/>
-                    <SidebarMenu menu="Order" icon={<ShoppingCartIcon className='w-5'/>} variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"/>
-                    <SidebarMenu menu="Category" icon={<ListBulletIcon className='w-5'/>} variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"/>
-                </div>
-            </div>
+            <Sidebar/>
 
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-2">
                 <div className="border-none p-3 mb-4 shadow-md">
@@ -80,59 +65,26 @@ function Dashboard() {
                     </div>
                 </div>
 
+                <div className="mt-5 gap-6 flex justify-center items-stretch">
+                    <div className="bg-white shadow-md rounded-md w-full">
+                        <h1 className="font-bold text-lg">Chart</h1>
+                    </div>
+
+                    <div className="p-4 bg-white shadow-md rounded-lg w-2/3">
+                        <div className="pb-5">
+                            <h1 className="font-bold text-2xl">Best Seller</h1>
+                        </div>
+                        <ListBestSellerProduct/>   
+                        <ListBestSellerProduct/>   
+                        <ListBestSellerProduct/>   
+                    </div>
+                </div>
+
                 <div className="bg-white rounded-lg p-4 shadow-md my-4">
-                    <table className="table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-2 text-left border-b-2 w-full">
-                                    <h2 className="text-ml font-bold text-gray-600">
-                                        Transacciones
-                                    </h2>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="border-b w-full">
-                                <td className="px-4 py-2 text-left align-top w-1/2">
-                                    <div>
-                                        <h2>Comercio</h2>
-                                        <p>24/07/2023</p>
-                                    </div>
-                                </td>
-                                <td className="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p>
-                                        <span>150$</span>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr className="border-b w-full">
-                                <td className="px-4 py-2 text-left align-top w-1/2">
-                                    <div>
-                                        <h2>Comercio</h2>
-                                        <p>24/06/2023</p>
-                                    </div>
-                                </td>
-                                <td className="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p>
-                                        <span>15$</span>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr className="border-b w-full">
-                                <td className="px-4 py-2 text-left align-top w-1/2">
-                                    <div>
-                                        <h2>Comercio</h2>
-                                        <p>02/05/2023</p>
-                                    </div>
-                                </td>
-                                <td className="px-4 py-2 text-right text-cyan-500 w-1/2">
-                                    <p>
-                                        <span>50$</span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="pb-4">
+                        <h2 className="font-bold text-2xl">Order</h2>
+                    </div>    
+                    <Table/>
                 </div>
             </div>
         </>
