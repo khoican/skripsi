@@ -1,8 +1,8 @@
 import { ShoppingBagIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
-import DropdownMenu from "../../components/Dashboard/DropdownProfileMenu"
-import Sidebar from "../../components/Dashboard/Sidebar"
-import ListBestSellerProduct from "../../components/Dashboard/ListBestSellerProduct"
-import Table from '../../components/Dashboard/Table';
+import Sidebar from '../../components/Dashboard/Sidebar'
+import ListBestSellerProduct from '../../components/Dashboard/ListBestSellerProduct'
+import Table from '../../components/Dashboard/Table'
+import Header from '../../components/Dashboard/Header'
 
 function Dashboard() {
     return (
@@ -10,27 +10,16 @@ function Dashboard() {
             <Sidebar/>
 
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-2">
-                <div className="border-none p-3 mb-4 shadow-md">
-                    <div className="flex justify-between">
-                        <div className="justify-center">
-                            <h1 className="font-bold text-3xl">Dashboard</h1>
-                            <p className="text-gray-400">Admin/Dashboard</p>
-                        </div>
-
-                        <div className="items-center">
-                            <DropdownMenu/>
-                        </div>
-                    </div>
-                </div>
+                <Header title="Dashboard" linkPage="Dashboard"/>
 
                 <div className="lg:flex gap-4 items-stretch">
                     <div className="bg-white md:p-2 p-6 rounded-lg border border-gray-200 ring-dark-green ring-2 mb-4 lg:mb-0 shadow-md shadow-dark-green lg:w-[35%]">
                         <div className="flex justify-between h-full">
                             <div className="m-auto">
                                 <p className="font-semibold py-2">Products</p>
-                                <h2 className="text-3xl font-bold text-dark-green pb-2">
+                                <p className="text-3xl font-bold text-dark-green pb-2">
                                     20
-                                </h2>
+                                </p>
                             </div>
                             <div className="m-auto">
                                 <ShoppingBagIcon className="w-10 text-dark-green"/>
