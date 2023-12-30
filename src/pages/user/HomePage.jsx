@@ -1,15 +1,15 @@
-import { Fragment } from "react"
-import Navbar from "../../components/user/fragments/Navbar/Index"
-import Home from "../../components/user/layouts/Home"
+import { Fragment } from 'react';
+import Navbar from '../../components/user/fragments/Navbar/Index';
+import Home from '../../components/user/layouts/Home';
 
 const HomePage = () => {
-    return (
-        <Fragment>
-            <Navbar/>
+	return (
+		<Fragment>
+			<Navbar />
 
-            <Home />
-        </Fragment>
-    )
-}
+			<Home />
+		</Fragment>
+	);
+};
 
-export default HomePage
+export default HomePage;
