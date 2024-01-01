@@ -17,6 +17,7 @@ export default {
 			colors: {
 				primary: '#046307',
 				green: '#79C314',
+				red: '#E45F2B'
 			},
 		},
 	},

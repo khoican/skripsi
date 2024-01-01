@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import Category from '../elements/Category/Index';
+import Product from '../fragments/Product/Index';
 
 const Home = () => {
 	return (
@@ -7,7 +8,7 @@ const Home = () => {
 			<main className="flex gap-20 px-28 mt-10">
 				<Category />
 
-				<h1>Home</h1>
+				<Product />
 			</main>
 		</Fragment>
 	);
