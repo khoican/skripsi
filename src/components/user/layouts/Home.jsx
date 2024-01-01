@@ -9,8 +9,13 @@ const Home = () => {
 				<Category />
 
 				<main className='w-9/12'>
-					<h1 className='text-montserrat font-bold text-xl mb-5'>Produk Terlaris</h1>
-					<Product />
+					<div className='mb-20'>
+						<h1 className='text-montserrat font-bold text-xl mb-5'>Produk Terlaris</h1>
+					</div>
+					<div>
+						<h1 className='text-montserrat font-bold text-xl mb-5'>Semua Produk</h1>
+						<Product />
+					</div>
 				</main>
 			</main>
 		</Fragment>
