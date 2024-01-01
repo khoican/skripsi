@@ -12,7 +12,7 @@ const Product = () => {
     }, [])
     return (
         <Fragment>
-            <main className="flex flex-wrap gap-4">
+            <main className="flex flex-wrap gap-4 mb-5">
                 { product.map((item, index) => (
                     <CardProduct key={index}>
                         <CardProduct.Header />
