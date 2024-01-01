@@ -5,10 +5,13 @@ import Product from '../fragments/Product/Index';
 const Home = () => {
 	return (
 		<Fragment>
-			<main className="flex gap-20 px-28 mt-10">
+			<main className="flex gap-14 px-28 mt-10">
 				<Category />
 
-				<Product />
+				<main className='w-9/12'>
+					<h1 className='text-montserrat font-bold text-xl mb-5'>Produk Terlaris</h1>
+					<Product />
+				</main>
 			</main>
 		</Fragment>
 	);

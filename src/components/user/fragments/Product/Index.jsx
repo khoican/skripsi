@@ -13,8 +13,8 @@ const Product = () => {
     return (
         <Fragment>
             <main className="flex flex-wrap gap-4">
-                { product.map((item) => (
-                    <CardProduct key={item}>
+                { product.map((item, index) => (
+                    <CardProduct key={index}>
                         <CardProduct.Header />
                         <CardProduct.Body name={item.name} price={item.price} />
                     </CardProduct>
