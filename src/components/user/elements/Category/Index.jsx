@@ -27,7 +27,7 @@ const Category = () => {
 			{ categories.length > 0 && categories.map((category, index) => (
 				<CategoryDropdown key={index} category={category.name}>
 					{ subCategories.filter((subCategory) => subCategory.category.id === category.id).map((item, index) => (
-						<CategoryDropdown.SubCategory key={index} subCategory={item.name} />
+						<CategoryDropdown.SubCategory key={index} subCategory={item.name} id={item.id} />
 					))}
 				</CategoryDropdown>
 			))}

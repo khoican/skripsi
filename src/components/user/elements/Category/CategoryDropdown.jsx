@@ -5,6 +5,7 @@ import {
 	ListBulletIcon,
 } from '@heroicons/react/24/solid';
 import { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CategoryDropdown = (props) => {
 	const { category, children } = props
@@ -29,14 +30,16 @@ const CategoryDropdown = (props) => {
 };
 
 const SubCategory = (props) => {
-	const { subCategory = 'Sub Kategori' } = props;
+	const { subCategory = 'Sub Kategori', id } = props;
 
 	return (
 		<Fragment>
 			<div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-green hover:text-white">
-				<div className="flex items-center gap-2.5 px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b-green">
-					<HashtagIcon className="w-5 h-5" />
-					<p>{subCategory}</p>
+				<div className="px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b-green">
+					<Link to={`/products/sub=${id}`} className="flex items-center gap-2.5">
+						<HashtagIcon className="w-5 h-5" />
+						<p>{subCategory}</p>
+					</Link>
 				</div>
 			</div>
 		</Fragment>
