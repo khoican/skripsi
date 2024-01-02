@@ -7,7 +7,7 @@ import FooterComponent from "../../elements/FooterComponent/Index"
 const Footer = () => {
     return (
         <Fragment>
-            <footer className="mt-20 bg-primary text-white px-28 py-10">
+            <footer className="mt-20 bg-primary text-white px-28 py-10 relatiive bottom-0">
                 <div className="flex justify-between py-5 border-b border-b-white">
                     <FooterComponent title="Kontak Kami">
                         <FooterComponent.Menu style="mt-8">

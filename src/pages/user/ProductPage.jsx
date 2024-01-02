@@ -1,5 +1,15 @@
+import { Fragment } from 'react';
+import Navbar from '../../components/user/fragments/Navbar/Index';
+import Footer from '../../components/user/fragments/Footer/Index';
+
 const ProductPage = () => {
-	return <h1>ProductPage</h1>;
+	return (
+		<Fragment>
+			<Navbar />
+
+			<Footer />
+		</Fragment>
+	);
 };
 
 export default ProductPage;
