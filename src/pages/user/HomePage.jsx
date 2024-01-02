@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Navbar from '../../components/user/fragments/Navbar/Index';
-import Home from '../../components/user/layouts/Home';
+import HomeLayouts from '../../components/user/layouts/HomeLayouts';
 import Footer from '../../components/user/fragments/Footer/Index';
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
 		<Fragment>
 			<Navbar />
 
-			<Home />
+			<HomeLayouts />
 
 			<Footer />
 		</Fragment>

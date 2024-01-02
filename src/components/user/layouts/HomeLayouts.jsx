@@ -3,7 +3,7 @@ import Category from '../elements/Category/Index';
 import Product from '../fragments/Product/Index';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const HomeLayouts = () => {
 	return (
 		<Fragment>
 			<main className="flex gap-14 px-28 mt-10">
@@ -24,4 +24,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default HomeLayouts;
