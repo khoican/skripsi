@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const HomeLayouts = () => {
 	return (
 		<Fragment>
-			<main className="flex gap-14 px-28 mt-10">
+			<main className="w-full flex gap-14 px-28 mt-10">
 				<Category />
 
 				<main className='w-9/12'>
