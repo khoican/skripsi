@@ -2,39 +2,38 @@ import { Fragment } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import { Link } from "react-router-dom"
+import FooterComponent from "../../elements/FooterComponent/Index"
 
 const Footer = () => {
     return (
         <Fragment>
             <footer className="mt-20 bg-primary text-white px-28 py-10">
                 <div className="flex justify-between py-5 border-b border-b-white">
-                    <div>
-                        <h1 className="font-montserrat text-2xl font-bold">Kontak Kami</h1>
+                    <FooterComponent title="Kontak Kami">
+                        <FooterComponent.Menu style="mt-8">
+                            <FooterComponent.SubTitle subTitle="Alamat" />
+                            <p className="font-light text-sm">Jl. Rotawu 2 No. 38 Jember - Jawa Timur</p>
+                        </FooterComponent.Menu>
 
-                        <div className="mt-8">
-                            <h3 className="font-montserrat text-md font-semibold">Alamat</h3>
-                            <p className="text-md font-light">Jl. Rotawu 2 No. 38 Jember - Jawa Timur</p>
-                        </div>
+                        <FooterComponent.Menu style="mt-5">
+                            <FooterComponent.SubTitle subTitle="Sosial Media" />
 
-                        <div className="mt-5">
-                            <h3 className="font-montserrat text-md font-semibold">Sosial Media</h3>
-                            <div className="flex gap-3 mt-2">
+                            <div className="flex gap-2 mt-2">
                                 <IconStyle icon={faWhatsapp} />
                                 <IconStyle icon={faInstagram} />
                             </div>
-                        </div>
-                    </div>
+                        </FooterComponent.Menu>
+                    </FooterComponent>
 
-                    <div className="text-end">
-                        <h1 className="font-montserrat text-2xl font-bold">As-Sakinah Mart</h1>
-
-                        <div className="mt-8 flex flex-col">
+                    <FooterComponent title="As-Sakinah Mart" style="text-end">
+                        <FooterComponent.Menu style="mt-8 flex flex-col gap-2">
                             <Link to={'/'}>Beranda</Link>
                             <Link to={'/products'}>Produk</Link>
                             <Link to={'/cart'}>Keranjang</Link>
-                        </div>
-                    </div>
+                        </FooterComponent.Menu>
+                    </FooterComponent>
                 </div>
+                    
                 <div className="py-2">
                     <p className="text-sm">As-Sakinah Mart @ 2023</p>
                 </div>
