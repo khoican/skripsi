@@ -36,7 +36,7 @@ const SubCategory = (props) => {
 		<Fragment>
 			<div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-green hover:text-white">
 				<div className="px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b-green">
-					<Link to={`/products/sub=${id}`} className="flex items-center gap-2.5">
+					<Link to={`/products/${id}`} className="flex items-center gap-2.5">
 						<HashtagIcon className="w-5 h-5" />
 						<p>{subCategory}</p>
 					</Link>
