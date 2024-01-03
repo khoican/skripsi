@@ -9,10 +9,10 @@ const ProductLayouts = () => {
     const [ product, setProduct ] = useState([])
 
     useEffect(() => {
-        getProducts((data) => {
+        getProducts(id,(data) => {
             setProduct(data)
         })
-    }, [])
+    }, [id])
     
     return (
         <Fragment>
@@ -22,7 +22,7 @@ const ProductLayouts = () => {
                 <main className="w-9/12">
                     <div>
 						<h1 className='text-montserrat font-bold text-xl mb-5'>Menampilkan {' '}
-                        { id != null ? product.filter((item) => item.subCategoryId === id).length : product.length }
+                        { product.length }
                         {' '} Produk</h1>
 						<Product />
 					</div>

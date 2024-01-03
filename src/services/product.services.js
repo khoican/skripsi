@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getProducts = (callback) => {
-    axios.get("http://localhost:3001/product")
+export const getProducts = (id, callback) => {
+    axios.get(`http://localhost:3001/product${id == null ? "" : `?subCategoryId=${id}`}`)
         .then((res) => {
             callback(res.data)
         })
