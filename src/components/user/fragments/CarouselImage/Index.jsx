@@ -3,14 +3,23 @@ import { Carousel } from "flowbite-react"
 
 const CarouselImage = () => {
     return (
-        <Fragment>
+        <div className="w-full h-96 mb-5">
             <Carousel>
-                <div>
-                    <img src="https://picsum.photos/200 " alt="" />
-                    <img src="https://picsum.photos/200 " alt="" />
-                </div>
+                <Image />
+                <Image />
+                <Image />
+                <Image />
             </Carousel>
+        </div>
+    )
+}
+
+const Image = () => {
+    return (
+        <Fragment>
+            <img src="https://picsum.photos/200 " alt="" className="w-full h-full object-cover"/>
         </Fragment>
     )
 }
+
 export default CarouselImage
