@@ -14,9 +14,11 @@ const CardProduct = ( props ) => {
     )
 }
 
-const Header = () => {
+const Header = (props) => {
+    const { id } = props
+
     return (
-        <Link to={'/'}>
+        <Link to={`/products/details/${id}`}>
             <div className="w-full h-60 overflow-hidden">
                 <img src="https://picsum.photos/200/300" alt="product" className="w-full object-cover hover:scale-150"/>
             </div>
@@ -38,7 +40,7 @@ const Body = ( props ) => {
                 <h1 className="font-montserrat font-semibold mb-5">{name}</h1>
                 <NumericFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} className="text-red text-xl" />
             </div>
-            <Link to={'/'} onClick={handleIcon} >
+            <Link to={`/products`} onClick={handleIcon} >
                 { icon ? <CartSolid className="w-8 h-8 text-green" /> : <CartOutline className="w-8 h-8 text-green" /> }
             </Link>
         </div>

@@ -17,7 +17,7 @@ const Product = () => {
             <main className="flex flex-wrap gap-4 mb-5">
                 { product.map((item, index) => (
                     <CardProduct key={index}>
-                        <CardProduct.Header />
+                        <CardProduct.Header  id={item.id} />
                         <CardProduct.Body name={item.name} price={item.price} />
                     </CardProduct>
                 ))}

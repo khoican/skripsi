@@ -10,8 +10,8 @@ export const getProducts = (id, callback) => {
         })
 }
 
-export const getProductBySubCategory = (callback) => {
-    axios.get("http://localhost:3001/product?subCategoryId=d42292cb-3598-450d-afd4-e07b79d5ddaf")
+export const getProductById = (id, callback) => {
+    axios.get(`http://localhost:3001/product?id=${id}`)
         .then((res) => {
             callback(res.data)
         })
