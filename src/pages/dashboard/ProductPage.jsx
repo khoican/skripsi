@@ -4,6 +4,8 @@ import Sidebar from "../../components/Dashboard/Sidebar/index";
 import DataTable from "react-data-table-component";
 import Input from "../../components/Dashboard/Input";
 import Button from "../../components/Dashboard/Button";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import SearchBar from "../../components/Dashboard/SearchBar";
 
 const columns = [
     {
@@ -108,14 +110,8 @@ function DashboardProduct() {
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-5">
                 <Header title="Product" linkPage="Product" />
                 <div className="flex justify-between mt-5">
-                    <div className="">
-                        <form action="">
-                            <Input
-                                type="text"
-                                name="productname"
-                                placeholder="Product Name"
-                            />
-                        </form>
+                    <div className="my-auto w-2/4">
+                        <SearchBar />
                     </div>
 
                     <div className="flex">
