@@ -1,11 +1,11 @@
-import Header from "../../../components/Dashboard/Header";
-import Sidebar from "../../../components/Dashboard/Sidebar/index";
-import Input from "../../../components/Dashboard/Input";
-import Label from "../../../components/Dashboard/Input/Label";
-import Select from "../../../components/Dashboard/Select";
-import Option from "../../../components/Dashboard/Select/option";
-import Textarea from "../../../components/Dashboard/Textarea";
-import ImageProduct from "../../../../public/images/Rectangle 11.png";
+import Header from "../../components/Dashboard/Header";
+import Sidebar from "../../components/Dashboard/Sidebar/index";
+import Input from "../../components/Dashboard/Input";
+import Label from "../../components/Dashboard/Input/Label";
+import Select from "../../components/Dashboard/Select";
+import Option from "../../components/Dashboard/Select/option";
+import Textarea from "../../components/Dashboard/Textarea";
+import ImageProduct from "../../../public/images/Rectangle 11.png";
 
 const CategoryData = [
     {

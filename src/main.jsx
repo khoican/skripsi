@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home/Home";
-import Dashboard from "./pages/dashboard/index";
-import DashboardProduct from "./pages/dashboard/product";
-import DashboardProductDetails from "./pages/dashboard/product/product-details";
+import Dashboard from "./pages/dashboard";
+import DashboardProduct from "./pages/dashboard/ProductPage";
+import DashboardProductDetails from "./pages/dashboard/ProductDetailsPage";
+import DashboardUser from "./pages/dashboard/UserPage";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: "/Dashboard",
         element: <Dashboard />,
+    },
+    {
+        path: "/Dashboard/User",
+        element: <DashboardUser />,
     },
     {
         path: "/Dashboard/Product",

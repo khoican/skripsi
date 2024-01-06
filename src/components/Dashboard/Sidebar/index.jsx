@@ -1,11 +1,5 @@
-import {
-    Squares2X2Icon,
-    ShoppingBagIcon,
-    ShoppingCartIcon,
-    ListBulletIcon,
-} from "@heroicons/react/24/solid";
-import SidebarListMenu from "./listMenu";
 import LogoImage from "./Logo";
+import Navigation from "./Navigation";
 
 const Sidebar = () => {
     return (
@@ -25,26 +19,7 @@ const Sidebar = () => {
                     </p>
                 </div>
                 <div className="p-4 space-y-4">
-                    <SidebarListMenu
-                        menu="Dashboard"
-                        icon={<Squares2X2Icon className="w-5" />}
-                        variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-dark-green active:bg-dark-green"
-                    />
-                    <SidebarListMenu
-                        menu="Product"
-                        icon={<ShoppingBagIcon className="w-5" />}
-                        variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"
-                    />
-                    <SidebarListMenu
-                        menu="Order"
-                        icon={<ShoppingCartIcon className="w-5" />}
-                        variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"
-                    />
-                    <SidebarListMenu
-                        menu="Category"
-                        icon={<ListBulletIcon className="w-5" />}
-                        variants="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-gray"
-                    />
+                    <Navigation />
                 </div>
             </div>
         </>

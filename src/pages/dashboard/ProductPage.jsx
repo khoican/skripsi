@@ -1,9 +1,9 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
-import Header from "../../../components/Dashboard/Header";
-import Sidebar from "../../../components/Dashboard/Sidebar/index";
+import Header from "../../components/Dashboard/Header";
+import Sidebar from "../../components/Dashboard/Sidebar/index";
 import DataTable from "react-data-table-component";
-import Input from "../../../components/Dashboard/Input";
-import Button from "../../../components/Dashboard/Button";
+import Input from "../../components/Dashboard/Input";
+import Button from "../../components/Dashboard/Button";
 
 const columns = [
     {
