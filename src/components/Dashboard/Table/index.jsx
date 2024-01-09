@@ -1,7 +1,23 @@
-const Table = () => {
+import DataTable from "react-data-table-component";
+import Button from "../Button";
+
+const Table = (props) => {
+    const { columns, data } = props;
     return (
         <>
-            <table className="table-auto w-full border-separate border-spacing-3">
+            <DataTable
+                columns={columns}
+                data={data}
+                pagination
+                responsive
+                columnsDefs={[
+                    {
+                        targets: "_all",
+                        className: "text-center",
+                    },
+                ]}
+            />
+            {/* <table className="table-auto w-full border-separate border-spacing-3">
                 <thead className="text-left border-b-2 border-black">
                     <tr>
                         <th>No</th>
@@ -41,7 +57,7 @@ const Table = () => {
                         <td>Details</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
         </>
     );
 };

@@ -12,21 +12,6 @@ const columns = [
         sortable: true,
     },
     {
-        name: "Email",
-        selector: (row) => row.email,
-        sortable: true,
-    },
-    {
-        name: "Password",
-        selector: (row) => row.password,
-        sortable: true,
-    },
-    {
-        name: "Address",
-        selector: (row) => row.address,
-        sortable: true,
-    },
-    {
         name: "Actions",
         cell: (row) => (
             <>
@@ -44,41 +29,29 @@ const columns = [
 const data = [
     {
         id: 1,
-        name: "John Doe",
-        password: "this is a password",
-        email: "jK5Jh@example.com",
-        address: "123 Main St",
+        name: "Sub Category 1",
     },
     {
         id: 2,
-        name: "Jane Doe",
-        password: "this is a password",
-
-        email: "jK5Jh@example.com",
-        address: "123 Main St",
+        name: "Sub Category 2",
     },
     {
         id: 3,
-        name: "Bob Smith",
-        password: "this is a password",
-        email: "jK5Jh@example.com",
-        address: "123 Main St",
+        name: "Sub Category 3",
     },
     {
         id: 4,
-        name: "Alice Johnson",
-        password: "this is a password",
-        email: "jK5Jh@example.com",
-        address: "123 Main St",
+        name: "Sub Category 4",
     },
 ];
 
-function DashboardUser() {
+function DashboardSubCategory() {
     return (
         <>
             <Sidebar />
+
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-5">
-                <Header title="User" linkPage="User" />
+                <Header title="SubCategory" linkPage="SubCategory" />
                 <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
                         <SearchInput />
@@ -103,4 +76,4 @@ function DashboardUser() {
     );
 }
 
-export default DashboardUser;
+export default DashboardSubCategory;

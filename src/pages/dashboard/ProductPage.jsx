@@ -1,11 +1,9 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, TrashIcon, PencilIcon } from "@heroicons/react/24/solid";
 import Header from "../../components/Dashboard/Header";
 import Sidebar from "../../components/Dashboard/Sidebar/index";
-import DataTable from "react-data-table-component";
-import Input from "../../components/Dashboard/Input";
 import Button from "../../components/Dashboard/Button";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import SearchBar from "../../components/Dashboard/SearchBar";
+import SearchInput from "../../components/Dashboard/SearchInput";
+import Table from "../../components/Dashboard/Table";
 
 const columns = [
     {
@@ -30,8 +28,16 @@ const columns = [
     },
     {
         name: "Actions",
-        selector: (row) => row.actions,
-        sortable: true,
+        cell: (row) => (
+            <>
+                <Button onClick={() => handleEdit(row.id)}>
+                    <PencilIcon className="w-8 pr-2" />
+                </Button>
+                <Button onClick={() => handleDelete(row.id)}>
+                    <TrashIcon className="w-8 pl-2" />
+                </Button>
+            </>
+        ),
     },
 ];
 
@@ -42,7 +48,6 @@ const data = [
         price: "Rp. 100.000,-",
         sold: "1",
         stock: "11",
-        actions: "Actions",
     },
     {
         id: 2,
@@ -50,7 +55,6 @@ const data = [
         price: "Rp. 200.000,-",
         sold: "2",
         stock: "15",
-        actions: "Actions",
     },
     {
         id: 3,
@@ -58,7 +62,6 @@ const data = [
         price: "Rp. 300.000,-",
         sold: "3",
         stock: "22",
-        actions: "Actions",
     },
     {
         id: 4,
@@ -66,7 +69,6 @@ const data = [
         price: "Rp. 400.000,-",
         sold: "4",
         stock: "20",
-        actions: "Actions",
     },
     {
         id: 5,
@@ -74,7 +76,6 @@ const data = [
         price: "Rp. 500.000,-",
         sold: "5",
         stock: "10",
-        actions: "Actions",
     },
     {
         id: 6,
@@ -82,7 +83,6 @@ const data = [
         price: "Rp. 600.000,-",
         sold: "6",
         stock: "12",
-        actions: "Actions",
     },
     {
         id: 7,
@@ -90,7 +90,6 @@ const data = [
         price: "Rp. 700.000,-",
         sold: "7",
         stock: "17",
-        actions: "Actions",
     },
     {
         id: 8,
@@ -98,20 +97,32 @@ const data = [
         price: "Rp. 800.000,-",
         sold: "8",
         stock: "18",
-        actions: "Actions",
     },
 ];
 
 function DashboardProduct() {
+    // const [edit, setEdit] = useState(false);
+    // const [deleteId, setDeleteId] = useState(null);
+
+    // const handleEdit = (id) => {
+    //     setEdit(true);
+    //     setDeleteId(id);
+    // };
+
+    // const handleDelete = () => {
+    //     // Implement the delete logic here
+    //     setEdit(false);
+    // };
+
     return (
         <>
             <Sidebar />
 
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-5">
                 <Header title="Product" linkPage="Product" />
-                <div className="flex justify-between mt-5">
+                <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
-                        <SearchBar />
+                        <SearchInput />
                     </div>
 
                     <div className="flex">
@@ -123,13 +134,10 @@ function DashboardProduct() {
                         </Button>
                     </div>
                 </div>
-                <div className="mt-2 w-full bg-white shadow-lg px-2">
-                    <DataTable
-                        columns={columns}
-                        data={data}
-                        pagination
-                        responsive
-                    />
+                <div className="my-10 px-7">
+                    <div className="mt-2 w-full bg-white shadow-lg px-2">
+                        <Table data={data} columns={columns} />
+                    </div>
                 </div>
             </div>
         </>
