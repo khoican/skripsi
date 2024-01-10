@@ -1,5 +1,4 @@
 import CategoryDropdown from "./CategoryDropdown";
-import { useState } from "react";
 
 const categories = [
     {
@@ -33,9 +32,6 @@ const subCategories = [
 const Category = () => {
     return (
         <div className="w-full">
-            {/* <div className="w-full px-4 py-4 bg-slate-300 rounded-t-md">
-                <h1 className="font-montserrat font-semibold">KATEGORI</h1>
-            </div> */}
             {categories.map((category, index) => (
                 <CategoryDropdown key={index} category={category.name}>
                     {subCategories
