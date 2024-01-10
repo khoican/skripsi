@@ -62,16 +62,6 @@ const Navigation = () => {
                 <span>{<ListBulletIcon className="w-6" />}</span>
                 <p className="-mr-1 font-medium">Category</p>
             </Link>
-            <Link
-                to="/Dashboard/SubCategory"
-                className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/SubCategory"
-                        ? "bg-dark-green text-white"
-                        : "text-gray"
-                } `}>
-                <span>{<ListBulletIcon className="w-6" />}</span>
-                <p className="-mr-1 font-medium">SubCategory</p>
-            </Link>
         </>
     );
 };
