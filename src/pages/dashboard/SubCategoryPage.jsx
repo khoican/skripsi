@@ -1,9 +1,9 @@
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
-import Button from "../../components/Dashboard/Button";
-import Header from "../../components/Dashboard/Header";
-import SearchInput from "../../components/Dashboard/SearchInput";
-import Sidebar from "../../components/Dashboard/Sidebar";
-import Table from "../../components/Dashboard/Table";
+import Button from "../../components/Dashboard/Elements/Button";
+import Header from "../../components/Dashboard/Elements/Header";
+import SearchInput from "../../components/Dashboard/Elements/SearchInput";
+import Sidebar from "../../components/Dashboard/Elements/Sidebar";
+import Table from "../../components/Dashboard/Elements/Table";
 
 const columns = [
     {

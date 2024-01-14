@@ -1,9 +1,9 @@
 const Label = (props) => {
-    const { htmlFor, title, variants } = props;
+    const { htmlFor, children, variants } = props;
     return (
         <>
             <label className={variants} htmlFor={htmlFor}>
-                {title}
+                {children}
             </label>
         </>
     );

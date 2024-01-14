@@ -1,4 +1,4 @@
-import BestSellerImage from "../../../../public/images/Rectangle 9.png";
+import BestSellerImage from "../../../../../public/images/Rectangle 9.png";
 
 const ListBestSellerProduct = () => {
     return (

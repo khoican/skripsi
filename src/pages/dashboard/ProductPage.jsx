@@ -1,9 +1,10 @@
 import { PlusIcon, TrashIcon, PencilIcon } from "@heroicons/react/24/solid";
-import Header from "../../components/Dashboard/Header";
-import Sidebar from "../../components/Dashboard/Sidebar/index";
-import Button from "../../components/Dashboard/Button";
-import SearchInput from "../../components/Dashboard/SearchInput";
-import Table from "../../components/Dashboard/Table";
+import Header from "../../components/Dashboard/Elements/Header";
+import Sidebar from "../../components/Dashboard/Elements/Sidebar/index";
+import Button from "../../components/Dashboard/Elements/Button";
+import SearchInput from "../../components/Dashboard/Elements/SearchInput";
+import Table from "../../components/Dashboard/Elements/Table";
+import { Link } from "react-router-dom";
 
 const columns = [
     {
@@ -101,19 +102,6 @@ const data = [
 ];
 
 function DashboardProduct() {
-    // const [edit, setEdit] = useState(false);
-    // const [deleteId, setDeleteId] = useState(null);
-
-    // const handleEdit = (id) => {
-    //     setEdit(true);
-    //     setDeleteId(id);
-    // };
-
-    // const handleDelete = () => {
-    //     // Implement the delete logic here
-    //     setEdit(false);
-    // };
-
     return (
         <>
             <Sidebar />
@@ -126,12 +114,14 @@ function DashboardProduct() {
                     </div>
 
                     <div className="flex">
-                        <Button
-                            type="button"
-                            variants="bg-light-green rounded-md py-2 px-3 text-white flex">
-                            Add Product{" "}
-                            <PlusIcon className="w-8 pl-2 mx-auto" />
-                        </Button>
+                        <Link to={"/Dashboard/Product/ProductDetails"}>
+                            <Button
+                                type="button"
+                                variants="bg-light-green rounded-md py-2 px-3 text-white flex">
+                                Add Product
+                                <PlusIcon className="w-8 pl-2 mx-auto" />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
                 <div className="my-10 px-7">

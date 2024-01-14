@@ -1,9 +1,9 @@
 import { ShoppingBagIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
-import Sidebar from "../../components/Dashboard/Sidebar";
-import ListBestSellerProduct from "../../components/Dashboard/ListBestSellerProduct";
-import Table from "../../components/Dashboard/Table";
-import Header from "../../components/Dashboard/Header";
-import Button from "../../components/Dashboard/Button";
+import Sidebar from "../../components/Dashboard/Elements/Sidebar";
+import ListBestSellerProduct from "../../components/Dashboard/Elements/ListBestSellerProduct";
+import Table from "../../components/Dashboard/Elements/Table";
+import Header from "../../components/Dashboard/Elements/Header";
+import Button from "../../components/Dashboard/Elements/Button";
 
 const columns = [
     {

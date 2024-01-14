@@ -1,8 +1,8 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
-import Button from "../../components/Dashboard/Button";
-import Header from "../../components/Dashboard/Header";
-import SearchInput from "../../components/Dashboard/SearchInput";
-import Sidebar from "../../components/Dashboard/Sidebar";
+import Button from "../../components/Dashboard/Elements/Button";
+import Header from "../../components/Dashboard/Elements/Header";
+import SearchInput from "../../components/Dashboard/Elements/SearchInput";
+import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 
 function DashboardOrder() {
     return (
