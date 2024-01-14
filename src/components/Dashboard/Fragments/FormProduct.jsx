@@ -7,7 +7,7 @@ import Option from "../Elements/Select/option";
 import Textarea from "../Elements/Textarea";
 import ImageProduct from "../../../../public/images/Rectangle 11.png";
 import Button from "../Elements/Button";
-import Counter from "../Counter";
+import Counter from "../Elements/Counter";
 
 const CategoryData = [
     {
