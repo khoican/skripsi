@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../Elements/Button";
+import Button from "../Button";
 
 const Counter = () => {
     const [count, setCount] = useState(0);
@@ -16,14 +16,20 @@ const Counter = () => {
 
     return (
         <>
-            <div className="flex border px-10">
-                <Button onClick={decreaseCount} variants="p">
+            <div className="flex border rounded-lg border-black">
+                <Button
+                    onClick={decreaseCount}
+                    variants="px-4 font-bold text-2xl">
                     -
                 </Button>
-                <div className="px-2">
-                    <p>{count}</p>
+                <div className="px-2 py-1">
+                    <p className="font-semibold text-2xl">{count}</p>
                 </div>
-                <Button onClick={increaseCount}>+</Button>
+                <Button
+                    onClick={increaseCount}
+                    variants="font-semibold text-2xl px-4">
+                    +
+                </Button>
             </div>
         </>
     );

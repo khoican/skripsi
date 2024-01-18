@@ -5,6 +5,7 @@ import Button from "../../components/Dashboard/Elements/Button";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Table from "../../components/Dashboard/Elements/Table";
 import { Link } from "react-router-dom";
+import Modal from "../../components/Dashboard/Elements/Modal";
 
 const columns = [
     {
@@ -29,12 +30,17 @@ const columns = [
     },
     {
         name: "Actions",
-        cell: (row) => (
+        cell: () => (
             <>
-                <Button onClick={() => handleEdit(row.id)}>
-                    <PencilIcon className="w-8 pr-2" />
-                </Button>
-                <Button onClick={() => handleDelete(row.id)}>
+                <Link to={"/Dashboard/Product/ProductDetails"}>
+                    <Button>
+                        <PencilIcon className="w-8 pr-2" />
+                    </Button>
+                </Link>
+                <Button
+                    onClick={() =>
+                        document.getElementById("delete").showModal()
+                    }>
                     <TrashIcon className="w-8 pl-2" />
                 </Button>
             </>
@@ -117,7 +123,7 @@ function DashboardProduct() {
                         <Link to={"/Dashboard/Product/ProductDetails"}>
                             <Button
                                 type="button"
-                                variants="bg-light-green rounded-md py-2 px-3 text-white flex">
+                                variants="flex bg-light-green rounded-md py-2 px-3 text-white">
                                 Add Product
                                 <PlusIcon className="w-8 pl-2 mx-auto" />
                             </Button>
@@ -127,6 +133,7 @@ function DashboardProduct() {
                 <div className="my-10 px-7">
                     <div className="mt-2 w-full bg-white shadow-lg px-2">
                         <Table data={data} columns={columns} />
+                        <Modal id="delete" />
                     </div>
                 </div>
             </div>

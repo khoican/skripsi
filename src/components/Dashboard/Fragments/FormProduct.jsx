@@ -8,6 +8,8 @@ import Textarea from "../Elements/Textarea";
 import ImageProduct from "../../../../public/images/Rectangle 11.png";
 import Button from "../Elements/Button";
 import Counter from "../Elements/Counter";
+import Modal from "../Elements/Modal";
+import ModalProduct from "./ModalProduct";
 
 const CategoryData = [
     {
@@ -51,7 +53,7 @@ const FormProduct = () => {
     return (
         <form action="">
             <div className="flex justify-between">
-                <div className="w-2/4 gap-2 rounded-lg shadow-md">
+                <div className="w-2/4">
                     <Label variants="font-semibold" htmlFor="productname">
                         Product Name
                     </Label>
@@ -115,40 +117,43 @@ const FormProduct = () => {
                         </div>
                     </div>
                     <div className="pt-4">
-                        <Label
-                            variants="font-semibold pb-2"
-                            htmlFor="productdescription">
-                            Description
-                        </Label>
-                    </div>
-                    <div className="pt-2">
-                        <Textarea
-                            className="resize-none rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
-                            name="productdescription"
-                            cols="70"
-                            rows="10"
-                        />
-                    </div>
-                    <div className="">
-                        <Label
-                            variants="font-semibold pb-2"
-                            htmlFor="productdescription"
-                            title="Description"
-                        />
+                        <div className="pb-3">
+                            <Label
+                                variants="font-semibold pb-2"
+                                htmlFor="productdescription">
+                                Description
+                            </Label>
+                        </div>
+                        <div className="pb-3">
+                            <Textarea
+                                variants="resize-none border border-dark-green rounded-lg w-full"
+                                name="productdescription"
+                                cols="66"
+                                rows="10"
+                            />
+                        </div>
                     </div>
                     <div className="flex">
-                        <div className="px-3 my">
-                            <Label>Stock</Label>
-                            <div className="">
+                        <div className="pt-3 mr-2">
+                            <Label
+                                htmlFor="productstock"
+                                variants="font-semibold">
+                                Stock
+                            </Label>
+                            <div className="pt-3">
                                 <Counter />
                             </div>
                         </div>
-                        <div className="px-3">
-                            <Label>Price</Label>
-                            <div className="pt-3">
+                        <div className="w-full pt-3 ml-2">
+                            <Label
+                                htmlFor="productprice"
+                                variants="font-semibold">
+                                Price
+                            </Label>
+                            <div className="pt-3 ">
                                 <Input
                                     type="number"
-                                    variants="rounded-lg border px-3 py-2"
+                                    variants="w-full rounded-lg border border-dark-green px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                             </div>
                         </div>
@@ -255,10 +260,16 @@ const FormProduct = () => {
                                     </div>
                                     <div className="px-2">
                                         <Button
-                                            type="submit"
-                                            variants="py-2 px-5 rounded-lg bg-light-red text-white">
+                                            type="button"
+                                            variants="py-2 px-5 rounded-lg bg-light-red text-white"
+                                            onClick={() =>
+                                                document
+                                                    .getElementById("delete")
+                                                    .showModal()
+                                            }>
                                             Delete
                                         </Button>
+                                        <ModalProduct></ModalProduct>
                                     </div>
                                     <div className="px-2">
                                         <Button

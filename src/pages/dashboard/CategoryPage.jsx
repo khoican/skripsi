@@ -4,6 +4,8 @@ import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Category from "../../components/Dashboard/Elements/Category";
+import ModalCategory from "../../components/Dashboard/Fragments/ModalCategory";
+import Input from "../../components/Dashboard/Elements/Input";
 
 function DashboardCategory() {
     return (
@@ -20,10 +22,25 @@ function DashboardCategory() {
                     <div className="">
                         <Button
                             type="button"
-                            variants="bg-light-green rounded-md py-2 px-3 text-white flex">
+                            variants="bg-light-green rounded-md py-2 px-3 text-white flex"
+                            onClick={() =>
+                                document.getElementById("add").showModal()
+                            }>
                             Add Category
                             <PlusIcon className="w-8 pl-2 mx-auto" />
                         </Button>
+                        <ModalCategory
+                            variants="bg-light-green"
+                            id="add"
+                            title="Add Category"
+                            btn="Save">
+                            <Input
+                                variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                type="text"
+                                name="categoryname"
+                                placeholder="Insert Category Name"
+                            />
+                        </ModalCategory>
                     </div>
                 </div>
                 <div className="my-10 px-7">

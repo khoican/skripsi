@@ -1,12 +1,5 @@
 import Header from "../../components/Dashboard/Elements/Header";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar/";
-import Input from "../../components/Dashboard/Elements/Input";
-import Label from "../../components/Dashboard/Elements/Input/Label";
-import Select from "../../components/Dashboard/Elements/Select";
-import Option from "../../components/Dashboard/Elements/Select/option";
-import Textarea from "../../components/Dashboard/Elements/Textarea";
-import ImageProduct from "../../../public/images/Rectangle 11.png";
-import FormProduct from "../../components/Dashboard/Fragments/FormProduct";
 import ProductDetails from "../../components/Dashboard/Layouts/ProductDetails";
 
 function DashboardProductDetails() {

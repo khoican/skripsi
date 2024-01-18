@@ -5,6 +5,7 @@ import {
     ShoppingCartIcon,
     ListBulletIcon,
     UserGroupIcon,
+    UserIcon,
 } from "@heroicons/react/24/solid";
 
 const Navigation = () => {
@@ -61,6 +62,16 @@ const Navigation = () => {
                 } `}>
                 <span>{<ListBulletIcon className="w-6" />}</span>
                 <p className="-mr-1 font-medium">Category</p>
+            </Link>
+            <Link
+                to="/Dashboard/Role"
+                className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+                    location == "/Dashboard/Role"
+                        ? "bg-dark-green text-white"
+                        : "text-gray"
+                } `}>
+                <span>{<UserIcon className="w-6" />}</span>
+                <p className="-mr-1 font-medium">Role</p>
             </Link>
         </>
     );
