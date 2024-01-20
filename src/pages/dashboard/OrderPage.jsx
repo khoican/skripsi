@@ -13,16 +13,7 @@ function DashboardOrder() {
                 <Header title="User" linkPage="User" />
                 <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
-                        <SearchInput />
-                    </div>
-
-                    <div className="flex">
-                        <Button
-                            type="button"
-                            variants="bg-light-green rounded-md py-2 px-3 text-white flex">
-                            Add Product{" "}
-                            <PlusIcon className="w-8 pl-2 mx-auto" />
-                        </Button>
+                        <SearchInput name="order" placeholder="Order" />
                     </div>
                 </div>
             </div>

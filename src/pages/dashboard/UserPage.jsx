@@ -4,6 +4,8 @@ import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Table from "../../components/Dashboard/Elements/Table";
+import { Link } from "react-router-dom";
+import ModalUser from "../../components/Dashboard/Fragments/ModalUser";
 
 const columns = [
     {
@@ -12,8 +14,8 @@ const columns = [
         sortable: true,
     },
     {
-        name: "Email",
-        selector: (row) => row.email,
+        name: "Username",
+        selector: (row) => row.username,
         sortable: true,
     },
     {
@@ -27,13 +29,31 @@ const columns = [
         sortable: true,
     },
     {
+        name: "Phone Number",
+        selector: (row) => row.phonenumber,
+        sortable: true,
+    },
+    {
+        name: "Role",
+        selector: (row) => row.role,
+        sortable: true,
+    },
+    {
+        name: "Token",
+        selector: (row) => row.token,
+        sortable: true,
+    },
+    {
         name: "Actions",
         cell: (row) => (
             <>
                 <Button onClick={() => handleEdit(row.id)}>
                     <PencilIcon className="w-8 pr-2" />
                 </Button>
-                <Button onClick={() => handleDelete(row.id)}>
+                <Button
+                    onClick={() =>
+                        document.getElementById("delete").showModal()
+                    }>
                     <TrashIcon className="w-8 pl-2" />
                 </Button>
             </>
@@ -46,30 +66,41 @@ const data = [
         id: 1,
         name: "John Doe",
         password: "this is a password",
-        email: "jK5Jh@example.com",
+        username: "this is username",
         address: "123 Main St",
+        phonenumber: "082312512312",
+        role: "Admin",
+        token: "this is a token",
     },
     {
         id: 2,
         name: "Jane Doe",
         password: "this is a password",
-
-        email: "jK5Jh@example.com",
+        username: "this is username",
         address: "123 Main St",
+        phonenumber: "082312512312",
+        role: "Admin",
+        token: "this is a token",
     },
     {
         id: 3,
         name: "Bob Smith",
         password: "this is a password",
-        email: "jK5Jh@example.com",
+        username: "this is username",
         address: "123 Main St",
+        phonenumber: "082312512312",
+        role: "Guest",
+        token: "this is a token",
     },
     {
         id: 4,
         name: "Alice Johnson",
         password: "this is a password",
-        email: "jK5Jh@example.com",
+        username: "this is username",
         address: "123 Main St",
+        phonenumber: "082312512312",
+        role: "Member",
+        token: "this is a token",
     },
 ];
 
@@ -81,21 +112,24 @@ function DashboardUser() {
                 <Header title="User" linkPage="User" />
                 <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
-                        <SearchInput />
+                        <SearchInput name="username" placeholder="User name" />
                     </div>
 
                     <div className="flex">
-                        <Button
-                            type="button"
-                            variants="bg-light-green rounded-md py-2 px-3 text-white flex">
-                            Add Product{" "}
-                            <PlusIcon className="w-8 pl-2 mx-auto" />
-                        </Button>
+                        <Link to="/Dashboard/User/UserDetails">
+                            <Button
+                                type="button"
+                                variants="bg-light-green rounded-md py-2 px-3 text-white flex">
+                                Add User
+                                <PlusIcon className="w-8 pl-2 mx-auto" />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
                 <div className="my-10 px-7">
                     <div className="mt-2 w-full bg-white shadow-lg px-2">
                         <Table data={data} columns={columns} />
+                        <ModalUser id="delete" />
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import Button from "../Elements/Button";
 import Modal from "../Elements/Modal";
 
-const ModalCategory = (props) => {
+function ModalRole(props) {
     const { children, title, btn, id, variants } = props;
     return (
         <>
@@ -31,6 +31,6 @@ const ModalCategory = (props) => {
             </Modal>
         </>
     );
-};
+}
 
-export default ModalCategory;
+export default ModalRole;

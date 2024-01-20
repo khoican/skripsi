@@ -1,15 +1,16 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Input from "../Input";
 
-const SearchInput = () => {
+const SearchInput = (props) => {
+    const { placeholder, name } = props;
     return (
         <>
             <form action="">
                 <Input
                     variants="w-3/4 px-5 py-1 rounded-lg ring-1 ring-dark-green"
                     type="text"
-                    name="productname"
-                    placeholder="Product Name"
+                    name={name}
+                    placeholder={placeholder}
                 />
 
                 <button className="relative right-8">

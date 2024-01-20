@@ -1,6 +1,6 @@
 import FormProduct from "../Fragments/FormProduct";
 
-const ProductDetails = () => {
+const ProductDetail = () => {
     return (
         <>
             <div className="py-6 items-stretch px-7">
@@ -10,4 +10,4 @@ const ProductDetails = () => {
     );
 };
 
-export default ProductDetails;
+export default ProductDetail;

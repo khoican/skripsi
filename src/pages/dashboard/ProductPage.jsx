@@ -5,7 +5,7 @@ import Button from "../../components/Dashboard/Elements/Button";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Table from "../../components/Dashboard/Elements/Table";
 import { Link } from "react-router-dom";
-import Modal from "../../components/Dashboard/Elements/Modal";
+import ModalProduct from "../../components/Dashboard/Fragments/ModalProduct";
 
 const columns = [
     {
@@ -116,7 +116,10 @@ function DashboardProduct() {
                 <Header title="Product" linkPage="Product" />
                 <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
-                        <SearchInput />
+                        <SearchInput
+                            name="productname"
+                            placeholder="Product Name"
+                        />
                     </div>
 
                     <div className="flex">
@@ -133,7 +136,7 @@ function DashboardProduct() {
                 <div className="my-10 px-7">
                     <div className="mt-2 w-full bg-white shadow-lg px-2">
                         <Table data={data} columns={columns} />
-                        <Modal id="delete" />
+                        <ModalProduct id="delete" />
                     </div>
                 </div>
             </div>

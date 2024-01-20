@@ -1,28 +1,30 @@
 import Button from "../Elements/Button";
 import Modal from "../Elements/Modal";
 
-const ModalCategory = (props) => {
-    const { children, title, btn, id, variants } = props;
+function ModalUser() {
     return (
         <>
-            <Modal id={id} variants="border-slate-300 w-[600px]">
+            <Modal id="delete">
                 <div className="modal-box py-3 px-9">
-                    <h3 className="font-bold text-lg pt-3 pb-6">{title}</h3>
-                    {children}
-                    <div className="modal-action py-4">
+                    <h3 className="font-bold text-lg">Alert!</h3>
+                    <p className="py-4 flex">
+                        Are you sure you want to delete
+                        <p className="px-1 font-bold">"this user"</p>?
+                    </p>
+                    <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             {/* <button className="btn">Close</button> */}
                             <div className="flex mt-2 justify-end">
                                 <Button
                                     type="submit"
-                                    variants="btn mr-2 px-4 py-2 border border-light-red rounded-lg text-light-red">
+                                    variants="btn mr-2 px-4 py-2 border border-light-red rounded-lg">
                                     Cancel
                                 </Button>
                                 <Button
                                     type="submit"
-                                    variants={`btn px-4 py-2 ${variants} rounded-lg text-white`}>
-                                    {btn}
+                                    variants="btn px-4 py-2 bg-light-red rounded-lg text-white">
+                                    Delete
                                 </Button>
                             </div>
                         </form>
@@ -31,6 +33,6 @@ const ModalCategory = (props) => {
             </Modal>
         </>
     );
-};
+}
 
-export default ModalCategory;
+export default ModalUser;
