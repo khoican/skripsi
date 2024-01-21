@@ -28,6 +28,9 @@ const Navigation = () => {
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
                     location == "/Dashboard/User"
                         ? "bg-dark-green text-white"
+                        : "text-gray" &&
+                          location == "/Dashboard/User/UserDetails"
+                        ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
                 <span>{<UserGroupIcon className="w-6" />}</span>
@@ -37,6 +40,9 @@ const Navigation = () => {
                 to="/Dashboard/Product"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
                     location == "/Dashboard/Product"
+                        ? "bg-dark-green text-white"
+                        : "text-gray" &&
+                          location == "/Dashboard/Product/ProductDetails"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>

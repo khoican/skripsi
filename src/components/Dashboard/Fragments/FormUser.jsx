@@ -27,8 +27,8 @@ const FormUser = () => {
         <>
             <form action="" method="">
                 <div className="w-2/4 rounded-md shadow-md m-auto">
-                    <div className="flex justify-center items-center gap-2 pt-2">
-                        <div>
+                    <div className="flex items-center gap-2 pt-2">
+                        <div className="w-full px-3">
                             <Label variants="font-semibold" htmlFor="name">
                                 Name
                             </Label>
@@ -41,7 +41,7 @@ const FormUser = () => {
                                 />
                             </div>
                         </div>
-                        <div>
+                        <div className="w-full px-3">
                             <Label variants="font-semibold" htmlFor="username">
                                 Username
                             </Label>

@@ -1,6 +1,6 @@
 import Header from "../../components/Dashboard/Elements/Header";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar/";
-import ProductDetail from "../../components/Dashboard/Layouts/ProductDetail";
+import ProductLayouts from "../../components/Dashboard/Layouts/ProductLayouts";
 
 function DashboardProductDetails() {
     return (
@@ -12,7 +12,7 @@ function DashboardProductDetails() {
                     title="Product Details"
                     linkPage="Product / Product Details"
                 />
-                <ProductDetail />
+                <ProductLayouts />
             </div>
         </>
     );
