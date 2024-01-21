@@ -9,14 +9,14 @@ import {
 } from "@heroicons/react/24/solid";
 
 const Navigation = () => {
-    const location = useLocation().pathname;
+    const isActive = useLocation().pathname;
 
     return (
         <>
             <Link
                 to="/Dashboard"
                 className={`relative px-4 py-3 flex items-center rounded-lg space-x-4 ${
-                    location == "/Dashboard"
+                    isActive == "/Dashboard"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
@@ -26,10 +26,10 @@ const Navigation = () => {
             <Link
                 to="/Dashboard/User"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/User"
+                    isActive == "/Dashboard/User"
                         ? "bg-dark-green text-white"
                         : "text-gray" &&
-                          location == "/Dashboard/User/UserDetails"
+                          isActive == "/Dashboard/User/UserDetails"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
@@ -39,10 +39,10 @@ const Navigation = () => {
             <Link
                 to="/Dashboard/Product"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/Product"
+                    isActive == "/Dashboard/Product"
                         ? "bg-dark-green text-white"
                         : "text-gray" &&
-                          location == "/Dashboard/Product/ProductDetails"
+                          isActive == "/Dashboard/Product/ProductDetails"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
@@ -52,7 +52,7 @@ const Navigation = () => {
             <Link
                 to="/Dashboard/Order"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/Order"
+                    isActive == "/Dashboard/Order"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
@@ -62,7 +62,7 @@ const Navigation = () => {
             <Link
                 to="/Dashboard/Category"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/Category"
+                    isActive == "/Dashboard/Category"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
@@ -72,7 +72,7 @@ const Navigation = () => {
             <Link
                 to="/Dashboard/Role"
                 className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-                    location == "/Dashboard/Role"
+                    isActive == "/Dashboard/Role"
                         ? "bg-dark-green text-white"
                         : "text-gray"
                 } `}>
