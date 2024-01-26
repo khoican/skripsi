@@ -7,12 +7,17 @@ import DashboardProductDetails from "../../pages/dashboard/ProductDetailsPage";
 import DashboardOrder from "../../pages/dashboard/OrderPage";
 import DashboardCategory from "../../pages/dashboard/CategoryPage";
 import DashboardRole from "../../pages/dashboard/RolePage";
-import LoginPage from "../../pages/dashboard/LoginPage";
+import DashboardProfile from "../../pages/dashboard/ProfilePage";
+import AuthAdmin from "../../pages/dashboard/LoginPage";
 
 export const router = createBrowserRouter([
     {
         path: "/Auth",
-        element: <LoginPage />,
+        element: <AuthAdmin />,
+    },
+    {
+        path: "/Dashboard/Profile",
+        element: <DashboardProfile />,
     },
     {
         path: "/Dashboard",

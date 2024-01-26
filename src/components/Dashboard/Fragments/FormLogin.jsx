@@ -6,8 +6,8 @@ const FormLogin = () => {
     return (
         <form action="" method="">
             <div className="h-screen">
-                <div className="rounded-lg shadow-lg sm:w-[500px] lg:w-[900px] flex justify-center sm:pr-10 pl-10 mx-auto translate-y-[30%] sm:gap-0 lg:gap-10">
-                    <div className="">
+                <div className="rounded-lg shadow-lg sm:w-[500px] lg:w-[900px] flex justify-center sm:pr-10 lg:pr-0 pl-10 mx-auto xl:translate-y-[3%] lg:translate-y-[3%] sm:translate-y-[15%] md:translate-y-[15%]   sm:gap-0 lg:gap-10">
+                    <div>
                         <h1 className="font-semibold text-2xl text-dark-green pb-3 pt-10">
                             Login
                         </h1>
@@ -70,10 +70,10 @@ const FormLogin = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="sm:hidden lg:block ">
+                    <div className="sm:hidden md:hidden lg:block xl:block">
                         <img
                             src="/public/images/AuthLogo.png"
-                            className="w-full h-full rounded-r-lg"
+                            className="h-full rounded-r-lg"
                             alt="AuthLogo"
                         />
                     </div>
