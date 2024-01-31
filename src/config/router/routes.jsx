@@ -9,6 +9,7 @@ import DashboardCategory from "../../pages/dashboard/CategoryPage";
 import DashboardRole from "../../pages/dashboard/RolePage";
 import DashboardProfile from "../../pages/dashboard/ProfilePage";
 import AuthAdmin from "../../pages/dashboard/LoginPage";
+import OrderDetailsPage from "../../pages/dashboard/OrderDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
     {
         path: "/Dashboard/Order",
         element: <DashboardOrder />,
+    },
+    {
+        path: "/Dashboard/Order/OrderDetails",
+        element: <OrderDetailsPage />,
     },
     {
         path: "/Dashboard/Category",
