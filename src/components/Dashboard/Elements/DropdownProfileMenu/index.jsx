@@ -1,6 +1,11 @@
-import { Fragment } from "react"
-import { Menu, Transition } from "@headlessui/react"
-import { UserCircleIcon, PencilSquareIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid"
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import {
+    UserCircleIcon,
+    PencilSquareIcon,
+    ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -11,7 +16,7 @@ function DropdownProfileMenu() {
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-full text-dark-green bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-dark-green hover:bg-dark-green hover:text-gray-50 transition-all ease-in-out 5s">
-                    <UserCircleIcon className="justify-center pr-5 w-10"/>
+                    <UserCircleIcon className="justify-center pr-5 w-10" />
                     Admin
                 </Menu.Button>
             </div>
@@ -28,31 +33,30 @@ function DropdownProfileMenu() {
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
-                                <a  
-                                    href="#"
+                                <Link
+                                    to="/Dashboard/Profile"
                                     className={classNames(
                                         active
                                             ? "bg-gray-100 text-gray-900"
                                             : "text-gray-700",
                                         "px-4 py-2 text-sm flex justify-start"
                                     )}>
-                                    <PencilSquareIcon className="w-5 "/>
+                                    <PencilSquareIcon className="w-5 " />
                                     Change Password
-                                </a>
-                                
+                                </Link>
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
                                 <a
-                                    href="#"
+                                    href="/Dashboard/"
                                     className={classNames(
                                         active
                                             ? "bg-gray-100 text-gray-900"
                                             : "text-gray-700",
                                         "flex justify-start px-4 py-2 text-sm"
                                     )}>
-                                    <ArrowLeftOnRectangleIcon className="w-5"/>
+                                    <ArrowLeftOnRectangleIcon className="w-5" />
                                     Logout
                                 </a>
                             )}
@@ -64,4 +68,4 @@ function DropdownProfileMenu() {
     );
 }
 
-export default DropdownProfileMenu
+export default DropdownProfileMenu;
