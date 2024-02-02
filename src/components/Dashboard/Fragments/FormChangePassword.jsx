@@ -36,7 +36,7 @@ function FormChangePassword() {
                         name="password"
                         placeholder="********"
                     />
-                    <Button variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s  pointer">
+                    <Button variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s pointer">
                         <EyeIcon />
                     </Button>
                 </div>
@@ -69,14 +69,14 @@ function FormChangePassword() {
                     <div className="px-2">
                         <Link
                             to="/Dashboard"
-                            className="py-2 px-5 rounded-lg border border-light-red text-light-red font-semibold">
+                            className="py-2 px-5 rounded-lg border border-light-red text-light-red font-semibold hover:text-white hover:bg-light-red transition ease-in-out 5s">
                             Cancel
                         </Link>
                     </div>
                     <div className="px-2">
                         <Button
                             type="submit"
-                            variants="py-2 px-5 rounded-lg bg-light-green text-white font-semibold">
+                            variants="py-2 px-5 rounded-lg bg-light-green text-white hover:bg-dark-green transition ease-in-out 5s font-semibold">
                             Change
                         </Button>
                     </div>
