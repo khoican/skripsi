@@ -34,7 +34,7 @@ const FormUser = () => {
                             </Label>
                             <div className="pt-2">
                                 <Input
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-7"
+                                    variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-7"
                                     type="text"
                                     name="name"
                                     placeholder="Insert Name"
@@ -47,7 +47,7 @@ const FormUser = () => {
                             </Label>
                             <div className="pt-2">
                                 <Input
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-7"
+                                    variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-7"
                                     type="text"
                                     name="username"
                                     placeholder="Insert Username"
@@ -62,7 +62,7 @@ const FormUser = () => {
                     </div>
                     <div className="pt-2 px-3">
                         <Input
-                            variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                            variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                             type="password"
                             name="password"
                             placeholder="********"
@@ -75,7 +75,7 @@ const FormUser = () => {
                     </div>
                     <div className="pt-2 px-3">
                         <Select
-                            variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                            variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                             name="role"
                             title="Role">
                             <Option value="role" title="Choose Role" />

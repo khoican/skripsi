@@ -58,7 +58,7 @@ const FormProduct = () => {
                     </Label>
                     <div className="pt-2">
                         <Input
-                            variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                            variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                             type="text"
                             name="productname"
                             placeholder="Insert Product Name"
@@ -71,7 +71,7 @@ const FormProduct = () => {
                             </Label>
                             <div className="pt-2">
                                 <Select
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                    variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                                     name="category"
                                     title="Category">
                                     <Option
@@ -97,7 +97,7 @@ const FormProduct = () => {
                             </Label>
                             <div className="pt-2 pb-2">
                                 <Select
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                    variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                                     name="category"
                                     title="Category">
                                     <Option

@@ -40,7 +40,7 @@ const FormLogin = () => {
                             </div>
                             <div className="pt-2">
                                 <Input
-                                    variants="rounded-lg w-[345px] ring-1 border-0 ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                    variants="rounded-lg md:w-[352px] lg:w-[345px] ring-1 ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition-all ease-in-out 5s py-2 px-3"
                                     type="text"
                                     name="username"
                                     placeholder="Your Username"
@@ -55,14 +55,14 @@ const FormLogin = () => {
                             </div>
                             <div className="pt-2 flex">
                                 <Input
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                    variants="rounded-lg ring-1 w-full ring-dark-green focus:outline-none focus:ring-1 focus:ring-light-green transition-all ease-in-out 5s py-2 px-3"
                                     type={type}
                                     name="password"
                                     placeholder="**********"
                                 />
                                 <Button
                                     type="button"
-                                    variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s pointer"
+                                    variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s"
                                     onClick={show}>
                                     {icon}
                                 </Button>
