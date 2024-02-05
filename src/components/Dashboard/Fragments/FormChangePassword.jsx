@@ -3,8 +3,16 @@ import Button from "../Elements/Button";
 import Input from "../Elements/Input";
 import Label from "../Elements/Input/Label";
 import { EyeIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 
 function FormChangePassword() {
+    const [type, setType] = useState("password");
+    const [icon, setIcon] = useState(<EyeIcon />);
+
+    const show = () => {
+        type === "password" ? setType("text") : setType("password");
+        icon === <EyeIcon /> ? setIcon(<EyeIcon />) : setIcon(<EyeIcon />);
+    };
     return (
         <>
             <div className="w-48 mx-auto">
@@ -15,7 +23,7 @@ function FormChangePassword() {
                 <p className="text-">KOPWAN ‘AISIYAH JEMBER</p>
             </div>
             <div className="mt-3 w-[500px] text-justify text-sm">
-                <p className="">
+                <p>
                     If you feel that your password is no longer secure, please
                     update it immediately. Make sure the password has a variety
                     of uppercase letters (A-Z) and lowercase letters (a-z),
@@ -32,12 +40,15 @@ function FormChangePassword() {
                 <div className="flex">
                     <Input
                         variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
-                        type="password"
+                        type={type}
                         name="password"
                         placeholder="********"
                     />
-                    <Button variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s pointer">
-                        <EyeIcon />
+                    <Button
+                        type="button"
+                        variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s pointer"
+                        onClick={show}>
+                        {icon}
                     </Button>
                 </div>
                 <div className="mt-4 mb-2">
@@ -49,12 +60,15 @@ function FormChangePassword() {
                     <div className="flex">
                         <Input
                             variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
-                            type="password"
+                            type={type}
                             name="password"
                             placeholder="********"
                         />
-                        <Button variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s  pointer">
-                            <EyeIcon />
+                        <Button
+                            type="button"
+                            variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s  pointer"
+                            onClick={show}>
+                            {icon}
                         </Button>
                     </div>
 

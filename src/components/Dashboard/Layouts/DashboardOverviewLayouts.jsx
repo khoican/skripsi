@@ -103,7 +103,9 @@ const DashboardOverview = () => {
 
             <div className="mt-5 gap-6 flex justify-center items-stretch px-7 my-10">
                 <div className="bg-white shadow-lg rounded-md w-full">
-                    <h1 className="font-bold text-lg">Chart</h1>
+                    <div className="pt-4 pl-4">
+                        <h1 className="font-bold text-2xl">Chart</h1>
+                    </div>
                 </div>
 
                 <div className="p-4 bg-white shadow-lg rounded-lg w-2/3">

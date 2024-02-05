@@ -1,8 +1,17 @@
+import { useState } from "react";
 import Button from "../Elements/Button";
 import Input from "../Elements/Input";
 import Label from "../Elements/Input/Label";
+import { EyeIcon } from "@heroicons/react/24/outline";
 
 const FormLogin = () => {
+    const [type, setType] = useState("password");
+    const [icon, setIcon] = useState(<EyeIcon />);
+
+    const show = () => {
+        type === "password" ? setType("text") : setType("password");
+        icon === <EyeIcon /> ? setIcon(<EyeIcon />) : setIcon(<EyeIcon />);
+    };
     return (
         <form action="" method="">
             <div className="h-screen">
@@ -31,7 +40,7 @@ const FormLogin = () => {
                             </div>
                             <div className="pt-2">
                                 <Input
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                    variants="rounded-lg w-[345px] ring-1 border-0 ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
                                     type="text"
                                     name="username"
                                     placeholder="Your Username"
@@ -44,13 +53,19 @@ const FormLogin = () => {
                                     Password
                                 </Label>
                             </div>
-                            <div className="pt-2">
+                            <div className="pt-2 flex">
                                 <Input
                                     variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
-                                    type="password"
+                                    type={type}
                                     name="password"
                                     placeholder="**********"
                                 />
+                                <Button
+                                    type="button"
+                                    variants="relative w-5 right-8 hover:text-light-green transition ease-in 5s pointer"
+                                    onClick={show}>
+                                    {icon}
+                                </Button>
                             </div>
                         </div>
                         <div className="pt-6 grid ">
