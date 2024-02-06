@@ -3,12 +3,9 @@ import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Button from "../../components/Dashboard/Elements/Button";
-import {
-    PencilIcon,
-    PlusIcon,
-    TrashIcon,
-    UserIcon,
-} from "@heroicons/react/24/solid";
+import { PlusIcon, UserIcon } from "@heroicons/react/24/solid";
+import TrashIcon from "../../assets/img/icon/TrashIcon";
+import PencilIcon from "../../assets/img/icon/PencilIcon";
 import ModalRole from "../../components/Dashboard/Fragments/ModalRole";
 import Input from "../../components/Dashboard/Elements/Input";
 
@@ -85,7 +82,11 @@ function DashboardRolePage() {
                                                             )
                                                             .showModal()
                                                     }>
-                                                    <PencilIcon className="w-5" />
+                                                    <img
+                                                        src={PencilIcon}
+                                                        className="w-7 pl-2"
+                                                        alt="pencilicon"
+                                                    />
                                                 </Button>
                                                 <ModalRole
                                                     id="edit"
@@ -107,7 +108,11 @@ function DashboardRolePage() {
                                                             )
                                                             .showModal()
                                                     }>
-                                                    <TrashIcon className="w-5" />
+                                                    <img
+                                                        src={TrashIcon}
+                                                        className="w-6 pl-2"
+                                                        alt="trashicon"
+                                                    />
                                                 </Button>
                                                 <ModalRole
                                                     id="delete"

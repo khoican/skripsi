@@ -18,8 +18,8 @@ const Counter = () => {
         dispatch(decrementCount());
     };
 
-    const handleAmountUpdate = (event) => {
-        const newAmount = parseInt(event.target.value, 10);
+    const handleAmountUpdate = (e) => {
+        const newAmount = parseInt(e.target.value);
         dispatch(updateCount(newAmount));
     };
 

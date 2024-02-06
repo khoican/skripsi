@@ -1,4 +1,6 @@
-import { PlusIcon, TrashIcon, PencilIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import TrashIcon from "../../assets/img/icon/TrashIcon";
+import PencilIcon from "../../assets/img/icon/PencilIcon";
 import Header from "../../components/Dashboard/Elements/Header";
 import Sidebar from "../../components/Dashboard/Elements/Sidebar/index";
 import Button from "../../components/Dashboard/Elements/Button";
@@ -34,14 +36,18 @@ const columns = [
             <>
                 <Link to={"/Dashboard/Product/ProductDetails"}>
                     <Button>
-                        <PencilIcon className="w-8 pr-2" />
+                        <img
+                            src={PencilIcon}
+                            className="w-7 pl-2"
+                            alt="pencilicon"
+                        />
                     </Button>
                 </Link>
                 <Button
                     onClick={() =>
                         document.getElementById("delete").showModal()
                     }>
-                    <TrashIcon className="w-8 pl-2" />
+                    <img src={TrashIcon} className="w-6 pl-2" alt="trashicon" />
                 </Button>
             </>
         ),

@@ -48,6 +48,21 @@ const SubCategoryData = [
     },
 ];
 
+const PhotoData = [
+    {
+        id: 1,
+        name: "assakinah-22-3-23-145601.jpg",
+    },
+    {
+        id: 2,
+        name: "assakinah-22-3-23-145602.jpg",
+    },
+    {
+        id: 1,
+        name: "assakinah-22-3-23-145603.jpg",
+    },
+];
+
 const FormProduct = () => {
     return (
         <form action="">
@@ -184,11 +199,13 @@ const FormProduct = () => {
                                 <div className="rounded-lg py-2 px-3 flex justify-center">
                                     <DocumentTextIcon className="w-9 pr-2" />
                                     <p>assakinah-22-3-23-145601.jpg</p>
-                                    <img
-                                        src={TrashIcon}
-                                        alt=""
-                                        className="h-5 my-auto pl-2"
-                                    />
+                                    <Button type="button">
+                                        <img
+                                            src={TrashIcon}
+                                            alt=""
+                                            className="h-5 my-auto pl-2"
+                                        />
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -211,39 +228,28 @@ const FormProduct = () => {
                                 Please input file with jpg, jpeg, png, gif
                                 extension
                             </p>
-                            <div className="pt-4">
-                                <div className="rounded-lg py-2 px-3 flex justify-center">
-                                    <DocumentTextIcon className="w-9 pr-2" />
-                                    <p>assakinah-22-3-23-145601.jpg</p>
-                                    <img
-                                        src={TrashIcon}
-                                        alt=""
-                                        className="h-5 my-auto pl-2"
-                                    />
+                            {PhotoData.map((item) => (
+                                <div
+                                    className="pt-4"
+                                    key={item}
+                                    value={item.id}>
+                                    <div className="rounded-lg py-2 px-3 flex justify-center">
+                                        <Button
+                                            type="button"
+                                            variants="flex items-center focus:outline-none">
+                                            <DocumentTextIcon className="w-9 pr-2" />
+                                            <p>{item.name}</p>
+                                        </Button>
+                                        <Button type="button">
+                                            <img
+                                                src={TrashIcon}
+                                                alt=""
+                                                className="h-5 my-auto pl-2"
+                                            />
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="pt-4">
-                                <div className="rounded-lg py-2 px-3 flex justify-center">
-                                    <DocumentTextIcon className="w-9 pr-2" />
-                                    <p>assakinah-22-3-23-145601.jpg</p>
-                                    <img
-                                        src={TrashIcon}
-                                        alt=""
-                                        className="h-5 my-auto pl-2"
-                                    />
-                                </div>
-                            </div>
-                            <div className="pt-4">
-                                <div className="rounded-lg py-2 px-3 flex justify-center">
-                                    <DocumentTextIcon className="w-9 pr-2" />
-                                    <p>assakinah-22-3-23-145601.jpg</p>
-                                    <img
-                                        src={TrashIcon}
-                                        alt=""
-                                        className="h-5 my-auto pl-2"
-                                    />
-                                </div>
-                            </div>
+                            ))}
                             <div className="pt-2">
                                 <p className="flex justify-center py-4 text-justify">
                                     Double check the data you entered before

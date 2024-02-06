@@ -1,4 +1,6 @@
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import TrashIcon from "../../assets/img/icon/TrashIcon";
+import PencilIcon from "../../assets/img/icon/PencilIcon";
 import Button from "../../components/Dashboard/Elements/Button";
 import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
@@ -48,13 +50,17 @@ const columns = [
         cell: (row) => (
             <>
                 <Button onClick={() => handleEdit(row.id)}>
-                    <PencilIcon className="w-8 pr-2" />
+                    <img
+                        src={PencilIcon}
+                        className="w-7 pl-2"
+                        alt="pencilicon"
+                    />
                 </Button>
                 <Button
                     onClick={() =>
                         document.getElementById("delete").showModal()
                     }>
-                    <TrashIcon className="w-8 pl-2" />
+                    <img src={TrashIcon} className="w-6 pl-2" alt="trashicon" />
                 </Button>
             </>
         ),

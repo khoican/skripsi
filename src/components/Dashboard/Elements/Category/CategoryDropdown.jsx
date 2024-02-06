@@ -1,15 +1,13 @@
 import {
-    ChevronDownIcon,
     HashtagIcon,
     ListBulletIcon,
-    PencilIcon,
     PlusIcon,
-    TrashIcon,
 } from "@heroicons/react/24/solid";
+import TrashIcon from "../../../../assets/img/icon/TrashIcon";
+import PencilIcon from "../../../../assets/img/icon/PencilIcon";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import Modal from "../Modal";
 import Input from "../Input";
 import ModalCategory from "../../Fragments/ModalCategory";
 
@@ -40,7 +38,11 @@ const CategoryDropdown = (props) => {
                             onClick={() =>
                                 document.getElementById("edit").showModal()
                             }>
-                            <PencilIcon className="w-5" />
+                            <img
+                                src={PencilIcon}
+                                className="w-7 pl-2"
+                                alt="pencilicon"
+                            />
                         </Button>
                         <ModalCategory
                             id="edit"
@@ -58,7 +60,11 @@ const CategoryDropdown = (props) => {
                             onClick={() =>
                                 document.getElementById("delete").showModal()
                             }>
-                            <TrashIcon className="w-5" />
+                            <img
+                                src={TrashIcon}
+                                className="w-6 pl-2"
+                                alt="trashicon"
+                            />
                         </Button>
                         <ModalCategory
                             id="delete"
