@@ -125,7 +125,7 @@ const FormProduct = () => {
                         </div>
                         <div className="pb-3">
                             <Textarea
-                                variants="resize-none border border-dark-green rounded-lg w-full"
+                                variants="resize-none border-0 ring-dark-green ring-1 focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s rounded-lg w-full"
                                 name="productdescription"
                                 cols="66"
                                 rows="10"
@@ -133,7 +133,7 @@ const FormProduct = () => {
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="pt-3 mr-2">
+                        <div className="pt-3">
                             <Label
                                 htmlFor="productstock"
                                 variants="font-semibold">
@@ -143,16 +143,16 @@ const FormProduct = () => {
                                 <Counter />
                             </div>
                         </div>
-                        <div className="w-full pt-3 ml-2">
+                        <div className="pt-3 ml-2 w-full">
                             <Label
                                 htmlFor="productprice"
                                 variants="font-semibold">
                                 Price
                             </Label>
-                            <div className="pt-3 ">
+                            <div className="pt-3">
                                 <Input
                                     type="number"
-                                    variants="w-full rounded-lg border border-dark-green px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    variants="w-full rounded-lg border-0 ring-dark-green ring-1 focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                             </div>
                         </div>
@@ -245,9 +245,9 @@ const FormProduct = () => {
                                 </div>
                             </div>
                             <div className="pt-2">
-                                <p className="flex justify-center py-4">
-                                    Double check the data you entered before add
-                                    action for this product
+                                <p className="flex justify-center py-4 text-justify">
+                                    Double check the data you entered before
+                                    saving for this product
                                 </p>
                                 <div className="flex justify-end">
                                     <div className="px-2">

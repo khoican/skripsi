@@ -1,33 +1,50 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    incrementCount,
+    decrementCount,
+    updateCount,
+} from "../../../../state/actions/counter";
 import Button from "../Button";
+import Input from "../Input";
 
 const Counter = () => {
-    const [count, setCount] = useState(0);
+    const { amount } = useSelector((state) => state.counter);
+    const dispatch = useDispatch();
 
-    const decreaseCount = (e) => {
-        e.preventDefault();
-        setCount(Math.max(0, count - 1));
+    const handleIncrement = () => {
+        dispatch(incrementCount());
+    };
+    const handleDecrement = () => {
+        dispatch(decrementCount());
     };
 
-    const increaseCount = (e) => {
-        e.preventDefault();
-        setCount(count + 1);
+    const handleAmountUpdate = (event) => {
+        const newAmount = parseInt(event.target.value, 10);
+        dispatch(updateCount(newAmount));
     };
 
     return (
         <>
-            <div className="flex border rounded-lg border-black">
+            <div className="flex rounded-lg border-0 ring-dark-green ring-1 focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s">
                 <Button
-                    onClick={decreaseCount}
+                    type="button"
+                    onClick={handleDecrement}
                     variants="px-4 font-bold text-2xl">
                     -
                 </Button>
                 <div className="px-2 py-1">
-                    <p className="font-semibold text-2xl">{count}</p>
+                    <Input
+                        type="number"
+                        variants="w-[15px] focus:outline-none text-2xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        value={amount}
+                        onChange={handleAmountUpdate}
+                    />
+                    {/* <p className="font-semibold text-2xl">{amount}</p> */}
                 </div>
                 <Button
-                    onClick={increaseCount}
-                    variants="font-semibold text-2xl px-4">
+                    type="button"
+                    onClick={handleIncrement}
+                    variants="px-4 font-semibold text-2xl">
                     +
                 </Button>
             </div>
