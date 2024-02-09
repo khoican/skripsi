@@ -120,7 +120,7 @@ function DashboardProduct() {
         <>
             <Sidebar />
 
-            <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-5">
+            <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
                 <Header title="Product" linkPage="Product" />
                 <div className="flex justify-between mt-5 px-7">
                     <div className="my-auto w-2/4">
