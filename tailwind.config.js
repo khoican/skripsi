@@ -18,6 +18,12 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+
+  daisyui: {
+    themes: [],
+    darkTheme: "dark",
+    themeRoot: ":root"
+  }
 }
 

@@ -35,6 +35,8 @@ const CategoryDropdown = (props) => {
                     {/* <ChevronDownIcon className="w-3 h-3" /> */}
                     <div className="flex gap-2">
                         <Button
+                            type="button"
+                            variants="focus:outline-none"
                             onClick={() =>
                                 document.getElementById("edit").showModal()
                             }>
@@ -53,10 +55,12 @@ const CategoryDropdown = (props) => {
                                 type="text"
                                 name="category"
                                 placeholder="Insert a New Category"
-                                variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                                variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                             />
                         </ModalCategory>
                         <Button
+                            type="button"
+                            variants="focus:outline-none"
                             onClick={() =>
                                 document.getElementById("delete").showModal()
                             }>
@@ -68,13 +72,13 @@ const CategoryDropdown = (props) => {
                         </Button>
                         <ModalCategory
                             id="delete"
-                            title="Delete Category"
+                            title="Alert!"
                             btn="Delete"
-                            variants="bg-light-red">
-                            <p className="flex">
-                                Are you sure you want to delete
+                            variants="bg-light-red hover:bg-red-700 transition ease-in-out 5s">
+                            <p className="flex text-black">
+                                Are you sure you want to delete this
                                 <p className="font-semibold pl-1">
-                                    "this Category ?"
+                                    "Category ?"
                                 </p>
                             </p>
                         </ModalCategory>
@@ -100,51 +104,57 @@ const SubCategory = (props) => {
                         <p>{subCategory}</p>
                     </Link>
 
-                    <Link>
-                        <div className="flex gap-2">
-                            <Button
-                                onClick={() =>
-                                    document
-                                        .getElementById("editSub")
-                                        .showModal()
-                                }>
-                                <PencilIcon className="w-5" />
-                            </Button>
-                            <ModalCategory
-                                id="editSub"
-                                title="Edit Sub Category"
-                                btn="Save"
-                                variants="bg-light-green">
-                                <Input
-                                    type="text"
-                                    name="subcategory"
-                                    placeholder="Insert a New Sub Category"
-                                    variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
-                                />
-                            </ModalCategory>
+                    <div className="flex gap-2">
+                        <Button
+                            type="button"
+                            variants="focus:outline-none"
+                            onClick={() =>
+                                document.getElementById("editsub").showModal()
+                            }>
+                            <img
+                                src={PencilIcon}
+                                className="w-6 pl-2"
+                                alt="trashicon"
+                            />
+                        </Button>
+                        <ModalCategory
+                            id="editsub"
+                            title="Edit Sub Category"
+                            btn="Save"
+                            variants="bg-light-green">
+                            <Input
+                                type="text"
+                                name="category"
+                                placeholder="Insert Sub Category"
+                                variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
+                            />
+                        </ModalCategory>
 
-                            <Button
-                                onClick={() =>
-                                    document
-                                        .getElementById("deleteSub")
-                                        .showModal()
-                                }>
-                                <TrashIcon className="w-5" />
-                            </Button>
-                            <ModalCategory
-                                id="deleteSub"
-                                title="Delete Sub Category"
-                                btn="Delete"
-                                variants="bg-light-red">
-                                <p className="flex">
-                                    Are you sure you want to delete
-                                    <p className="font-semibold pl-1">
-                                        "this Sub Category ?"
-                                    </p>
+                        <Button
+                            type="button"
+                            variants="focus:outline-none"
+                            onClick={() =>
+                                document.getElementById("deleteSub").showModal()
+                            }>
+                            <img
+                                src={TrashIcon}
+                                className="w-6 pl-2"
+                                alt="trashicon"
+                            />
+                        </Button>
+                        <ModalCategory
+                            id="deleteSub"
+                            title="Delete Sub Category"
+                            btn="Delete"
+                            variants="bg-light-red hover:bg-red-700 transition ease-in-out 5s">
+                            <p className="flex text-black">
+                                Are you sure you want to delete
+                                <p className="font-semibold pl-1">
+                                    "this Sub Category ?"
                                 </p>
-                            </ModalCategory>
-                        </div>
-                    </Link>
+                            </p>
+                        </ModalCategory>
+                    </div>
                 </div>
             </div>
             <div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-light-green hover:text-white transition-all 3s ease-in">

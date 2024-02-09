@@ -49,14 +49,21 @@ const columns = [
         name: "Actions",
         cell: (row) => (
             <>
-                <Button onClick={() => handleEdit(row.id)}>
-                    <img
-                        src={PencilIcon}
-                        className="w-7 pl-2"
-                        alt="pencilicon"
-                    />
-                </Button>
+                <Link to="/Dashboard/User/UserDetails">
+                    <Button
+                        type="button"
+                        variants="focus:outline-none"
+                        onClick={() => handleEdit(row.id)}>
+                        <img
+                            src={PencilIcon}
+                            className="w-7 pl-2"
+                            alt="pencilicon"
+                        />
+                    </Button>
+                </Link>
                 <Button
+                    type="button"
+                    variants="focus:outline-none"
                     onClick={() =>
                         document.getElementById("delete").showModal()
                     }>

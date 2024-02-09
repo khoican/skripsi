@@ -5,11 +5,11 @@ function ModalUser() {
     return (
         <>
             <Modal id="delete">
-                <div className="modal-box py-3 px-9">
+                <div className="bg-white modal-box py-3 px-9">
                     <h3 className="font-bold text-lg">Alert!</h3>
                     <p className="py-4 flex">
-                        Are you sure you want to delete
-                        <p className="px-1 font-bold">"this user"</p>?
+                        Are you sure you want to delete this
+                        <p className="px-1 font-bold">"user"</p>?
                     </p>
                     <div className="modal-action">
                         <form method="dialog">
@@ -18,12 +18,12 @@ function ModalUser() {
                             <div className="flex mt-2 justify-end">
                                 <Button
                                     type="submit"
-                                    variants="btn mr-2 px-4 py-2 border border-light-red rounded-lg">
+                                    variants="btn mr-2 px-4 py-2 border border-light-red hover:border-red-700 rounded-lg">
                                     Cancel
                                 </Button>
                                 <Button
                                     type="submit"
-                                    variants="btn px-4 py-2 bg-light-red rounded-lg text-white">
+                                    variants="btn px-4 py-2 bg-light-red hover:bg-red-700 rounded-lg text-white">
                                     Delete
                                 </Button>
                             </div>

@@ -29,12 +29,12 @@ function DashboardCategory() {
                         <PlusIcon className="w-8 pl-2 mx-auto" />
                     </Button>
                     <ModalCategory
-                        variants="bg-light-green"
+                        variants="bg-light-green hover:bg-dark-green transition ease-in-out 5s"
                         id="add"
                         title="Add Category"
                         btn="Save">
                         <Input
-                            variants="rounded-lg ring-1 border-0 w-full ring-inset ring-dark-green focus:ring-1 focus:ring-inset focus:ring-dark-green py-2 px-3"
+                            variants="rounded-lg ring-1 border-0 w-full  ring-dark-green focus:ring-1 focus:outline-none focus:ring-light-green transition ease-in-out 5s py-2 px-3"
                             type="text"
                             name="categoryname"
                             placeholder="Insert Category Name"

@@ -35,7 +35,7 @@ const columns = [
         cell: () => (
             <>
                 <Link to={"/Dashboard/Product/ProductDetails"}>
-                    <Button>
+                    <Button type="button" variants="focus:outline-none">
                         <img
                             src={PencilIcon}
                             className="w-7 pl-2"
@@ -44,6 +44,8 @@ const columns = [
                     </Button>
                 </Link>
                 <Button
+                    type="button"
+                    variants="focus:outline-none"
                     onClick={() =>
                         document.getElementById("delete").showModal()
                     }>

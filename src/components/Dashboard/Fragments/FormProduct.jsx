@@ -251,7 +251,7 @@ const FormProduct = () => {
                                 </div>
                             ))}
                             <div className="pt-2">
-                                <p className="flex justify-center py-4 text-justify">
+                                <p className="py-4 text-justify">
                                     Double check the data you entered before
                                     saving for this product
                                 </p>
@@ -279,7 +279,7 @@ const FormProduct = () => {
                                     <div className="px-2">
                                         <Button
                                             type="submit"
-                                            variants="py-2 px-5 rounded-lg bg-light-green text-white">
+                                            variants="py-2 px-6 rounded-lg bg-light-green text-white">
                                             Save
                                         </Button>
                                     </div>
