@@ -21,7 +21,7 @@ export default {
 			colors: {
 				primary: '#046307',
 				success: '#79C314',
-				red: '#E45F2B',
+				danger: '#E45F2B',
 			},
 		},
 	},

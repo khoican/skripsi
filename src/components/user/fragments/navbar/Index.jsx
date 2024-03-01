@@ -8,10 +8,25 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import logo from '/logo.png';
+import { useState } from 'react';
 
 const Navbar = () => {
+	const [navbar, setNavbar] = useState(false);
+
+	window.onscroll = () => {
+		if (window.scrollY > 0) {
+			setNavbar(true);
+		} else {
+			setNavbar(false);
+		}
+	};
+
 	return (
-		<nav className="bg-white py-3 px-5 shadow sticky top-0 flex justify-between items-center">
+		<nav
+			className={` ${
+				navbar ? 'bg-white shadow' : 'bg-green-100'
+			} py-3 px-5 sticky top-0 flex justify-between items-center z-10`}
+		>
 			<div className="h-8 w-8">
 				<img src={logo} alt="" />
 			</div>
