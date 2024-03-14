@@ -1,14 +1,14 @@
 /* eslint-disable import/no-absolute-path */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-	faHouse,
+	faHome,
 	faMagnifyingGlass,
-	faBagShopping,
-	faCartShopping,
+	faShoppingBag,
+	faShoppingCart,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import logo from '/logo.png';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
+import Logo from '../../elements/logo/Index';
+import NavbarIcon from '../../elements/navbarIcon/Index';
 
 const Navbar = () => {
 	const [navbar, setNavbar] = useState(false);
@@ -22,34 +22,32 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav
-			className={` ${
-				navbar ? 'bg-white shadow' : 'bg-green-100'
-			} py-3 px-5 sticky top-0 flex justify-between items-center z-10`}
-		>
-			<div className="h-8 w-8">
-				<img src={logo} alt="" />
-			</div>
-			<div></div>
-			<div className="flex items-center gap-3 text-gray-400">
-				<FontAwesomeIcon
-					icon={faMagnifyingGlass}
-					className="text-black"
-				/>
-				<Link to={'/'}>
-					<FontAwesomeIcon
-						icon={faHouse}
-						className="text-green-900"
-					/>
-				</Link>
-				<Link to={'/products'}>
-					<FontAwesomeIcon icon={faBagShopping} />
-				</Link>
-				<Link to={'/cart'}>
-					<FontAwesomeIcon icon={faCartShopping} />
-				</Link>
-			</div>
-		</nav>
+		<Fragment>
+			<nav
+				className={` ${
+					navbar ? 'shadow' : ''
+				} bg-white py-5 px-20 sticky top-0 flex justify-between items-center z-10`}
+			>
+				<Logo />
+				<div className="w-1/3 text-center relative">
+					<form action="">
+						<input
+							type="text"
+							className="border border-green-500 text-sm w-full rounded-full focus:border-green-700"
+							placeholder="Cari produk yang anda inginkan"
+						/>
+						<button className="absolute p-2 right-2">
+							<FontAwesomeIcon icon={faMagnifyingGlass} />
+						</button>
+					</form>
+				</div>
+				<div className="flex items-center justify-end gap-5 text-gray-400 w-1/3">
+					<NavbarIcon link={'/'} icon={faHome} />
+					<NavbarIcon link={'/products'} icon={faShoppingBag} />
+					<NavbarIcon link={'/cart'} icon={faShoppingCart} />
+				</div>
+			</nav>
+		</Fragment>
 	);
 };
 

@@ -32,10 +32,6 @@ const HomePage = () => {
 			</header>
 
 			<main className="p-5">
-				<button className="p-3 text-sm font-semibold bg-gray-200 rounded-lg shadow-md">
-					Kategori
-				</button>
-
 				<div className="mt-5">
 					<h1 className="font-semibold mb-3">Produk Paling Laris</h1>
 
