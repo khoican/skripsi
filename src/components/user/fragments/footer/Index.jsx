@@ -4,7 +4,7 @@ import { faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => {
 	return (
 		<footer className="bg-primary text-white p-5">
-			<div>
+			<div className="flex md:flex-row flex-col justify-between">
 				<div>
 					<h1 className="text-md font-semibold">Kontak Kami</h1>
 
@@ -36,10 +36,10 @@ const Footer = () => {
 					</div>
 				</div>
 
-				<div className="mt-5">
+				<div className="mt-5 md:mt-0">
 					<h1 className="text-md font-semibold">As-Sakinah Mart</h1>
 
-					<div className="mt-4 font-extralight text-xs flex flex-col">
+					<div className="mt-4 font-extralight text-xs flex flex-col md:text-end">
 						<a href="">Beranda</a>
 						<a href="">Produk</a>
 						<a href="">Keranjang</a>
