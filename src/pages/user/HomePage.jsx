@@ -1,61 +1,56 @@
 /* eslint-disable import/no-absolute-path */
 import { Link } from 'react-router-dom';
-import ProductCard from '../../components/user/fragments/productCard/Index';
-import heroIcon from '/hero-icon.png';
+// import ProductCard from '../../components/user/fragments/productCard/Index';
+import { getAllProducts } from '../../../services/product';
+import { useEffect } from 'react';
+// import heroIcon from '/hero-icon.png';
 
 const HomePage = () => {
+	useEffect(() => {
+		getAllProducts((data) => {
+			console.log(data);
+		});
+	}, []);
+
 	return (
 		<main className="min-h-screen">
-			<header className="flex flex-col p-5 h-screen bg-green-100">
-				<div className="h-1/2 flex flex-col justify-center">
-					<p className="text-sm">Selamat Datang di</p>
-					<h1 className="text-3xl text-green-700 font-bold">
-						AS-SAKINAH MART
-					</h1>
-					<p className="text-sm text-grey-700">
-						Temukan semua kebutuhan anda disini
-					</p>
-					<a
-						href=""
-						className="bg-success text-white w-2/4 text-sm font-base text-center mt-3 p-3 rounded-xl"
-					>
-						Jelajahi Sekarang!
-					</a>
-				</div>
-				<div className="h-1/2 flex justify-center">
-					<img
-						src={heroIcon}
-						alt=""
-						className="h-3/4 drop-shadow-lg"
-					/>
-				</div>
+			<header className="flex flex-col items-center justify-center p-5 h-[80vh] bg-green-700">
+				<h1 className="text-5xl font-medium text-white">
+					Selamat Datang
+				</h1>
+				<p className="text-md text-white font-extralight">
+					di <b className="text-yellow-100">As-Sakinah Mart</b>,
+					tempat belanja terpercaya dan amanah
+				</p>
+				<a
+					href=""
+					className="text-white py-3 px-5 mt-5 bg-yellow-300 rounded-full"
+				>
+					Jelajahi Sekarang
+				</a>
 			</header>
 
-			<main className="p-5">
+			<main className="p-5 max-w-screen-xl px-20">
 				<div className="mt-5">
 					<h1 className="font-semibold mb-3">Produk Paling Laris</h1>
 
 					<div className="flex flex-wrap gap-[2%] w-full">
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
+						{/* {getAllProduct.map((item, index) => (
+							<ProductCard
+								key={index}
+								link={'/'}
+								image={item.image}
+								title={item.name}
+								price={item.price}
+							/>
+						))} */}
 					</div>
 				</div>
 
 				<div className="mt-5">
 					<h1 className="font-semibold mb-3">Semua Produk</h1>
 
-					<div className="flex flex-wrap gap-[2%] w-full">
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-						<ProductCard />
-					</div>
+					<div className="flex flex-wrap gap-[2%] w-full"></div>
 
 					<div className="w-full">
 						<Link
