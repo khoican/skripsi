@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
-import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Button from "../../components/Dashboard/Elements/Button";
 import { PlusIcon, UserIcon } from "@heroicons/react/24/solid";
 import TrashIcon from "../../assets/img/icon/TrashIcon";
@@ -27,8 +26,6 @@ const DataRole = [
 function DashboardRolePage() {
     return (
         <>
-            <Sidebar />
-
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
                 <Header title="Role" linkPage="Role" />
                 <div className="flex justify-between mt-5 px-7">

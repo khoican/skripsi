@@ -4,7 +4,6 @@ import PencilIcon from "../../assets/img/icon/PencilIcon";
 import Button from "../../components/Dashboard/Elements/Button";
 import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
-import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Table from "../../components/Dashboard/Elements/Table";
 import { Link } from "react-router-dom";
 import ModalUser from "../../components/Dashboard/Fragments/ModalUser";
@@ -120,7 +119,6 @@ const data = [
 function DashboardUser() {
     return (
         <>
-            <Sidebar />
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
                 <Header title="User" linkPage="User" />
                 <div className="flex justify-between mt-5 px-7">

@@ -14,7 +14,7 @@ const FormLogin = () => {
     };
     return (
         <form action="" method="">
-            <div className="h-screen">
+            <div className="h-screen flex items-center ">
                 <div className="rounded-lg shadow-lg sm:w-[500px] lg:w-[900px] flex justify-center sm:pr-10 lg:pr-0 pl-10 mx-auto xl:translate-y-[3%] lg:translate-y-[3%] sm:translate-y-[15%] md:translate-y-[15%]   sm:gap-0 lg:gap-10">
                     <div>
                         <h1 className="font-semibold text-2xl text-dark-green pb-3 pt-10">

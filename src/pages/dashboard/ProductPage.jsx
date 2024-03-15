@@ -2,7 +2,6 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import TrashIcon from "../../assets/img/icon/TrashIcon";
 import PencilIcon from "../../assets/img/icon/PencilIcon";
 import Header from "../../components/Dashboard/Elements/Header";
-import Sidebar from "../../components/Dashboard/Elements/Sidebar/index";
 import Button from "../../components/Dashboard/Elements/Button";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Table from "../../components/Dashboard/Elements/Table";
@@ -118,8 +117,6 @@ const data = [
 function DashboardProduct() {
     return (
         <>
-            <Sidebar />
-
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
                 <Header title="Product" linkPage="Product" />
                 <div className="flex justify-between mt-5 px-7">

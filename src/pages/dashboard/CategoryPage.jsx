@@ -2,7 +2,6 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import Button from "../../components/Dashboard/Elements/Button";
 import Header from "../../components/Dashboard/Elements/Header";
 import SearchInput from "../../components/Dashboard/Elements/SearchInput";
-import Sidebar from "../../components/Dashboard/Elements/Sidebar";
 import Category from "../../components/Dashboard/Elements/Category";
 import ModalCategory from "../../components/Dashboard/Fragments/ModalCategory";
 import Input from "../../components/Dashboard/Elements/Input";
@@ -10,8 +9,6 @@ import Input from "../../components/Dashboard/Elements/Input";
 function DashboardCategory() {
     return (
         <>
-            <Sidebar />
-
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
                 <Header title="Category" linkPage="Category" />
                 <div className="flex justify-between mt-5 px-7">
