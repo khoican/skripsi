@@ -2,15 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
+import heroIcon from '/hero-icon.png';
+import { getAppUrl } from '../../../../../config/app';
 
 const ProductCard = (props) => {
 	const { link, image, title, price } = props;
 
 	return (
-		<div className="w-[49%] lg:w-[23.5%] shadow bg-white mb-3">
-			<Link to={link}>
+		<div className="w-[49%] lg:w-[32%] shadow bg-white mb-3">
+			<Link to={`/${link}`}>
 				<img
-					src={image}
+					src={getAppUrl() + image}
 					alt={`gambar ${title}`}
 					className="w-full h-52 object-cover"
 				/>

@@ -4,7 +4,7 @@ import { getAppUrl } from '../config/app';
 export const getAllProducts = (callback) => {
 	axios({
 		method: 'get',
-		url: `${getAppUrl()}products`,
+		url: `${getAppUrl()}api/products`,
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
@@ -17,12 +17,12 @@ export const getAllProducts = (callback) => {
 export const getProductBySlug = (slug, callback) => {
 	axios({
 		method: 'get',
-		url: `${getAppUrl()}products/${slug}`,
+		url: `${getAppUrl()}api/products/${slug}`,
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		},
 	}).then(function (response) {
-		callback(response.data);
+		callback(response);
 	});
 };
