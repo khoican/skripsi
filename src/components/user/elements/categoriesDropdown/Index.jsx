@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { getAllSubCategories } from '../../../../../services/category';
+import CategoryMenu from './Menu';
 
 const CategoriesDropdown = (props) => {
 	const [open, setOpen] = useState(false);
@@ -13,19 +14,6 @@ const CategoriesDropdown = (props) => {
 		setOpen(!open);
 	};
 
-	useEffect(() => {
-		getAllSubCategories((data) => {
-			setSubCategories(
-				data.data.map((subCategory) => ({
-					id: subCategory.id,
-					name: subCategory.name,
-					slug: subCategory.slug,
-					categoryId: subCategory.category.id,
-				})),
-			);
-		});
-	}, []);
-
 	return (
 		<>
 			<div
@@ -34,29 +22,17 @@ const CategoriesDropdown = (props) => {
 			>
 				<div className="flex items-center gap-5">
 					<FontAwesomeIcon icon={faList} />
-					<p>{name}</p>
+					<p className="capitalize">{name}</p>
 				</div>
 				<FontAwesomeIcon
 					icon={faChevronDown}
-					className="cursor-pointer"
+					className={`cursor-pointer transition-all ${
+						open ? 'rotate-180' : ''
+					}`}
 				/>
 			</div>
 
-			{open &&
-				subCategories
-					.filter((subCategory) => subCategory.categoryId == id)
-					.map((item, index) => (
-						<div
-							key={index}
-							className="flex items-center gap-5 ms-8 me-5 p-3 border-b border-gray-300"
-						>
-							<FontAwesomeIcon
-								icon={faCircle}
-								className="text-xs"
-							/>
-							<p>{item.name}</p>
-						</div>
-					))}
+			{open && <CategoryMenu id={id} />}
 		</>
 	);
 };
