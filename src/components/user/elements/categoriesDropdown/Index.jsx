@@ -7,7 +7,6 @@ import CategoryMenu from './Menu';
 
 const CategoriesDropdown = (props) => {
 	const [open, setOpen] = useState(false);
-	const [subCategories, setSubCategories] = useState([]);
 	const { name, id } = props;
 
 	const handleOpen = () => {
@@ -18,7 +17,7 @@ const CategoriesDropdown = (props) => {
 		<>
 			<div
 				onClick={handleOpen}
-				className="mx-5 p-3 flex justify-between items-center border-b border-gray-300"
+				className="mx-5 p-3 flex justify-between items-center border-b border-gray-300 cursor-pointer"
 			>
 				<div className="flex items-center gap-5">
 					<FontAwesomeIcon icon={faList} />
@@ -26,9 +25,7 @@ const CategoriesDropdown = (props) => {
 				</div>
 				<FontAwesomeIcon
 					icon={faChevronDown}
-					className={`cursor-pointer transition-all ${
-						open ? 'rotate-180' : ''
-					}`}
+					className={`transition-all ${open ? 'rotate-180' : ''}`}
 				/>
 			</div>
 
