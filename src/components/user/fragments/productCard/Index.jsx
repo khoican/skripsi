@@ -2,15 +2,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
-import heroIcon from '/hero-icon.png';
 import { getAppUrl } from '../../../../../config/app';
+import { useState } from 'react';
 
 const ProductCard = (props) => {
-	const { link, image, title, price } = props;
+	const { id, link, image, title, price } = props;
+	const [productId, setProductId] = useState();
+	// const history = useHistory();
+
+	const handleState = () => {
+		setProductId(id);
+		history.Push(`/products/show/${link}`, productId);
+	};
 
 	return (
 		<div className="w-[49%] lg:w-[32%] shadow bg-white mb-3">
-			<Link to={`/${link}`}>
+			<Link to={`/products/show/${link}`} onClick={handleState}>
 				<img
 					src={getAppUrl() + image}
 					alt={`gambar ${title}`}

@@ -1,26 +1,18 @@
 /* eslint-disable import/no-absolute-path */
 import { Link } from 'react-router-dom';
 import ProductCard from '../../components/user/fragments/productCard/Index';
-import { getAllProducts } from '../../../services/product';
-import { useEffect, useState } from 'react';
 import CategoriesMenu from '../../components/user/fragments/categoriesMenu/Index';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from '../../actions/productsAction';
 
 const HomePage = () => {
-	const [getProduct, setGetProduct] = useState([]);
+	const dispatch = useDispatch();
+	const products = useSelector((state) => state.fetchProducts.products);
 
 	useEffect(() => {
-		getAllProducts((data) => {
-			setGetProduct(
-				data.data.map((product) => ({
-					id: product.id,
-					name: product.name,
-					slug: product.slug,
-					price: product.price,
-					tumb: product.images.map((image) => image.image),
-				})),
-			);
-		});
-	}, []);
+		dispatch(fetchProducts());
+	}, [dispatch]);
 
 	return (
 		<main className="min-h-screen">
@@ -50,11 +42,16 @@ const HomePage = () => {
 						</h1>
 
 						<div className="flex flex-wrap gap-[2%] w-full">
-							{getProduct.map((item, index) => (
+							{products.map((item, index) => (
 								<ProductCard
 									key={index}
 									link={item.slug}
-									image={item.tumb[1]}
+									id={item.id}
+									image={
+										item.images.length > 0
+											? item.images[0].image
+											: ''
+									}
 									title={item.name}
 									price={item.price}
 								/>
