@@ -1,44 +1,26 @@
-import { useEffect, useState } from 'react';
-import { getAllProducts } from '../../../services/product';
+import { useEffect } from 'react';
 import CategoriesMenu from '../../components/user/fragments/categoriesMenu/Index';
 import ProductCard from '../../components/user/fragments/productCard/Index';
 import { Link, useParams } from 'react-router-dom';
 import noData from '/no-data.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../actions/productsAction';
+// import { fetchProductBySubCategory } from '../../actions/productBySubCategoryAction';
 
 const ProductPage = () => {
-	const [getProduct, setGetProduct] = useState([]);
 	const subCategoryId = useParams();
+	const dispatch = useDispatch();
+	let products = useSelector((state) => state.fetchProducts.products);
 
 	useEffect(() => {
-		getAllProducts((data) => {
-			setGetProduct(
-				subCategoryId.id
-					? data.data
-							.filter(
-								(product) =>
-									product.subCategoryId === subCategoryId.id,
-							)
-							.map((product) => ({
-								id: product.id,
-								name: product.name,
-								slug: product.slug,
-								price: product.price,
-								tumb: product.images.map(
-									(image) => image.image,
-								),
-								subCategory: product.subCategoryId,
-							}))
-					: data.data.map((product) => ({
-							id: product.id,
-							name: product.name,
-							slug: product.slug,
-							price: product.price,
-							tumb: product.images.map((image) => image.image),
-							subCategory: product.subCategoryId,
-						})),
-			);
-		});
-	});
+		dispatch(fetchProducts());
+	}, [dispatch]);
+
+	let product = subCategoryId.id
+		? products.filter(
+				(product) => product.subCategoryId === subCategoryId.id,
+			)
+		: products;
 
 	return (
 		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
@@ -48,17 +30,21 @@ const ProductPage = () => {
 				<div className="">
 					<h1 className="font-semibold text-lg mb-3">
 						{subCategoryId.id
-							? 'Produk Sub Kategori'
+							? 'Menampilkan ' + product.length + ' Produk'
 							: 'Semua Produk'}
 					</h1>
 
 					<div className="flex flex-wrap gap-[2%] w-full">
-						{getProduct.length > 0 ? (
-							getProduct.map((item, index) => (
+						{product.length > 0 ? (
+							product.map((item, index) => (
 								<ProductCard
 									key={index}
 									link={item.slug}
-									image={item.tumb[1]}
+									image={
+										item.images.length > 0
+											? item.images[0].image
+											: ''
+									}
 									title={item.name}
 									price={item.price}
 								/>
