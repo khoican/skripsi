@@ -1,29 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CategoriesDropdown from '../../elements/categoriesDropdown/Index';
-import { getAllCategories } from '../../../../../services/category';
+import { useEffect } from 'react';
+import { fetchCategories } from '../../../../actions/categoryAction';
 
 const CategoriesMenu = () => {
-	const [categories, setCategories] = useState([]);
+	const dispatch = useDispatch();
+	const categories = useSelector((state) => state.fetchCategories.category);
 
 	useEffect(() => {
-		getAllCategories((data) => {
-			setCategories(
-				data.data.map((category) => ({
-					id: category.id,
-					name: category.name,
-				})),
-			);
-		});
-	});
+		dispatch(fetchCategories());
+	}, [dispatch]);
 
 	return (
 		<div className="w-1/4 overflow-hidden h-full rounded-xl shadow">
 			<h1 className="bg-gray-200 px-5 py-3 font-semibold text-lg uppercase tracking-widest">
 				Kategori
 			</h1>
-			{categories.map((item, index) => (
-				<CategoriesDropdown key={index} name={item.name} id={item.id} />
-			))}
+			{categories.length > 0 &&
+				categories.map((item, index) => (
+					<CategoriesDropdown
+						key={index}
+						name={item.name}
+						id={item.id}
+					/>
+				))}
 		</div>
 	);
 };

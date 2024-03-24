@@ -1,29 +1,26 @@
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import { getAllSubCategories } from '../../../../../services/category';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchSubCategories } from '../../../../actions/subCategoryAction';
 
 const CategoryMenu = (props) => {
-	const [subCategories, setSubCategories] = useState([]);
 	const { id } = props;
+	const dispatch = useDispatch();
+	const subCategories = useSelector(
+		(state) => state.fetchSubCategories.category,
+	);
 
 	useEffect(() => {
-		getAllSubCategories((data) => {
-			setSubCategories(
-				data.data.map((subCategory) => ({
-					id: subCategory.id,
-					name: subCategory.name,
-					slug: subCategory.slug,
-					categoryId: subCategory.category.id,
-				})),
-			);
-		});
-	}, []);
+		dispatch(fetchSubCategories());
+	}, [dispatch]);
 
-	let handleSubCategory = subCategories.filter(
-		(subCategory) => subCategory.categoryId == id,
+	const handleSubCategory = subCategories.filter(
+		(item) => item.categoryId === id,
 	);
+
+	console.log(handleSubCategory);
 
 	return (
 		<>

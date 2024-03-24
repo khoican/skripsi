@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import noData from '/no-data.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../actions/productsAction';
-// import { fetchProductBySubCategory } from '../../actions/productBySubCategoryAction';
 
 const ProductPage = () => {
 	const subCategoryId = useParams();

@@ -1,8 +1,7 @@
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import { getAllSubCategories } from '../../../../../services/category';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 import CategoryMenu from './Menu';
 
 const CategoriesDropdown = (props) => {
