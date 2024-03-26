@@ -38,7 +38,7 @@ const ProductPage = () => {
 							product.map((item, index) => (
 								<ProductCard
 									key={index}
-									link={item.slug}
+									link={item.id}
 									image={
 										item.images.length > 0
 											? item.images[0].image

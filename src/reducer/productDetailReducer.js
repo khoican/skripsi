@@ -5,7 +5,7 @@ import {
 } from '../actions/productDetailAction';
 
 const initialState = {
-	product: null,
+	product: [],
 	loading: false,
 	error: '',
 };

@@ -45,7 +45,7 @@ const HomePage = () => {
 							{products.map((item, index) => (
 								<ProductCard
 									key={index}
-									link={item.slug}
+									link={item.id}
 									id={item.id}
 									image={
 										item.images.length > 0

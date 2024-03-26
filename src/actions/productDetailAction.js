@@ -8,9 +8,9 @@ export const fetchProductDetailRequest = () => ({
 	type: FETCH_PRODUCT_DETAIL_REQUEST,
 });
 
-export const fetchProductDetailSuccess = (id) => ({
+export const fetchProductDetailSuccess = (product) => ({
 	type: FETCH_PRODUCT_DETAIL_SUCCESS,
-	payload: id,
+	payload: product,
 });
 
 export const fetchProductDetailError = (error) => ({
@@ -22,7 +22,7 @@ export const fetchProductDetail = (id) => {
 	return async (dispatch) => {
 		dispatch(fetchProductDetailRequest());
 		try {
-			const data = await getProductBySlug(id, data.data);
+			const data = await getProductBySlug(id);
 			dispatch(fetchProductDetailSuccess(data));
 		} catch (error) {
 			dispatch(fetchProductDetailError(error));

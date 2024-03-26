@@ -6,7 +6,7 @@ import subCategoryReducer from '../reducer/subCategoryReducer';
 
 export default configureStore({
 	reducer: {
-		productDetail: productDetailReducer,
+		fetchProductDetail: productDetailReducer,
 		fetchProducts: productsReducer,
 		fetchCategories: categoryReducer,
 		fetchSubCategories: subCategoryReducer,

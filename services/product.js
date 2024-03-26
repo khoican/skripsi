@@ -6,15 +6,17 @@ export const getAllProducts = async () => {
 	return response.data.data;
 };
 
-export const getProductBySlug = (id, callback) => {
-	axios({
+export const getProductBySlug = async (id) => {
+	const response = await axios({
 		method: 'get',
 		url: `${getAppUrl()}api/products/${id}`,
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		},
-	}).then(function (response) {
-		callback(response);
+	}).then((res) => {
+		return res.data.data;
 	});
+
+	return response;
 };
