@@ -3,6 +3,7 @@ import productDetailReducer from '../reducer/productDetailReducer';
 import productsReducer from '../reducer/productsReducer';
 import categoryReducer from '../reducer/categoryReducer';
 import subCategoryReducer from '../reducer/subCategoryReducer';
+import counterReducer from '../reducer/counterReducer';
 
 export default configureStore({
 	reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
 		fetchProducts: productsReducer,
 		fetchCategories: categoryReducer,
 		fetchSubCategories: subCategoryReducer,
+		counter: counterReducer,
 	},
 });

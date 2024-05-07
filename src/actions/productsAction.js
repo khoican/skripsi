@@ -18,11 +18,11 @@ export const fetchProductsError = (error) => ({
 	payload: error,
 });
 
-export const fetchProducts = () => {
+export const fetchProducts = (skip, take) => {
 	return async (dispatch) => {
 		dispatch(fetchProductsRequest());
 		try {
-			const data = await getAllProducts();
+			const data = await getAllProducts(skip, take);
 			dispatch(fetchProductsSuccess(data));
 		} catch (error) {
 			dispatch(fetchProductsError(error.message));

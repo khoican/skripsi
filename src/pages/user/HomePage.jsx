@@ -11,7 +11,7 @@ const HomePage = () => {
 	const products = useSelector((state) => state.fetchProducts.products);
 
 	useEffect(() => {
-		dispatch(fetchProducts());
+		dispatch(fetchProducts(3, 2));
 	}, [dispatch]);
 
 	return (

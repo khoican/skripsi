@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
-export const getAllProducts = async () => {
-	const response = await axios.get(`${getAppUrl()}api/products`);
+export const getAllProducts = async (skip = 0, take = 10) => {
+	const response = await axios.get(
+		`${getAppUrl()}api/products?skip=${skip}&take=${take}`,
+	);
 	return response.data.data;
 };
 
