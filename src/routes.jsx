@@ -5,6 +5,7 @@ import ProductPage from './pages/user/ProductsPage';
 import ProductDetail from './pages/user/ProductDetail';
 import CartPage from './pages/user/CartPage';
 import CheckoutPage from './pages/user/CheckoutPage';
+import LoginPage from './pages/user/auth/LoginPage';
 
 export const router = createBrowserRouter([
 	{
@@ -36,5 +37,9 @@ export const router = createBrowserRouter([
 				element: <CheckoutPage />,
 			},
 		],
+	},
+	{
+		path: '/login',
+		element: <LoginPage />,
 	},
 ]);

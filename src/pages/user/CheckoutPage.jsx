@@ -77,6 +77,7 @@ const CheckoutPage = () => {
 								}
 								icon={faTruckFast}
 								onClick={handleOpenAddress}
+								active={openAddress ? true : false}
 							/>
 							<Button
 								text={'Ambil di Toko'}
@@ -85,6 +86,7 @@ const CheckoutPage = () => {
 								}
 								icon={faStore}
 								onClick={handleCloseAddress}
+								active={!openAddress ? true : false}
 							/>
 						</div>
 
