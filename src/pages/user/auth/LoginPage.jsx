@@ -1,21 +1,60 @@
+import { useState } from 'react';
 import Button from '../../../components/user/elements/button/Index';
 import Input from '../../../components/user/elements/input/Index';
 import logo from '/logo.png';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { postLogin } from '../../../../helper/postLogin';
 
 const LoginPage = () => {
+	const [inputLogin, setInputLogin] = useState({
+		username: '',
+		password: '',
+	});
+	const [status, setStatus] = useState('');
+
+	const handleLogin = (e) => {
+		setInputLogin({
+			...inputLogin,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmitLogin = async () => {
+		localStorage.removeItem('user');
+		const login = await postLogin(inputLogin.username, inputLogin.password);
+
+		if (login.status !== 'success') {
+			setStatus(login.message);
+		} else {
+			window.location.href = '/';
+		}
+	};
+
 	return (
 		<main className="h-screen max-w-screen-2xl mx-auto flex">
 			<div className="w-5/12 h-full flex justify-center items-center">
 				<div className="mx-14">
 					<h1 className="text-3xl font-semibold">Login</h1>
 
+					{status && (
+						<p className="text-sm bg-danger text-white p-5 rounded-md mt-5">
+							{status}
+						</p>
+					)}
+
 					<div className="mt-8 flex flex-col gap-4 w-full">
-						<Input text={'Username'} id={'username'} />
+						<Input
+							text={'Username'}
+							id={'username'}
+							name={'username'}
+							onChange={handleLogin}
+						/>
 						<Input
 							text={'Password'}
 							id={'password'}
 							password={true}
+							name={'password'}
+							onChange={handleLogin}
 						/>
 
 						<p className="text-sm">
@@ -27,6 +66,7 @@ const LoginPage = () => {
 								text={'Login'}
 								style={'bg-success text-white hover:bg-primary'}
 								icon={faRightToBracket}
+								onClick={handleSubmitLogin}
 							/>
 						</div>
 					</div>

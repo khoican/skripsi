@@ -30,12 +30,7 @@ const ProductDetail = (loading, product, error) => {
 	};
 
 	const handlePost = () => {
-		postCardByUser(
-			count,
-			note,
-			'08dbab14-09f0-4585-bdc4-2edac3553e74',
-			productId.id,
-		);
+		postCardByUser(count, note, productId.id);
 	};
 
 	const getImages = products.images;

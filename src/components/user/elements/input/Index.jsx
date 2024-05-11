@@ -3,7 +3,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 
 const Input = (props) => {
-	const { text, note, id, password } = props;
+	const { text, note, id, password, name, onChange } = props;
 	const [hidden, setHidden] = useState(true);
 
 	function togglePassword() {
@@ -20,6 +20,8 @@ const Input = (props) => {
 					type={password && hidden ? 'password' : 'text'}
 					className={`form-input w-full border border-primary rounded-md focus:border-primary`}
 					id={id}
+					name={name}
+					onChange={onChange}
 				/>
 
 				{password && (

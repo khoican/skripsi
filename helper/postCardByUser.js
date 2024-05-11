@@ -1,10 +1,12 @@
 import { postCartProduct } from '../services/cartProduct';
 
-const postCardByUser = async (qty, note, userId, productId) => {
+const postCardByUser = async (qty, note, productId) => {
+	const user = JSON.parse(localStorage.getItem('user'));
+
 	const data = {
 		quantity: qty,
 		notes: note,
-		userId: userId,
+		userId: user.id,
 		productId: productId,
 	};
 
