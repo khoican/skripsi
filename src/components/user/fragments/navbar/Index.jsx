@@ -5,6 +5,7 @@ import {
 	faMagnifyingGlass,
 	faShoppingBag,
 	faShoppingCart,
+	faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { Fragment, useState } from 'react';
 import Logo from '../../elements/logo/Index';
@@ -45,6 +46,7 @@ const Navbar = () => {
 					<NavbarIcon link={'/'} icon={faHome} />
 					<NavbarIcon link={'/products'} icon={faShoppingBag} />
 					<NavbarIcon link={'/cart'} icon={faShoppingCart} />
+					<NavbarIcon link={'/login'} icon={faUser} />
 				</div>
 			</nav>
 		</Fragment>

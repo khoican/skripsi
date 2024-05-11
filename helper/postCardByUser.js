@@ -1,6 +1,6 @@
 import { postCartProduct } from '../services/cartProduct';
 
-const postCardByUser = (qty, note, userId, productId) => {
+const postCardByUser = async (qty, note, userId, productId) => {
 	const data = {
 		quantity: qty,
 		notes: note,
@@ -8,7 +8,9 @@ const postCardByUser = (qty, note, userId, productId) => {
 		productId: productId,
 	};
 
-	qty > 0 && postCartProduct(data).then((res) => console.log(res));
+	const response = await postCartProduct(data);
+	console.log(response);
+	localStorage.setItem('cart', JSON.stringify(response));
 };
 
 export default postCardByUser;

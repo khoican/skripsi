@@ -6,6 +6,8 @@ import { NumericFormat } from 'react-number-format';
 import Carousel from '../../components/user/fragments/carousel/Index';
 import Counter from '../../components/user/fragments/counter/Index';
 import postCardByUser from '../../../helper/postCardByUser';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBox } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetail = (loading, product, error) => {
 	const productId = useParams();
@@ -34,8 +36,6 @@ const ProductDetail = (loading, product, error) => {
 			'08dbab14-09f0-4585-bdc4-2edac3553e74',
 			productId.id,
 		);
-
-		window.location.replace('/cart');
 	};
 
 	const getImages = products.images;
@@ -49,7 +49,7 @@ const ProductDetail = (loading, product, error) => {
 			</div>
 			<div className="w-7/12">
 				<div className="p-3">
-					<div className="flex justify-between">
+					<div className="flex justify-between pb-1 border-b border-gray-300">
 						<div className="flex flex-col">
 							<div>
 								<h1 className="font-semibold text-xl capitalize">
@@ -64,7 +64,11 @@ const ProductDetail = (loading, product, error) => {
 									/>
 								</p>
 							</div>
-							<div className="flex gap-3 mt-3">
+							<div className="flex gap-2 mt-3 items-center">
+								<FontAwesomeIcon
+									icon={faBox}
+									className="text-gray-600"
+								/>
 								<p className="text-sm font-semibold">
 									{products.stock}{' '}
 									<span className="font-light">Tersedia</span>
@@ -72,9 +76,8 @@ const ProductDetail = (loading, product, error) => {
 							</div>
 						</div>
 					</div>
-					<hr />
 
-					<div>
+					<div className="mt-0">
 						<div className="flex gap-3">
 							<div>
 								<p className="text-xs mt-3">Jumlah Barang</p>
@@ -82,7 +85,11 @@ const ProductDetail = (loading, product, error) => {
 							</div>
 							<div>
 								<p className="text-xs mt-3">Catatan</p>
-								<input type="text" onChange={handleNote} />
+								<input
+									type="text"
+									onChange={handleNote}
+									className="border border-gray-500 text-sm p-2"
+								/>
 							</div>
 						</div>
 						<button
@@ -93,7 +100,7 @@ const ProductDetail = (loading, product, error) => {
 						</button>
 					</div>
 
-					<main className="mt-5">
+					<main className="mt-10">
 						<p className="text-justify">{products.description}</p>
 					</main>
 				</div>

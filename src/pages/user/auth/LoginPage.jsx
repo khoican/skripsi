@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Button from '../../../components/user/elements/button/Index';
 import Input from '../../../components/user/elements/input/Index';
 import logo from '/logo.png';

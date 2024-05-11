@@ -2,16 +2,18 @@ import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
 export const postCartProduct = async (data) => {
-	await axios
-		.post(`${getAppUrl()}api/cartproducts`, data)
-		.then((res) => {
-			if (res.status !== 200) {
-				console.log('error :' + res.data);
-			}
+	try {
+		const response = await axios.post(
+			`${getAppUrl()}api/cartproducts`,
+			data,
+		);
+		if (response.status !== 200) {
+			console.log('error :' + response.data);
+		}
 
-			console.log(res.data);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+		let responseData = response.data.data;
+		return responseData;
+	} catch (error) {
+		console.log(error);
+	}
 };
