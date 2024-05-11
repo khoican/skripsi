@@ -1,15 +1,17 @@
+import { useEffect, useState } from "react";
 import CategoryDropdown from "./CategoryDropdown";
+import { getCategory } from "../../../../config/services/category";
 
-const categories = [
-    {
-        id: 1,
-        name: "Kategori 1",
-    },
-    {
-        id: 2,
-        name: "Kategori 2",
-    },
-];
+// const categories = [
+//     {
+//         id: 1,
+//         name: "Kategori 1",
+//     },
+//     {
+//         id: 2,
+//         name: "Kategori 2",
+//     },
+// ];
 const subCategories = [
     {
         id: 1,
@@ -30,6 +32,18 @@ const subCategories = [
 ];
 
 const Category = () => {
+    const [categories, setCategory] = useState([]);
+    const data = async () => {
+        const fetchData = await getCategory();
+        setCategory(fetchData);
+    };
+
+    useEffect(() => {
+        data();
+    }, []);
+
+    console.log(categories);
+
     return (
         <div className="w-full">
             {categories.map((category, index) => (

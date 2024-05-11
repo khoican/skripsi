@@ -1,3 +1,5 @@
+import Button from "../Elements/Button";
+
 const FormOrder = () => {
     return (
         <>
@@ -78,6 +80,20 @@ const FormOrder = () => {
                     <p className="text-lg font-bold text-light-red">
                         Rp. 455.000
                     </p>
+                </div>
+                <div className="mt-6 flex items-center justify-end gap-3">
+                    <Button variants="border border-red-500 py-2 px-4 rounded-md text-red-500">
+                        Cancel
+                    </Button>
+                    <Button variants="bg-red-500 py-2 px-4 rounded-md text-white">
+                        Delete
+                    </Button>
+                    <Button variants="bg-blue-500 py-2 px-4 rounded-md text-white">
+                        Process
+                    </Button>
+                    <Button variants="bg-green-500 py-2 px-4 rounded-md text-white">
+                        Success
+                    </Button>
                 </div>
             </div>
         </>

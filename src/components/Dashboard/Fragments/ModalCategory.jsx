@@ -12,18 +12,7 @@ const ModalCategory = (props) => {
                 {children}
                 <div className="modal-action py-4">
                     <form method="dialog">
-                        <div className="flex mt-2 justify-end">
-                            <Button
-                                type="submit"
-                                variants="mr-2 px-4 py-2 border border-light-red hover:text-red-700 hover:border-red-700 transition ease-in-out 5s rounded-lg text-light-red">
-                                Cancel
-                            </Button>
-                            <Button
-                                type="submit"
-                                variants={`px-4 py-2 ${variants} rounded-lg text-white`}>
-                                {btn}
-                            </Button>
-                        </div>
+                        <div className="flex mt-2 justify-end"></div>
                     </form>
                 </div>
             </div>

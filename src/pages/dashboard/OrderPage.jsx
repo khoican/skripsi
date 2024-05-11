@@ -30,7 +30,9 @@ const columns = [
         cell: () => (
             <>
                 <Link to={"/Dashboard/Order/OrderDetails"}>
-                    <Button>Details</Button>
+                    <Button variants="bg-blue-500 rounded-md py-2 px-2 text-white">
+                        Details
+                    </Button>
                 </Link>
             </>
         ),

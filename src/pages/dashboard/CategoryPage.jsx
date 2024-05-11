@@ -5,8 +5,25 @@ import SearchInput from "../../components/Dashboard/Elements/SearchInput";
 import Category from "../../components/Dashboard/Elements/Category";
 import ModalCategory from "../../components/Dashboard/Fragments/ModalCategory";
 import Input from "../../components/Dashboard/Elements/Input";
+import { useEffect, useState } from "react";
+// import axios from "axios";
+import { postCategory } from "../../config/services/category";
 
 function DashboardCategory() {
+    const [category, setCategory] = useState("");
+
+    function handleCategory(e) {
+        setCategory(e.target.value);
+    }
+
+    console.log(category);
+
+    function handleSubmit() {
+        postCategory({
+            name: category,
+        });
+    }
+
     return (
         <>
             <div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
@@ -35,7 +52,21 @@ function DashboardCategory() {
                             type="text"
                             name="categoryname"
                             placeholder="Insert Category Name"
+                            onChange={handleCategory}
                         />
+                        <div className="">
+                            <Button
+                                type="submit"
+                                variants="mr-2 px-4 py-2 border border-light-red hover:text-red-700 hover:border-red-700 transition ease-in-out 5s rounded-lg text-light-red">
+                                Cancel
+                            </Button>
+                            <Button
+                                type="submit"
+                                variants="px-4 py-2 rounded-lg bg-light-green text-white"
+                                onClick={handleSubmit}>
+                                Save
+                            </Button>
+                        </div>
                     </ModalCategory>
                 </div>
                 <div className="my-10 px-7">
