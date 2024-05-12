@@ -1,3 +1,4 @@
+import { getCartByUserId } from '../services/cartProduct';
 import { login } from '../services/user';
 
 export const postLogin = async (username, password) => {
@@ -24,6 +25,7 @@ export const postLogin = async (username, password) => {
 		};
 
 		localStorage.setItem('user', JSON.stringify(user));
+		getCartUser(response.data.id);
 
 		return {
 			status: response.status,
@@ -35,4 +37,11 @@ export const postLogin = async (username, password) => {
 			message: 'Terjadi kesalahan saat melakukan login',
 		};
 	}
+};
+
+const getCartUser = async (id) => {
+	const response = await getCartByUserId(id);
+	console.log(response);
+
+	localStorage.setItem('cart', JSON.stringify(response));
 };

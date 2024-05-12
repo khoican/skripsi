@@ -21,6 +21,7 @@ const LoginPage = () => {
 
 	const handleSubmitLogin = async () => {
 		localStorage.removeItem('user');
+		localStorage.removeItem('cart');
 		const login = await postLogin(inputLogin.username, inputLogin.password);
 
 		if (login.status !== 'success') {
