@@ -8,6 +8,7 @@ import Counter from '../../components/user/fragments/counter/Index';
 import postCardByUser from '../../../helper/postCardByUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
+import logo from '/logo.png';
 
 const ProductDetail = (loading, product, error) => {
 	const productId = useParams();
@@ -21,7 +22,7 @@ const ProductDetail = (loading, product, error) => {
 		dispatch(fetchProductDetail(productId.id));
 	}, [dispatch]);
 
-	if (!loading) {
+	if (!products) {
 		return <p>Loading...</p>;
 	}
 
@@ -39,7 +40,11 @@ const ProductDetail = (loading, product, error) => {
 		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
 			<div className="w-5/12">
 				<div className="w-full">
-					<Carousel images={getImages} />
+					{!products.images ? (
+						<Carousel images={getImages} />
+					) : (
+						<img src={logo} alt="" className="w-4/6" />
+					)}
 				</div>
 			</div>
 			<div className="w-7/12">
