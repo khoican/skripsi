@@ -9,18 +9,38 @@ import postCardByUser from '../../../helper/postCardByUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
 import logo from '/logo.png';
+import { updateCart } from '../../../helper/updateCart';
 
 const ProductDetail = (loading, product, error) => {
 	const productId = useParams();
 	const dispatch = useDispatch();
-	const products = useSelector((state) => state.fetchProductDetail.product);
-	const count = useSelector((state) => state.counter.count);
+	const [existingProduct, setExistingProduct] = useState(null);
 
-	const [note, setNote] = useState('');
+	const products = useSelector((state) => state.fetchProductDetail.product);
+
+	const count = useSelector((state) => state.counter[productId.id]?.count);
+
+	const [note, setNote] = useState(
+		existingProduct ? existingProduct.notes : '',
+	);
 
 	useEffect(() => {
 		dispatch(fetchProductDetail(productId.id));
 	}, [dispatch]);
+
+	useEffect(() => {
+		const cartProduct = JSON.parse(localStorage.getItem('cart')) || [];
+		const existing = cartProduct
+			.filter((item) => item.productId === productId.id)
+			.map((item) => {
+				return {
+					id: item.id,
+					quantity: item.quantity,
+					notes: item.notes,
+				};
+			});
+		setExistingProduct(existing[0]);
+	}, [productId]);
 
 	if (!products) {
 		return <p>Loading...</p>;
@@ -31,9 +51,10 @@ const ProductDetail = (loading, product, error) => {
 	};
 
 	const handlePost = () => {
-		postCardByUser(count, note, productId.id);
+		existingProduct
+			? updateCart(existingProduct.id, note, count, productId.id)
+			: postCardByUser(count, note, productId.id);
 	};
-
 	const getImages = products.images;
 
 	return (
@@ -81,7 +102,15 @@ const ProductDetail = (loading, product, error) => {
 						<div className="flex gap-3">
 							<div>
 								<p className="text-xs mt-3">Jumlah Barang</p>
-								<Counter limit={products.stock} />
+								<Counter
+									limit={products.stock}
+									id={productId.id}
+									value={
+										existingProduct
+											? existingProduct.quantity
+											: 0
+									}
+								/>
 							</div>
 							<div>
 								<p className="text-xs mt-3">Catatan</p>

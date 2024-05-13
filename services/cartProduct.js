@@ -19,8 +19,40 @@ export const postCartProduct = async (data) => {
 			console.log('error :' + response.data);
 		}
 
-		let responseData = response.data.data;
+		let responseData = response.data;
 		return responseData;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const updatedCartProduct = async (id, data) => {
+	try {
+		const response = await axios.patch(
+			`${getAppUrl()}api/cartproducts/${id}`,
+			data,
+		);
+		if (response.status !== 200) {
+			console.log('error :' + response.data);
+		}
+
+		let responseData = response.data;
+		return responseData;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const deleteCartProduct = async (id) => {
+	try {
+		const response = await axios.delete(
+			`${getAppUrl()}api/cartproducts/${id}`,
+		);
+		if (response.status !== 200) {
+			console.log('error :' + response.data);
+		}
+
+		return response;
 	} catch (error) {
 		console.log(error);
 	}

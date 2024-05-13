@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	incrementCounter,
 	decrementCounter,
+	counterValue,
 } from '../../../../actions/counterAction';
+import { useEffect } from 'react';
 
 const Counter = (props) => {
-	const { limit = 100, main = true } = props;
+	const { id, limit = 100, main = true, value } = props;
 
 	const dispatch = useDispatch();
-	const count = useSelector((state) => state.counter.count);
+	const count = useSelector((state) => state.counter[id]?.count || 0);
+
 	const leftButtonStyle = `p-2 flex items-center justify-center ${
 		main === true
 			? 'bg-gray-400 text-white active:bg-gray-600'
@@ -24,12 +27,16 @@ const Counter = (props) => {
 	const iconStyle = `${main === true ? '' : 'w-4 h-4'}`;
 
 	function handleIncrement() {
-		limit > count && dispatch(incrementCounter());
+		limit > count && dispatch(incrementCounter(id));
 	}
 
 	function handleDecrement() {
-		count > 0 && dispatch(decrementCounter());
+		count > 0 && dispatch(decrementCounter(id));
 	}
+
+	useEffect(() => {
+		dispatch(counterValue(id, parseInt(value)));
+	}, [dispatch, id, value]);
 
 	return (
 		<div className="flex">

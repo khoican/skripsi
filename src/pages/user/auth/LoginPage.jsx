@@ -4,6 +4,7 @@ import Input from '../../../components/user/elements/input/Index';
 import logo from '/logo.png';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { postLogin } from '../../../../helper/postLogin';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
 	const [inputLogin, setInputLogin] = useState({
@@ -11,6 +12,7 @@ const LoginPage = () => {
 		password: '',
 	});
 	const [status, setStatus] = useState('');
+	const navigate = useNavigate();
 
 	const handleLogin = (e) => {
 		setInputLogin({
@@ -19,7 +21,7 @@ const LoginPage = () => {
 		});
 	};
 
-	const handleSubmitLogin = async () => {
+	const handleSubmitLogin = async (e) => {
 		localStorage.removeItem('user');
 		localStorage.removeItem('cart');
 		const login = await postLogin(inputLogin.username, inputLogin.password);
@@ -27,7 +29,8 @@ const LoginPage = () => {
 		if (login.status !== 'success') {
 			setStatus(login.message);
 		} else {
-			window.location.href = '/';
+			e.preventDefault();
+			navigate('/');
 		}
 	};
 
