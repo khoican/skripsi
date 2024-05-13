@@ -22,7 +22,8 @@ const setLocalStorage = (response) => {
 	existingCart = existingCart.map((item) => {
 		if (item.productId === response.productId) {
 			existingData = true;
-			item = response;
+			item.quantity = response.quantity;
+			item.notes = response.notes;
 		}
 
 		return item;

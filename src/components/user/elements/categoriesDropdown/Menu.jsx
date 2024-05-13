@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchSubCategories } from '../../../../actions/subCategoryAction';
+import { fetchSubCategories } from '../../../../redux/actions/subCategoryAction';
 
 const CategoryMenu = (props) => {
 	const { id } = props;

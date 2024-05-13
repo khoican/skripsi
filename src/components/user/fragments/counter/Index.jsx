@@ -5,7 +5,7 @@ import {
 	incrementCounter,
 	decrementCounter,
 	counterValue,
-} from '../../../../actions/counterAction';
+} from '../../../../redux/actions/counterAction';
 import { useEffect } from 'react';
 
 const Counter = (props) => {

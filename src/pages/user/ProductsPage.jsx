@@ -4,7 +4,7 @@ import ProductCard from '../../components/user/fragments/productCard/Index';
 import { Link, useParams } from 'react-router-dom';
 import noData from '/no-data.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../actions/productsAction';
+import { fetchProducts } from '../../redux/actions/productsAction';
 
 const ProductPage = () => {
 	const subCategoryId = useParams();

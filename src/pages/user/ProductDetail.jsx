@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchProductDetail } from '../../actions/productDetailAction';
+import { fetchProductDetail } from '../../redux/actions/productDetailAction';
 import { NumericFormat } from 'react-number-format';
 import Carousel from '../../components/user/fragments/carousel/Index';
 import Counter from '../../components/user/fragments/counter/Index';
