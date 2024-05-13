@@ -31,7 +31,7 @@ const ProductCard = (props) => {
 							{title}
 						</h1>
 
-						<p className="text-red-500">
+						<p className="text-danger">
 							<NumericFormat
 								value={price}
 								displayType={'text'}

@@ -43,6 +43,7 @@ const CartPage = () => {
 								quantity={item.quantity}
 								note={item.notes}
 								price={item.product.price}
+								productId={item.productId}
 							/>
 						))
 					) : (

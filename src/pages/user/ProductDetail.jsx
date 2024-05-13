@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetail } from '../../redux/actions/productDetailAction';
 import { NumericFormat } from 'react-number-format';
 import Carousel from '../../components/user/fragments/carousel/Index';
@@ -12,9 +12,11 @@ import logo from '/logo.png';
 import { updateCart } from '../../../helper/updateCart';
 
 const ProductDetail = (loading, product, error) => {
+	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
 	const [existingProduct, setExistingProduct] = useState(null);
+	const [status, setStatus] = useState('');
 
 	const products = useSelector((state) => state.fetchProductDetail.product);
 
@@ -50,10 +52,16 @@ const ProductDetail = (loading, product, error) => {
 		setNote(e.target.value);
 	};
 
-	const handlePost = () => {
-		existingProduct
-			? updateCart(existingProduct.id, note, count, productId.id)
-			: postCardByUser(count, note, productId.id);
+	const handlePost = async () => {
+		const response = existingProduct
+			? await updateCart(existingProduct.id, note, count, productId.id)
+			: await postCardByUser(count, note, productId.id);
+
+		if (response.status !== 'success') {
+			setStatus(response.message);
+		} else {
+			navigate('/cart');
+		}
 	};
 	const getImages = products.images;
 
@@ -76,7 +84,7 @@ const ProductDetail = (loading, product, error) => {
 								<h1 className="font-semibold text-xl capitalize">
 									{products.name}
 								</h1>
-								<p className="font-semibold text-2xl text-red-600">
+								<p className="font-semibold text-2xl text-danger">
 									<NumericFormat
 										value={products.price}
 										displayType={'text'}

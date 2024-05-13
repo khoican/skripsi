@@ -1,18 +1,28 @@
 import { updatedCartProduct } from '../services/cartProduct';
 
 export const updateCart = async (id, notes, quantity, productId) => {
-	const response = await updatedCartProduct(id, {
-		quantity: quantity,
-		notes: notes,
-		cartId: id,
-		productId: productId,
-	});
+	try {
+		const response = await updatedCartProduct(id, {
+			quantity: quantity,
+			notes: notes,
+			cartId: id,
+			productId: productId,
+		});
 
-	if (response.status !== 'success') {
-		console.log('error :' + response.data);
+		setLocalStorage(response.data);
+
+		return {
+			status: 'success',
+			message: 'Barang ditambahkan ke keranjang',
+		};
+	} catch (error) {
+		console.log(error);
+
+		return {
+			status: 'error',
+			message: 'Barang gagal ditambahkan ke keranjang',
+		};
 	}
-
-	setLocalStorage(response.data);
 };
 
 const setLocalStorage = (response) => {

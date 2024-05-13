@@ -12,7 +12,6 @@ const postCardByUser = async (qty, note, productId) => {
 
 	try {
 		const response = await postCartProduct(data);
-		console.log(response);
 		setLocalStorage(response.data, qty);
 
 		return {
