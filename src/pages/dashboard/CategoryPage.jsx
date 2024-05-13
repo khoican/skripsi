@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 // import axios from "axios";
 import { postCategory } from '../../config/services/category';
 
-function DashboardCategory() {
+const DashboardCategory = () => {
 	const [category, setCategory] = useState('');
 
 	function handleCategory(e) {
@@ -81,6 +81,6 @@ function DashboardCategory() {
 			</div>
 		</>
 	);
-}
+};
 
 export default DashboardCategory;

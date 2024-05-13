@@ -115,7 +115,7 @@ const data = [
 	},
 ];
 
-function DashboardProduct() {
+const DashboardProduct = () => {
 	return (
 		<>
 			<div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
@@ -149,6 +149,6 @@ function DashboardProduct() {
 			</div>
 		</>
 	);
-}
+};
 
 export default DashboardProduct;

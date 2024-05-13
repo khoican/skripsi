@@ -23,7 +23,7 @@ const DataRole = [
 	},
 ];
 
-function DashboardRolePage() {
+const DashboardRolePage = () => {
 	return (
 		<>
 			<div className="lg:ml-64 lg:pl-4 lg:flex lg:flex-col lg:w-75% pt-5 px-5">
@@ -141,6 +141,6 @@ function DashboardRolePage() {
 			</div>
 		</>
 	);
-}
+};
 
 export default DashboardRolePage;
