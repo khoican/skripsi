@@ -1,31 +1,31 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        'poppins': ['Poppins'],
-        'montserrat': ['Montserrat', 'sans-serif', 'Source Code Pro', 'monospace'], 
-      },
-      colors: {
-        "dark-green": "#046307",
-        "light-green": "#79C314",
-        "light-red": "#E45F2B",
-        "light-orange": "#F6C445",
-      },
-    },
-  },
-  plugins: [
-    require("daisyui"), 
-  ],
-
-  daisyui: {
-    themes: [],
-    darkTheme: "dark",
-    themeRoot: ":root"
-  }
-}
-
+	content: [
+		'./index.html',
+		'./src/**/*.{js,ts,jsx,tsx}',
+		'node_modules/flowbite-react/lib/esm/**/*.js',
+	],
+	theme: {
+		extend: {
+			fontFamily: {
+				sans: [
+					'Poppins',
+					'sans-serif',
+					...defaultTheme.fontFamily.sans,
+				],
+				montserrat: ['Montserrat'],
+			},
+			colors: {
+				primary: '#046307',
+				success: '#79C314',
+				danger: '#E45F2B',
+				red: '#FF0000',
+				secondary: '#F6C445',
+			},
+		},
+	},
+	plugins: [require('@tailwindcss/forms')],
+};
