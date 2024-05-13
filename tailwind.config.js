@@ -22,6 +22,8 @@ export default {
 				primary: '#046307',
 				success: '#79C314',
 				danger: '#E45F2B',
+				red: '#FF0000',
+				secondary: '#F6C445',
 			},
 		},
 	},

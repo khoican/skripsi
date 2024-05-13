@@ -32,6 +32,7 @@
     "@heroicons/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.2.2",
     "axios": "^1.6.3",
+    "faker": "^5.5.3",
     "flowbite-react": "^0.7.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -40,7 +41,6 @@
     "react-flags-select": "^2.2.3",
     "react-number-format": "^5.3.1",
     "react-phone-number-input": "^3.4.1",
-    "react-redux": "^9.1.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.1"
   },
