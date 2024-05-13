@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import CategoriesDropdown from '../../elements/categoriesDropdown/Index';
 import { useEffect } from 'react';
-import { fetchCategories } from '../../../../actions/categoryAction';
+import { fetchCategories } from '../../../../redux/actions/categoryAction';
 
 const CategoriesMenu = () => {
 	const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import ProductCard from '../../components/user/fragments/productCard/Index';
 import CategoriesMenu from '../../components/user/fragments/categoriesMenu/Index';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchProducts } from '../../actions/productsAction';
+import { fetchProducts } from '../../redux/actions/productsAction';
 
 const HomePage = () => {
 	const dispatch = useDispatch();

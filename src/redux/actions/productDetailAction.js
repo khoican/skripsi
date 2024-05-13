@@ -1,4 +1,4 @@
-import { getProductBySlug } from '../../services/product';
+import { getProductBySlug } from '../../../services/product';
 
 export const FETCH_PRODUCT_DETAIL_REQUEST = 'FETCH_PRODUCT_DETAIL_REQUEST';
 export const FETCH_PRODUCT_DETAIL_SUCCESS = 'FETCH_PRODUCT_DETAIL_SUCCESS';

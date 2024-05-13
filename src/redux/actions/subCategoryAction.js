@@ -1,4 +1,4 @@
-import { getAllSubCategories } from '../../services/category';
+import { getAllSubCategories } from '../../../services/category';
 
 export const FETCH_SUB_CATEGORY_REQUEST = 'FETCH_SUB_CATEGORY_REQUEST';
 export const FETCH_SUB_CATEGORY_SUCCESS = 'FETCH_SUB_CATEGORY_SUCCESS';

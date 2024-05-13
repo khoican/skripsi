@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	incrementCounter,
 	decrementCounter,
-} from '../../../../actions/counterAction';
+} from '../../../../redux/actions/counterAction';
 
 const Counter = (props) => {
 	const { limit = 100, main = true } = props;

@@ -1,4 +1,4 @@
-import { getAllCategories } from '../../services/category';
+import { getAllCategories } from '../../../services/category';
 
 export const FETCH_CATEGORY_REQUEST = 'FETCH_CATEGORY_REQUEST';
 export const FETCH_CATEGORY_SUCCESS = 'FETCH_CATEGORY_SUCCESS';
