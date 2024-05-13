@@ -1,3 +1,5 @@
 export function getAppUrl() {
-	return import.meta.env.VITE_API_URL;
+	const api = import.meta.env.VITE_API_URL;
+
+	return api;
 }
