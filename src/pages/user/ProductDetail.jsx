@@ -16,14 +16,11 @@ const ProductDetail = (loading, product, error) => {
 	const dispatch = useDispatch();
 	const [existingProduct, setExistingProduct] = useState(null);
 	const [status, setStatus] = useState('');
+	const [note, setNote] = useState('');
 
 	const products = useSelector((state) => state.fetchProductDetail.product);
 
 	const count = useSelector((state) => state.counter[productId.id]?.count);
-
-	const [note, setNote] = useState(
-		existingProduct ? existingProduct.notes : '',
-	);
 
 	useEffect(() => {
 		dispatch(fetchProductDetail(productId.id));
@@ -34,6 +31,7 @@ const ProductDetail = (loading, product, error) => {
 		const existing = cartProduct
 			.filter((item) => item.productId === productId.id)
 			.map((item) => {
+				setNote(item.notes);
 				return {
 					id: item.id,
 					quantity: item.quantity,
@@ -119,6 +117,7 @@ const ProductDetail = (loading, product, error) => {
 								<p className="text-xs mt-3">Catatan</p>
 								<input
 									type="text"
+									value={note}
 									onChange={handleNote}
 									className="border border-gray-500 text-sm p-2"
 								/>

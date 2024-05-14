@@ -7,8 +7,10 @@ import Button from '../../components/user/elements/button/Index';
 import { faStore, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import { NumericFormat } from 'react-number-format';
 import { postOrder } from '../../../helper/postOrder';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
+	const navigate = useNavigate();
 	const [phone, setPhone] = useState();
 	const [country, setCountry] = useState('ID');
 	const [openAddress, setOpenAddress] = useState(false);
@@ -53,10 +55,8 @@ const CheckoutPage = () => {
 		};
 
 		const response = await postOrder(data);
-
-		if (response) {
-			return <p>Pesanan anda sedang diproses</p>;
-		}
+		console.log(response);
+		navigate(`/invoice/${response.id}`);
 	};
 
 	return (
