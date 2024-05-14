@@ -1,6 +1,24 @@
 import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
+export const postCategory = async (body) => {
+    await axios.post(`${getAppUrl()}api/category`, body)
+    .then(res => {if(res.status == 201) console.log(res.data)}
+    ).catch(e => console.log(e));  
+}
+
+export const deleteCategory = async (id) => {
+    await axios.delete(`${getAppUrl()}api/category/${id}`)
+    .then(res => {if(res.status == 200) console.log(res.data)}
+    ).catch(e => console.log(e));  
+}
+
+export const editCategory = async (id, body) => {
+    await axios.patch(`${getAppUrl()}api/category/${id}`, body)
+    .then(res => {if(res.status == 200) console.log(res.data)}
+    ).catch(e => console.log(e));  
+}
+
 export const getAllCategories = async () => {
 	const response = await axios.get(`${getAppUrl()}api/category`);
 	return response.data.data;

@@ -1,19 +1,17 @@
-import Button from '../Elements/Button';
 import Modal from '../Elements/Modal';
 
 const ModalCategory = (props) => {
 	const { children, title, id } = props;
 	return (
-		<Modal id={id} variants="border-none z-10 w-[600px] m-auto">
-			<div className="bg-white modal-box py-3 px-9">
-				<h3 className="text-black font-bold text-lg pt-3 pb-6">
-					{title}
-				</h3>
-				{children}
-				<div className="modal-action py-4">
-					<form method="dialog">
-						<div className="flex mt-2 justify-end"></div>
-					</form>
+		<Modal
+			id={id}
+			handleDelete
+			variants="border-none z-10 w-[600px] m-auto bg-white opacity-100"
+		>
+			<div className="bg-white modal-box py-4 px-9">
+				<h3 className="text-black font-bold text-lg pb-2">{title}</h3>
+				<div className="modal-action pb-2">
+					<form method="dialog">{children}</form>
 				</div>
 			</div>
 		</Modal>

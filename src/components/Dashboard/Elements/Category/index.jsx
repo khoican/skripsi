@@ -1,69 +1,55 @@
-import { useEffect, useState } from "react";
-import CategoryDropdown from "./CategoryDropdown";
-import { getCategory } from "../../../../config/services/category";
-
-// const categories = [
-//     {
-//         id: 1,
-//         name: "Kategori 1",
-//     },
-//     {
-//         id: 2,
-//         name: "Kategori 2",
-//     },
-// ];
-const subCategories = [
-    {
-        id: 1,
-        name: "Sub Kategori 1",
-        category: {
-            id: 1,
-            name: "Kategori 1",
-        },
-    },
-    {
-        id: 2,
-        name: "Sub Kategori 2",
-        category: {
-            id: 2,
-            name: "Kategori 2",
-        },
-    },
-];
+import { useEffect, useState } from 'react';
+import CategoryDropdown from './CategoryDropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../../../redux/actions/categoryAction';
+import { fetchSubCategories } from '../../../../redux/actions/subCategoryAction';
 
 const Category = () => {
-    const [categories, setCategory] = useState([]);
-    const data = async () => {
-        const fetchData = await getCategory();
-        setCategory(fetchData);
-    };
+	const dispatch = useDispatch();
+	const categories = useSelector((state) => state.fetchCategories.category);
+	const subCategories = useSelector(
+		(state) => state.fetchSubCategories.category,
+	);
 
-    useEffect(() => {
-        data();
-    }, []);
+	useEffect(() => {
+		dispatch(fetchCategories());
+		dispatch(fetchSubCategories());
+	}, [dispatch]);
 
-    console.log(categories);
+	console.log(categories);
+	console.log(subCategories);
 
-    return (
-        <div className="w-full">
-            {categories.map((category, index) => (
-                <CategoryDropdown key={index} category={category.name}>
-                    {subCategories
-                        .filter(
-                            (subCategory) =>
-                                subCategory.category.id === category.id
-                        )
-                        .map((item, index) => (
-                            <CategoryDropdown.SubCategory
-                                key={index}
-                                subCategory={item.name}
-                                id={item.id}
-                            />
-                        ))}
-                </CategoryDropdown>
-            ))}
-        </div>
-    );
+	if (!categories && !subCategories) {
+		return <p>Loading....</p>;
+	}
+
+	return (
+		<div className="w-full">
+			{categories.map((categories, index) => (
+				<CategoryDropdown
+					id={categories.id}
+					key={index}
+					categories={categories.name}
+				>
+					{subCategories &&
+						subCategories
+							.filter(
+								(subCategories) =>
+									subCategories.categoryId === categories.id,
+							)
+							.map((item, index) => (
+								<CategoryDropdown.SubCategory
+									key={index}
+									subCategories={item.name}
+									id={item.id}
+								/>
+							))}
+
+					<CategoryDropdown.AddSubCategory />
+				</CategoryDropdown>
+			))}
+		</div>
+	);
 };
 
 export default Category;
