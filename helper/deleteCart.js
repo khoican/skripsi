@@ -6,7 +6,7 @@ export const deleteCart = async (id) => {
 	try {
 		const response = await deleteCartProduct(id);
 
-		if (response.status !== 'success') {
+		if (response.status !== 200) {
 			console.log('error :' + response.data);
 		}
 

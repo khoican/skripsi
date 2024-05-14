@@ -31,18 +31,21 @@ const postCardByUser = async (qty, note, productId) => {
 const setLocalStorage = (response, qty) => {
 	let existingCart = JSON.parse(localStorage.getItem('cart')) || [];
 
+	console.log(response);
 	let existingData = false;
 	existingCart = existingCart.map((item) => {
-		if (item.productId === response.productId) {
+		if (item.productId === response.data.productId) {
 			existingData = true;
-			item.notes = response.notes;
-			item.quantity += qty;
+			item = {
+				...item,
+				quantity: item.quantity + qty,
+			};
 		}
 
 		return item;
 	});
 	if (existingData === false) {
-		existingCart.push(response);
+		existingCart.push(response.data);
 	}
 
 	localStorage.setItem('cart', JSON.stringify(existingCart));

@@ -18,8 +18,47 @@ import DashboardRole from './pages/dashboard/RolePage';
 import DashboardProfile from './pages/dashboard/ProfilePage';
 import Auth from './pages/dashboard/LoginPage';
 import OrderDetailsPage from './pages/dashboard/OrderDetailsPage';
+import InvoicePage from './pages/user/InvoicePage';
 
 export const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <User />,
+		children: [
+			{
+				path: '/',
+				element: <HomePage />,
+			},
+			{
+				path: '/products',
+				element: <ProductPage />,
+			},
+			{
+				path: '/products/:id',
+				element: <ProductPage />,
+			},
+			{
+				path: '/products/show/:id',
+				element: <ProductDetail />,
+			},
+			{
+				path: '/cart',
+				element: <CartPage />,
+			},
+			{
+				path: '/checkout',
+				element: <CheckoutPage />,
+			},
+			{
+				path: '/invoice',
+				element: <InvoicePage />,
+			},
+		],
+	},
+	{
+		path: '/login',
+		element: <LoginPage />,
+	},
 	{
 		path: '/Auth',
 		element: <Auth />,
@@ -70,43 +109,5 @@ export const router = createBrowserRouter([
 				element: <DashboardRole />,
 			},
 		],
-	},
-	{
-		path: '/login',
-		element: <User />,
-	},
-	{
-		path: '/',
-		element: <User />,
-		children: [
-			{
-				path: '/',
-				element: <HomePage />,
-			},
-			{
-				path: '/products',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products/:id',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products/show/:id',
-				element: <ProductDetail />,
-			},
-			{
-				path: '/cart',
-				element: <CartPage />,
-			},
-			{
-				path: '/checkout',
-				element: <CheckoutPage />,
-			},
-		],
-	},
-	{
-		path: '/login',
-		element: <LoginPage />,
 	},
 ]);

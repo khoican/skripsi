@@ -70,9 +70,9 @@ const ProductDetail = (loading, product, error) => {
 			<div className="w-5/12">
 				<div className="w-full">
 					{!products.images ? (
-						<Carousel images={getImages} />
-					) : (
 						<img src={logo} alt="" className="w-4/6" />
+					) : (
+						<Carousel images={getImages} />
 					)}
 				</div>
 			</div>

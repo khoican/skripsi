@@ -2,17 +2,12 @@ import Counter from '../counter/Index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NumericFormat } from 'react-number-format';
-import { deleteCart } from '../../../../../helper/deleteCart';
 import { Link } from 'react-router-dom';
 
 const CartProduct = (props) => {
-	const { id, name, price, quantity, note, productId } = props;
+	const { id, name, price, quantity, note, productId, onClick } = props;
 
 	let totalPrice = price * quantity;
-
-	const handleDeleteCart = () => {
-		deleteCart(id);
-	};
 
 	return (
 		<div className="flex justify-between rounded-md shadow-lg w-full overflow-hidden">
@@ -50,7 +45,7 @@ const CartProduct = (props) => {
 				<FontAwesomeIcon
 					icon={faTrash}
 					className="text-danger h-8"
-					onClick={handleDeleteCart}
+					onClick={onClick}
 				/>
 			</div>
 		</div>

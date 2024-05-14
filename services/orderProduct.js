@@ -1,8 +1,10 @@
 import { getAppUrl } from '../config/app';
+import axios from 'axios';
 
 export const postOrderProduct = async (data) => {
 	try {
-		const response = await axios.post(`${getAppUrl()}/api/orders`);
+		const response = await axios.post(`${getAppUrl()}api/orders`, data);
+		console.log(response);
 
 		return response.data;
 	} catch (error) {

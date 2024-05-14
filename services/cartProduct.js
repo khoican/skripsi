@@ -19,7 +19,7 @@ export const postCartProduct = async (data) => {
 			console.log('error :' + response.data);
 		}
 
-		let responseData = response.data;
+		let responseData = response;
 		return responseData;
 	} catch (error) {
 		console.log(error);
