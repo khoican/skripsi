@@ -3,34 +3,35 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import { getAppUrl } from '../../../../../config/app';
-import { useState } from 'react';
+import logo from '/logo.png';
+import postCardByUser from '../../../../../helper/postCardByUser';
 
 const ProductCard = (props) => {
-	const { id, link, image, title, price } = props;
-	const [productId, setProductId] = useState();
-	// const history = useHistory();
+	const { link, image, title, price } = props;
 
-	const handleState = () => {
-		setProductId(id);
-		history.Push(`/products/show/${link}`, productId);
+	const handlePostCart = () => {
+		postCardByUser(1, '', link);
 	};
 
 	return (
 		<div className="w-[49%] lg:w-[32%] shadow bg-white mb-3">
-			<Link to={`/products/show/${link}`} onClick={handleState}>
+			<Link to={`/products/show/${link}`}>
 				<img
-					src={getAppUrl() + image}
+					src={image ? `${getAppUrl()}${image}` : logo}
 					alt={`gambar ${title}`}
 					className="w-full h-52 object-cover"
+					loading="lazy"
 				/>
+			</Link>
 
-				<div className="flex justify-between p-3 items-center">
+			<div className="flex justify-between p-3 items-center">
+				<Link to={`/products/show/${link}`}>
 					<div>
 						<h1 className="font-semibold text-sm capitalize">
 							{title}
 						</h1>
 
-						<p className="text-red-500">
+						<p className="text-danger">
 							<NumericFormat
 								value={price}
 								displayType={'text'}
@@ -39,12 +40,16 @@ const ProductCard = (props) => {
 							/>
 						</p>
 					</div>
+				</Link>
 
-					<div>
-						<FontAwesomeIcon icon={faCartShopping} />
-					</div>
+				<div>
+					<FontAwesomeIcon
+						icon={faCartShopping}
+						className="hover:text-primary"
+						onClick={handlePostCart}
+					/>
 				</div>
-			</Link>
+			</div>
 		</div>
 	);
 };

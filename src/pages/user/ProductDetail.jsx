@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetail } from '../../redux/actions/productDetailAction';
 import { NumericFormat } from 'react-number-format';
 import Carousel from '../../components/user/fragments/carousel/Index';
@@ -8,20 +8,42 @@ import Counter from '../../components/user/fragments/counter/Index';
 import postCardByUser from '../../../helper/postCardByUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
+import { updateCart } from '../../../helper/updateCart';
 
 const ProductDetail = (loading, product, error) => {
+	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
-	const products = useSelector((state) => state.fetchProductDetail.product);
-	const count = useSelector((state) => state.counter.count);
+	const [existingProduct, setExistingProduct] = useState(null);
+	const [status, setStatus] = useState('');
 
-	const [note, setNote] = useState('');
+	const products = useSelector((state) => state.fetchProductDetail.product);
+
+	const count = useSelector((state) => state.counter[productId.id]?.count);
+
+	const [note, setNote] = useState(
+		existingProduct ? existingProduct.notes : '',
+	);
 
 	useEffect(() => {
 		dispatch(fetchProductDetail(productId.id));
 	}, [dispatch]);
 
-	if (!loading) {
+	useEffect(() => {
+		const cartProduct = JSON.parse(localStorage.getItem('cart')) || [];
+		const existing = cartProduct
+			.filter((item) => item.productId === productId.id)
+			.map((item) => {
+				return {
+					id: item.id,
+					quantity: item.quantity,
+					notes: item.notes,
+				};
+			});
+		setExistingProduct(existing[0]);
+	}, [productId]);
+
+	if (!products && !products.images) {
 		return <p>Loading...</p>;
 	}
 
@@ -29,22 +51,24 @@ const ProductDetail = (loading, product, error) => {
 		setNote(e.target.value);
 	};
 
-	const handlePost = () => {
-		postCardByUser(
-			count,
-			note,
-			'08dbab14-09f0-4585-bdc4-2edac3553e74',
-			productId.id,
-		);
-	};
+	const handlePost = async () => {
+		const response = existingProduct
+			? await updateCart(existingProduct.id, note, count, productId.id)
+			: await postCardByUser(count, note, productId.id);
 
-	const getImages = products.images;
+		if (response.status !== 'success') {
+			setStatus(response.message);
+		} else {
+			navigate('/cart');
+		}
+	};
+	const getImages = products.images ? products.images : [];
 
 	return (
 		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
 			<div className="w-5/12">
 				<div className="w-full">
-					<Carousel images={getImages} />
+					{getImages && <Carousel images={getImages} />}
 				</div>
 			</div>
 			<div className="w-7/12">
@@ -55,7 +79,7 @@ const ProductDetail = (loading, product, error) => {
 								<h1 className="font-semibold text-xl capitalize">
 									{products.name}
 								</h1>
-								<p className="font-semibold text-2xl text-red-600">
+								<p className="font-semibold text-2xl text-danger">
 									<NumericFormat
 										value={products.price}
 										displayType={'text'}
@@ -81,7 +105,15 @@ const ProductDetail = (loading, product, error) => {
 						<div className="flex gap-3">
 							<div>
 								<p className="text-xs mt-3">Jumlah Barang</p>
-								<Counter limit={products.stock} />
+								<Counter
+									limit={products.stock}
+									id={productId.id}
+									value={
+										existingProduct
+											? existingProduct.quantity
+											: 0
+									}
+								/>
 							</div>
 							<div>
 								<p className="text-xs mt-3">Catatan</p>
