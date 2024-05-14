@@ -13,7 +13,7 @@ function Dashboard() {
                     <div className="flex justify-center pb-4">
                         <LogoIMG />
                     </div>
-                    <h2 className="text-center font-bold text-lg">AS-SAKINAH MART</h2>
+                    <h2 className="text-center font-bold text-lg">AS-SAKINAH MART COY</h2>
                     <p className="text-center font-bold text-sm">KOPWAN AISIYAH JEMBER</p>
                 </div>
                 <div className="p-4 space-y-4">
