@@ -1,21 +1,62 @@
 import PhoneInput from 'react-phone-number-input/input';
 import 'react-phone-number-input/style.css';
 import Input from '../../components/user/elements/input/Index';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
 import Button from '../../components/user/elements/button/Index';
 import { faStore, faTruckFast } from '@fortawesome/free-solid-svg-icons';
+import { NumericFormat } from 'react-number-format';
+import { postOrder } from '../../../helper/postOrder';
 
 const CheckoutPage = () => {
 	const [phone, setPhone] = useState();
 	const [country, setCountry] = useState('ID');
 	const [openAddress, setOpenAddress] = useState(false);
+	const carts = JSON.parse(localStorage.getItem('cart'));
+	const [orderInput, setOrderInput] = useState({
+		name: '',
+		address: '',
+		notes: '',
+	});
+	const [total, setTotal] = useState(0);
 
 	const handleOpenAddress = () => {
 		setOpenAddress(true);
 	};
 	const handleCloseAddress = () => {
 		setOpenAddress(false);
+	};
+
+	const input = (e) => {
+		setOrderInput({
+			...orderInput,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	useEffect(() => {
+		let totalPrice = 0;
+		carts.forEach((item) => {
+			totalPrice += item.product.price * item.quantity;
+		});
+		setTotal(totalPrice);
+	}, [carts]);
+
+	const handleSubmit = async () => {
+		const data = {
+			name: orderInput.name,
+			address:
+				openAddress === true ? orderInput.address : 'Ambil di toko',
+			phoneNumber: phone,
+			notes: orderInput.notes,
+			totalPrice: total,
+		};
+
+		const response = await postOrder(data);
+
+		if (response) {
+			return <p>Pesanan anda sedang diproses</p>;
+		}
 	};
 
 	return (
@@ -30,7 +71,12 @@ const CheckoutPage = () => {
 
 			<div className="flex justify-between">
 				<div className="w-6/12 flex flex-col gap-6">
-					<Input text={'Nama Lengkap'} id={'email'} />
+					<Input
+						text={'Nama Lengkap'}
+						id={'email'}
+						name={'name'}
+						onChange={input}
+					/>
 
 					<div>
 						<label
@@ -103,6 +149,7 @@ const CheckoutPage = () => {
 									name="address"
 									id="address"
 									rows={5}
+									onChange={input}
 									className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none"
 								></textarea>
 								<p className="text-xs">
@@ -121,6 +168,8 @@ const CheckoutPage = () => {
 						text={'Catatan'}
 						id={'note'}
 						note={'Catatan tambahan untuk penjual'}
+						name={'notes'}
+						onChange={input}
 					/>
 				</div>
 
@@ -137,22 +186,33 @@ const CheckoutPage = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="text-center border-collapse border-b border-gray-400">
-								<th className="py-2">1</th>
-								<td className="py-2 pl-5 text-start">
-									Produk 1
-								</td>
-								<td className="py-2">1</td>
-								<td className="py-2">Rp. 100.000</td>
-							</tr>
-							<tr className="text-center border-collapse border-b border-gray-400">
-								<th className="py-2">1</th>
-								<td className="py-2 pl-5 text-start">
-									Produk 1
-								</td>
-								<td className="py-2">1</td>
-								<td className="py-2">Rp. 100.000</td>
-							</tr>
+							{carts &&
+								carts.map((carts, index) => (
+									<tr
+										className="text-center border-collapse border-b border-gray-400"
+										key={index}
+									>
+										<th className="py-2">{index + 1}</th>
+										<td className="py-2 pl-5 text-start">
+											{carts.product.name}
+										</td>
+										<td className="py-2">
+											{carts.quantity}
+										</td>
+										<td className="py-2">
+											<NumericFormat
+												value={
+													carts.product.price *
+													carts.quantity
+												}
+												displayType={'text'}
+												thousandSeparator={true}
+												prefix={'Rp. '}
+											/>
+										</td>
+									</tr>
+								))}
+
 							<tr className="text-danger">
 								<td
 									colSpan={3}
@@ -161,7 +221,12 @@ const CheckoutPage = () => {
 									Total Bayar
 								</td>
 								<td className="py-2 text-center">
-									Rp. 100.000
+									<NumericFormat
+										value={total}
+										displayType={'text'}
+										thousandSeparator={true}
+										prefix={'Rp. '}
+									/>
 								</td>
 							</tr>
 						</tbody>
@@ -179,6 +244,7 @@ const CheckoutPage = () => {
 							style={
 								'bg-success text-white hover:bg-primary mt-5'
 							}
+							onClick={handleSubmit}
 						/>
 					</div>
 				</div>
