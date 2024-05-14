@@ -8,7 +8,6 @@ import Counter from '../../components/user/fragments/counter/Index';
 import postCardByUser from '../../../helper/postCardByUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
-import logo from '/logo.png';
 import { updateCart } from '../../../helper/updateCart';
 
 const ProductDetail = (loading, product, error) => {
@@ -44,7 +43,7 @@ const ProductDetail = (loading, product, error) => {
 		setExistingProduct(existing[0]);
 	}, [productId]);
 
-	if (!products) {
+	if (!products && !products.images) {
 		return <p>Loading...</p>;
 	}
 
@@ -63,17 +62,13 @@ const ProductDetail = (loading, product, error) => {
 			navigate('/cart');
 		}
 	};
-	const getImages = products.images;
+	const getImages = products.images ? products.images : [];
 
 	return (
 		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
 			<div className="w-5/12">
 				<div className="w-full">
-					{!products.images ? (
-						<img src={logo} alt="" className="w-4/6" />
-					) : (
-						<Carousel images={getImages} />
-					)}
+					{getImages && <Carousel images={getImages} />}
 				</div>
 			</div>
 			<div className="w-7/12">

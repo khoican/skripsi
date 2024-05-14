@@ -1,5 +1,6 @@
 import { getAppUrl } from '../../../../../config/app';
 import { useState } from 'react';
+import logo from '/logo.png';
 
 const Carousel = ({ images }) => {
 	const [selectedImage, setSelectedImage] = useState(0);
@@ -16,7 +17,11 @@ const Carousel = ({ images }) => {
 		<>
 			<div className="w-full">
 				<img
-					src={getAppUrl() + images[selectedImage].image}
+					src={
+						images > 0
+							? getAppUrl() + images[selectedImage].image
+							: logo
+					}
 					alt=""
 					className="w-full object-cover"
 				/>
