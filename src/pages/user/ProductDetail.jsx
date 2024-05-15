@@ -10,13 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
 import { updateCart } from '../../../helper/updateCart';
 import Button from '../../components/user/elements/button/Index';
+import Alert from '../../components/user/elements/alert/Index';
 
 const ProductDetail = (product, error) => {
 	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
 	const [existingProduct, setExistingProduct] = useState(null);
-	const [status, setStatus] = useState({});
+	const [status, setStatus] = useState();
 	const [loading, setLoading] = useState(false);
 	const [note, setNote] = useState('');
 
@@ -53,96 +54,127 @@ const ProductDetail = (product, error) => {
 
 	const handlePost = async () => {
 		setLoading(true);
-		const response = existingProduct
-			? await updateCart(existingProduct.id, note, count, productId.id)
-			: await postCardByUser(count, note, productId.id);
 
-		if (response.status !== 'success') {
-			setStatus(response.message);
+		if (count > 0) {
+			const response = existingProduct
+				? await updateCart(
+						existingProduct.id,
+						note,
+						count,
+						productId.id,
+					)
+				: await postCardByUser(count, note, productId.id);
+
+			if (response.status !== 'success') {
+				setStatus(response);
+			} else {
+				navigate('/cart');
+			}
 		} else {
-			navigate('/cart');
+			setStatus({
+				status: 'error',
+				message: 'Anda belum menambahkan jumlah pesanan',
+			});
+
+			setLoading(false);
 		}
 	};
 	const getImages = products.images ? products.images : [];
 
 	return (
-		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
-			<div className="w-5/12">
-				<div className="w-full">
-					{getImages && <Carousel images={getImages} />}
+		<>
+			{status && (
+				<Alert
+					message={status.message}
+					onSuccess={status.status}
+					success="success"
+					onClick={() => setStatus('')}
+				/>
+			)}
+			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
+				<div className="w-5/12">
+					<div className="w-full">
+						{getImages && <Carousel images={getImages} />}
+					</div>
 				</div>
-			</div>
-			<div className="w-7/12">
-				<div className="p-3">
-					<div className="flex justify-between pb-1 border-b border-gray-300">
-						<div className="flex flex-col">
-							<div>
-								<h1 className="font-semibold text-xl capitalize">
-									{products.name}
-								</h1>
-								<p className="font-semibold text-2xl text-danger">
-									<NumericFormat
-										value={products.price}
-										displayType={'text'}
-										thousandSeparator={true}
-										prefix={'Rp. '}
+				<div className="w-7/12">
+					<div className="p-3">
+						<div className="flex justify-between pb-1 border-b border-gray-300">
+							<div className="flex flex-col">
+								<div>
+									<h1 className="font-semibold text-xl capitalize">
+										{products.name}
+									</h1>
+									<p className="font-semibold text-2xl text-danger">
+										<NumericFormat
+											value={products.price}
+											displayType={'text'}
+											thousandSeparator={true}
+											prefix={'Rp. '}
+										/>
+									</p>
+								</div>
+								<div className="flex gap-2 mt-3 items-center">
+									<FontAwesomeIcon
+										icon={faBox}
+										className="text-gray-600"
 									/>
-								</p>
-							</div>
-							<div className="flex gap-2 mt-3 items-center">
-								<FontAwesomeIcon
-									icon={faBox}
-									className="text-gray-600"
-								/>
-								<p className="text-sm font-semibold">
-									{products.stock}{' '}
-									<span className="font-light">Tersedia</span>
-								</p>
+									<p className="text-sm font-semibold">
+										{products.stock}{' '}
+										<span className="font-light">
+											Tersedia
+										</span>
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div className="mt-0">
-						<div className="flex gap-3">
-							<div>
-								<p className="text-xs mt-3">Jumlah Barang</p>
-								<Counter
-									limit={products.stock}
-									id={productId.id}
-									value={
-										existingProduct
-											? existingProduct.quantity
-											: 0
-									}
-								/>
+						<div className="mt-0">
+							<div className="flex gap-3">
+								<div>
+									<p className="text-xs mt-3">
+										Jumlah Barang
+									</p>
+									<Counter
+										limit={products.stock}
+										id={productId.id}
+										value={
+											existingProduct
+												? existingProduct.quantity
+												: 0
+										}
+									/>
+								</div>
+								<div>
+									<p className="text-xs mt-3">Catatan</p>
+									<input
+										type="text"
+										value={note}
+										onChange={handleNote}
+										className="border border-gray-500 text-sm p-2"
+									/>
+								</div>
 							</div>
-							<div>
-								<p className="text-xs mt-3">Catatan</p>
-								<input
-									type="text"
-									value={note}
-									onChange={handleNote}
-									className="border border-gray-500 text-sm p-2"
-								/>
-							</div>
+							<Button
+								text={
+									loading
+										? 'Menambahkan....'
+										: 'Masukkan keranjang'
+								}
+								onClick={handlePost}
+								style={`bg-green-700 hover:bg-primary rounded-md p-3 text-white font-semibold text-sm mt-3 ${loading && 'cursor-not-allowed'}`}
+							/>
 						</div>
-						<Button
-							text={
-								loading
-									? 'Menambahkan....'
-									: 'Masukkan keranjang'
-							}
-							onClick={handlePost}
-							style={`bg-green-700 hover:bg-primary rounded-md p-3 text-white font-semibold text-sm mt-3 ${loading && 'cursor-not-allowed'}`}
-						/>
-					</div>
 
-					<main className="mt-10">
-						<p className="text-justify">{products.description}</p>
-					</main>
+						<main className="mt-10">
+							<p className="text-justify">
+								{products.description}
+							</p>
+						</main>
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</>
 	);
 };
 

@@ -13,7 +13,7 @@ const Alert = (props) => {
 			</div>
 			<FontAwesomeIcon
 				icon={faClose}
-				className="text-xl"
+				className="text-xl cursor-pointer"
 				onClick={onClick}
 			/>
 		</div>
