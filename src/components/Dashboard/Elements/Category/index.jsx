@@ -16,36 +16,33 @@ const Category = () => {
 		dispatch(fetchSubCategories());
 	}, [dispatch]);
 
-	console.log(categories);
-	console.log(subCategories);
-
 	if (!categories && !subCategories) {
 		return <p>Loading....</p>;
 	}
 
 	return (
 		<div className="w-full">
-			{categories.map((categories, index) => (
+			{categories.map((category, index) => (
 				<CategoryDropdown
-					id={categories.id}
+					id={category.id}
 					key={index}
-					categories={categories.name}
+					categories={category.name}
 				>
 					{subCategories &&
 						subCategories
 							.filter(
-								(subCategories) =>
-									subCategories.categoryId === categories.id,
+								(subCategory) =>
+									subCategory.categoryId === category.id,
 							)
-							.map((item, index) => (
+							.map((subCategory, index) => (
 								<CategoryDropdown.SubCategory
 									key={index}
-									subCategories={item.name}
-									id={item.id}
+									subCategories={subCategory.name}
+									id={subCategory.id}
 								/>
 							))}
 
-					<CategoryDropdown.AddSubCategory />
+					<CategoryDropdown.AddSubCategory id={category.id} />
 				</CategoryDropdown>
 			))}
 		</div>

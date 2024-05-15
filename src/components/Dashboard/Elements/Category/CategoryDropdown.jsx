@@ -10,7 +10,11 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Input from '../Input';
 import ModalCategory from '../../Fragments/ModalCategory';
-import { editCategory, deleteCategory } from '../../../../../services/category';
+import {
+	editCategory,
+	deleteCategory,
+	postSubCategory,
+} from '../../../../../services/category';
 
 const CategoryDropdown = (props) => {
 	const { categories, children, id } = props;
@@ -117,9 +121,9 @@ const CategoryDropdown = (props) => {
 						>
 							<p className="flex text-black">
 								Are you sure you want to delete this
-								<p className="font-semibold pl-1">
+								<span className="font-semibold pl-1">
 									"Category ?"
-								</p>
+								</span>
 							</p>
 							<div className="flex justify-end pt-2">
 								<Button
@@ -152,10 +156,7 @@ const SubCategory = (props) => {
 		<>
 			<div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-success hover:text-white transition-all 3s ease-in">
 				<div className="flex justify-between items-center px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b-green">
-					<Link
-						// to={`/products/${id}`}
-						className="flex items-center gap-2.5"
-					>
+					<Link className="flex items-center gap-2.5">
 						<HashtagIcon className="w-5 h-5" />
 						<p>{subCategories}</p>
 					</Link>
@@ -209,9 +210,9 @@ const SubCategory = (props) => {
 						>
 							<p className="flex text-black">
 								Are you sure you want to delete
-								<p className="font-semibold pl-1">
+								<span className="font-semibold pl-1">
 									"this Sub Category ?"
-								</p>
+								</span>
 							</p>
 						</ModalCategory>
 					</div>
@@ -221,54 +222,79 @@ const SubCategory = (props) => {
 	);
 };
 
-const AddSubCategory = () => {
+const AddSubCategory = ({ id }) => {
+	const [subCategory, setSubCategory] = useState('');
+
+	function handleSubCategory(e) {
+		setSubCategory(e.target.value);
+		console.log(setSubCategory);
+	}
+
+	function handleSubmitSubCategory() {
+		postSubCategory({
+			name: subCategory,
+			categoryId: id,
+		}).then(() => {
+			window.location.reload();
+		});
+
+		console.log(postSubCategory);
+	}
 	return (
 		<>
-			<Button
-				type="button"
-				variants="w-full focus:outline-none"
-				onClick={() => document.getElementById('addSub').showModal()}
-			>
+			<div className="w-full focus:outline-none">
 				<div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-success hover:text-white transition-all 3s ease-in">
 					<div className="px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b-green">
 						<div className="flex items-center gap-2.5">
-							<PlusIcon className="w-5 h-5" />
-							Add Sub Category
+							<Button
+								type="button"
+								variants="flex items-start gap-2.5"
+								onClick={() =>
+									document
+										.getElementById('addSub')
+										.showModal()
+								}
+							>
+								<span>
+									<PlusIcon className="w-5 h-5" />
+								</span>
+								Add Sub Category
+							</Button>
 							<ModalCategory
 								id="addSub"
 								title="Add Sub Category"
 								btn="Save"
 								variants="bg-success"
 							>
-								<form method="dialog">
-									<div className="flex mt-2 justify-end">
-										<Input
-											type="text"
-											name="subcategory"
-											variants="rounded-lg ring-1 border-0 w-full ring-inset ring-success focus:ring-1 focus:ring-inset focus:ring-primary focus:outline-none py-2 px-3"
-											placeholder="Insert Sub Category Name"
-										/>
-									</div>
-									<div className="flex justify-end pt-3 gap-2">
-										<Button
-											variants="focus:outline-none ring-1 ring-danger rounded-md py-2 px-3 text-danger hover:text-white hover:bg-danger transition-all ease-in 3s"
-											type="submit"
-										>
-											Cancel
-										</Button>
-										<Button
-											variants="focus:outline-none bg-success rounded-md py-2 px-5 text-white hover:bg-primary transition-all ease-in 3s"
-											type="submit"
-										>
-											Save
-										</Button>
-									</div>
-								</form>
+								<div className="flex mt-2 justify-end">
+									<Input
+										type="text"
+										name="subcategory"
+										variants="rounded-lg ring-1 border-0 w-full ring-inset ring-success focus:ring-1 focus:ring-inset focus:ring-primary focus:outline-none py-2 px-3"
+										placeholder="Insert Sub Category Name"
+										onChange={handleSubCategory}
+									/>
+								</div>
+								<div className="flex justify-end pt-3 gap-2">
+									<Button
+										variants="focus:outline-none ring-1 ring-danger rounded-md py-2 px-3 text-danger hover:text-white hover:bg-danger transition-all ease-in 3s"
+										type="submit"
+									>
+										Cancel
+									</Button>
+									<Button
+										variants="focus:outline-none bg-success rounded-md py-2 px-5 text-white hover:bg-primary transition-all ease-in 3s"
+										type="submit"
+										onClick={handleSubmitSubCategory}
+									>
+										Save
+									</Button>
+								</div>
 							</ModalCategory>
 						</div>
 					</div>
 				</div>
-			</Button>
+			</div>
 		</>
 	);
 };

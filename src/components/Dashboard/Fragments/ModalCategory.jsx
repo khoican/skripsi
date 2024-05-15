@@ -5,7 +5,6 @@ const ModalCategory = (props) => {
 	return (
 		<Modal
 			id={id}
-			handleDelete
 			variants="border-none z-10 w-[600px] m-auto bg-white opacity-100"
 		>
 			<div className="bg-white modal-box py-4 px-9">

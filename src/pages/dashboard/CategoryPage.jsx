@@ -19,8 +19,8 @@ const DashboardCategory = () => {
 	function handleSubmit() {
 		postCategory({
 			name: category,
-		}).then(() => {
-			window.location.reload();
+		}).then((res) => {
+			console.log(res);
 		});
 	}
 

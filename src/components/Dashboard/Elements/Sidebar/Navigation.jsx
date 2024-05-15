@@ -14,9 +14,9 @@ const Navigation = () => {
 	return (
 		<>
 			<Link
-				to="/Dashboard"
+				to="/dashboard"
 				className={`relative px-4 py-3 flex items-center rounded-lg space-x-4 ${
-					isActive == '/Dashboard'
+					isActive == '/dashboard'
 						? 'bg-success text-white'
 						: 'text-gray'
 				} `}
@@ -25,12 +25,12 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Dashboard</p>
 			</Link>
 			<Link
-				to="/Dashboard/User"
+				to="/dashboard/user"
 				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/User'
+					isActive == '/dashboard/user'
 						? 'bg-success text-white'
 						: 'text-gray' &&
-							  isActive == '/Dashboard/User/UserDetails'
+							  isActive == '/dashboard/user/userdetails'
 							? 'bg-success text-white'
 							: 'text-gray'
 				} `}
@@ -39,12 +39,12 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">User</p>
 			</Link>
 			<Link
-				to="/Dashboard/Product"
+				to="/dashboard/product"
 				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Product'
+					isActive == '/dashboard/product'
 						? 'bg-success text-white'
 						: 'text-gray' &&
-							  isActive == '/Dashboard/Product/ProductDetails'
+							  isActive == '/dashboard/product/productdetails'
 							? 'bg-success text-white'
 							: 'text-gray'
 				} `}
@@ -53,9 +53,9 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Product</p>
 			</Link>
 			<Link
-				to="/Dashboard/Order"
+				to="/dashboard/order"
 				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Order'
+					isActive == '/dashboard/order'
 						? 'bg-success text-white'
 						: 'text-gray'
 				} `}
@@ -64,9 +64,9 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Order</p>
 			</Link>
 			<Link
-				to="/Dashboard/Category"
+				to="/dashboard/category"
 				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Category'
+					isActive == '/dashboard/category'
 						? 'bg-success text-white'
 						: 'text-gray'
 				} `}
@@ -75,9 +75,9 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Category</p>
 			</Link>
 			<Link
-				to="/Dashboard/Role"
+				to="/dashboard/role"
 				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Role'
+					isActive == '/dashboard/role'
 						? 'bg-success text-white'
 						: 'text-gray'
 				} `}

@@ -129,7 +129,7 @@ const DashboardProduct = () => {
 					</div>
 
 					<div className="flex">
-						<Link to={'/Dashboard/Product/ProductDetails'}>
+						<Link to={'/dashboard/product/productdetails'}>
 							<Button
 								type="button"
 								variants="flex bg-success rounded-md py-2 px-3 text-white"
