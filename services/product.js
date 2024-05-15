@@ -22,3 +22,18 @@ export const getProductBySlug = async (id) => {
 
 	return response;
 };
+
+export const searchProductByName = async (query) => {
+	const response = await axios({
+		method: 'get',
+		url: `${getAppUrl()}api/products?name=${query}`,
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+		},
+	}).then((res) => {
+		return res.data.data;
+	});
+
+	return response;
+};

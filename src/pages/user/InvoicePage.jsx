@@ -5,6 +5,7 @@ import {
 	getOrderHistoryProduct,
 	getOrderProduct,
 } from '../../../services/orderProduct';
+import moment from 'moment/moment';
 
 const InvoicePage = () => {
 	const id = useParams().id;
@@ -37,6 +38,9 @@ const InvoicePage = () => {
 		return <div>Loading...</div>;
 	}
 
+	const getDate = moment(order.createdAt);
+	const formattedDate = getDate.locale('id').format('DD MMMM YYYY');
+
 	return (
 		<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-40 gap-5 mt-5">
 			<div className="mb-10">
@@ -67,6 +71,11 @@ const InvoicePage = () => {
 						<p className="w-2/6 font-semibold">Catatan</p>
 						<p className="w-1/6 text-end pe-5">:</p>
 						<p className="w-3/6">{order.notes}</p>
+					</div>
+					<div className="flex w-full">
+						<p className="w-2/6 font-semibold">Tanggal Dibuat</p>
+						<p className="w-1/6 text-end pe-5">:</p>
+						<p className="w-3/6">{formattedDate}</p>
 					</div>
 				</div>
 

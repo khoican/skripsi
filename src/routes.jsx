@@ -42,6 +42,10 @@ export const router = createBrowserRouter([
 				element: <ProductPage />,
 			},
 			{
+				path: '/products?search=:query',
+				element: <ProductPage />,
+			},
+			{
 				path: '/products/show/:id',
 				element: <ProductDetail />,
 			},

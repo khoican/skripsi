@@ -8,10 +8,19 @@ import postCardByUser from '../../../../../helper/postCardByUser';
 
 const ProductCard = (props) => {
 	const { link, image, title, price, onStatus } = props;
+	const user = JSON.parse(localStorage.getItem('user'));
 
 	const handlePostCart = async () => {
-		const response = await postCardByUser(1, '', link);
-		onStatus(response);
+		if (user) {
+			const response = await postCardByUser(1, '', link);
+			onStatus(response);
+		} else {
+			onStatus({
+				status: 'error',
+				message:
+					'Silahkan login terlebih dahulu sebelum menambahkan produk ke keranjang',
+			});
+		}
 	};
 
 	return (

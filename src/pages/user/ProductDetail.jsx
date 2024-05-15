@@ -13,6 +13,7 @@ import Button from '../../components/user/elements/button/Index';
 import Alert from '../../components/user/elements/alert/Index';
 
 const ProductDetail = (product, error) => {
+	const user = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
@@ -53,30 +54,38 @@ const ProductDetail = (product, error) => {
 	};
 
 	const handlePost = async () => {
-		setLoading(true);
+		if (user) {
+			setLoading(true);
 
-		if (count > 0) {
-			const response = existingProduct
-				? await updateCart(
-						existingProduct.id,
-						note,
-						count,
-						productId.id,
-					)
-				: await postCardByUser(count, note, productId.id);
+			if (count > 0) {
+				const response = existingProduct
+					? await updateCart(
+							existingProduct.id,
+							note,
+							count,
+							productId.id,
+						)
+					: await postCardByUser(count, note, productId.id);
 
-			if (response.status !== 'success') {
-				setStatus(response);
+				if (response.status !== 'success') {
+					setStatus(response);
+				} else {
+					navigate('/cart');
+				}
 			} else {
-				navigate('/cart');
+				setStatus({
+					status: 'error',
+					message: 'Anda belum menambahkan jumlah pesanan',
+				});
+
+				setLoading(false);
 			}
 		} else {
 			setStatus({
 				status: 'error',
-				message: 'Anda belum menambahkan jumlah pesanan',
+				message:
+					'Silahkan login terlebih dahulu sebelum menambahkan produk ke keranjang',
 			});
-
-			setLoading(false);
 		}
 	};
 	const getImages = products.images ? products.images : [];

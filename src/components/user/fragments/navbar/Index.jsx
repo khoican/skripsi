@@ -14,7 +14,7 @@ import {
 import { Fragment, useState } from 'react';
 import Logo from '../../elements/logo/Index';
 import NavbarIcon from '../../elements/navbarIcon/Index';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../elements/button/Index';
 import { logoutUser } from '../../../../../helper/logoutUser';
 import Alert from '../../elements/alert/Index';
@@ -24,6 +24,8 @@ const Navbar = () => {
 	const [navbar, setNavbar] = useState(false);
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const [status, setStatus] = useState('');
+	const [searchInput, setSearchInput] = useState('');
+	const navigate = useNavigate();
 
 	window.onscroll = () => {
 		if (window.scrollY > 0) {
@@ -54,6 +56,17 @@ const Navbar = () => {
 			setStatus('');
 		}, 5000);
 	};
+
+	const handleSearchInput = (e) => {
+		setSearchInput(e.target.value);
+	};
+
+	const handleNavigate = (e) => {
+		if (searchInput && e.keyCode === 13) {
+			navigate(`/products?search=${searchInput}`);
+		}
+	};
+
 	return (
 		<Fragment>
 			<nav
@@ -63,16 +76,19 @@ const Navbar = () => {
 			>
 				<Logo />
 				<div className="w-1/3 text-center relative">
-					<form action="">
-						<input
-							type="text"
-							className="border border-green-500 text-sm w-full rounded-full focus:border-green-700"
-							placeholder="Cari produk yang anda inginkan"
-						/>
-						<button className="absolute p-2 right-2">
-							<FontAwesomeIcon icon={faMagnifyingGlass} />
-						</button>
-					</form>
+					<input
+						type="text"
+						className="border border-green-500 text-sm w-full rounded-full focus:border-green-700"
+						placeholder="Cari produk yang anda inginkan"
+						onChange={handleSearchInput}
+						onKeyDown={handleNavigate}
+					/>
+					<button
+						className="absolute p-2 right-2"
+						onClick={handleNavigate}
+					>
+						<FontAwesomeIcon icon={faMagnifyingGlass} />
+					</button>
 				</div>
 				<div className="flex items-center justify-end gap-5 text-gray-400 w-1/3">
 					<NavbarIcon link={'/'} icon={faHome} />
