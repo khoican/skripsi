@@ -31,7 +31,6 @@ const postCardByUser = async (qty, note, productId) => {
 const setLocalStorage = (response, qty) => {
 	let existingCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-	console.log(response);
 	let existingData = false;
 	existingCart = existingCart.map((item) => {
 		if (item.productId === response.data.productId) {

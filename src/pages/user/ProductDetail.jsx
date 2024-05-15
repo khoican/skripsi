@@ -9,13 +9,15 @@ import postCardByUser from '../../../helper/postCardByUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox } from '@fortawesome/free-solid-svg-icons';
 import { updateCart } from '../../../helper/updateCart';
+import Button from '../../components/user/elements/button/Index';
 
-const ProductDetail = (loading, product, error) => {
+const ProductDetail = (product, error) => {
 	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
 	const [existingProduct, setExistingProduct] = useState(null);
-	const [status, setStatus] = useState('');
+	const [status, setStatus] = useState({});
+	const [loading, setLoading] = useState(false);
 	const [note, setNote] = useState('');
 
 	const products = useSelector((state) => state.fetchProductDetail.product);
@@ -50,6 +52,7 @@ const ProductDetail = (loading, product, error) => {
 	};
 
 	const handlePost = async () => {
+		setLoading(true);
 		const response = existingProduct
 			? await updateCart(existingProduct.id, note, count, productId.id)
 			: await postCardByUser(count, note, productId.id);
@@ -123,12 +126,15 @@ const ProductDetail = (loading, product, error) => {
 								/>
 							</div>
 						</div>
-						<button
+						<Button
+							text={
+								loading
+									? 'Menambahkan....'
+									: 'Masukkan keranjang'
+							}
 							onClick={handlePost}
-							className="bg-primary rounded-md p-3 text-white font-semibold text-sm mt-3"
-						>
-							Tambah Keranjang
-						</button>
+							style={`bg-green-700 hover:bg-primary rounded-md p-3 text-white font-semibold text-sm mt-3 ${loading && 'cursor-not-allowed'}`}
+						/>
 					</div>
 
 					<main className="mt-10">
@@ -141,7 +147,6 @@ const ProductDetail = (loading, product, error) => {
 };
 
 const mapStateToProps = (state) => ({
-	loading: state.fetchProductDetail.loading,
 	product: state.fetchProductDetail.product,
 	error: state.fetchProductDetail.error,
 });

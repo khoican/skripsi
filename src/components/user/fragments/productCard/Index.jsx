@@ -7,10 +7,11 @@ import logo from '/logo.png';
 import postCardByUser from '../../../../../helper/postCardByUser';
 
 const ProductCard = (props) => {
-	const { link, image, title, price } = props;
+	const { link, image, title, price, onStatus } = props;
 
-	const handlePostCart = () => {
-		postCardByUser(1, '', link);
+	const handlePostCart = async () => {
+		const response = await postCardByUser(1, '', link);
+		onStatus(response);
 	};
 
 	return (

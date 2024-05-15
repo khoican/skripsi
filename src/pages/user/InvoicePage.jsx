@@ -33,7 +33,7 @@ const InvoicePage = () => {
 		fetchProducts();
 	}, [id]);
 
-	if (!products) {
+	if (!order && !products) {
 		return <div>Loading...</div>;
 	}
 

@@ -3,7 +3,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 
 const Input = (props) => {
-	const { text, note, id, password, name, onChange } = props;
+	const { text, note, id, password, name, onChange, value } = props;
 	const [hidden, setHidden] = useState(true);
 
 	function togglePassword() {
@@ -22,6 +22,7 @@ const Input = (props) => {
 					id={id}
 					name={name}
 					onChange={onChange}
+					value={value}
 				/>
 
 				{password && (
