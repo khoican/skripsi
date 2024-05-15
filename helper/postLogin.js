@@ -23,6 +23,7 @@ export const postLogin = async (username, password) => {
 			id: response.data.id,
 			name: response.data.name,
 			address: response.data.address,
+			role: response.data.role,
 			phoneNumber: response.data.phoneNumber,
 			token: response.data.token,
 		};

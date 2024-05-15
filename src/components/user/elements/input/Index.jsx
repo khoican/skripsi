@@ -12,7 +12,7 @@ const Input = (props) => {
 
 	return (
 		<div>
-			<label className="text-md font-semibold" htmlFor={id}>
+			<label className="text-sm font-semibold" htmlFor={id}>
 				{text}
 			</label>
 			<div className="flex relative mt-1">
@@ -47,7 +47,7 @@ const Input = (props) => {
 			{note && (
 				<p className="text-xs">
 					{' '}
-					<span className="text-red-600 font-bold mr-1">*</span>
+					<span className="text-danger font-bold mr-1">*</span>
 					{note}
 				</p>
 			)}

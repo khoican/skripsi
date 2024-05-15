@@ -99,7 +99,7 @@ const CheckoutPage = () => {
 
 						<div>
 							<label
-								className="text-md font-semibold"
+								className="text-sm font-semibold"
 								htmlFor="phone"
 							>
 								Nomor Telepon
@@ -131,7 +131,7 @@ const CheckoutPage = () => {
 						</div>
 
 						<div>
-							<p className="text-md font-semibold">
+							<p className="text-sm font-semibold">
 								Metode Pengiriman
 							</p>
 							<div className="flex gap-3">
@@ -158,7 +158,7 @@ const CheckoutPage = () => {
 							{openAddress === true && (
 								<div className="mt-4">
 									<label
-										className="text-md font-semibold"
+										className="text-sm font-semibold"
 										htmlFor="address"
 									>
 										Alamat Lengkap
@@ -194,11 +194,11 @@ const CheckoutPage = () => {
 					</div>
 
 					<div className="w-5/12">
-						<h2 className="text-lg font-semibold">Daftar Produk</h2>
+						<h2 className="text-md font-semibold">Daftar Produk</h2>
 
 						<table className="w-full mt-3">
 							<thead className="border-b border-collapse border-black">
-								<tr className="text-center">
+								<tr className="text-center text-sm">
 									<th className="w-1/12 pb-2">No</th>
 									<th className="w-5/12 pb-2">Nama produk</th>
 									<th className="w-2/12 pb-2">Qty</th>
@@ -209,7 +209,7 @@ const CheckoutPage = () => {
 								{carts &&
 									carts.map((carts, index) => (
 										<tr
-											className="text-center border-collapse border-b border-gray-400"
+											className="text-center border-collapse border-b border-gray-400 text-sm"
 											key={index}
 										>
 											<th className="py-2">
