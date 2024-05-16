@@ -4,7 +4,7 @@ const CarouselImage = (props) => {
 	const { children } = props;
 	return (
 		<>
-			<div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+			<div className="h-56 sm:h-64 xl:h-80 2xl:h-96 shadow-md rounded-sm transition ease-in-out delay-150 bg-gray-50 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300">
 				<Carousel slide={false}>{children}</Carousel>
 			</div>
 		</>

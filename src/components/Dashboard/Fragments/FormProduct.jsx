@@ -187,18 +187,16 @@ const FormProduct = () => {
 				<CarouselImage>
 					{addPreviewImage && addPreviewImage.length > 0 ? (
 						addPreviewImage.map((image, index) => (
-							<div className="img" key={index}>
+							<div className="flex justify-center ">
 								<img
-									className="w-full object-cover"
+									key={index}
 									src={URL.createObjectURL(image)}
 									alt={`Image ${index}`}
 								/>
 							</div>
 						))
 					) : (
-						<div className="img">
-							<img src={ImageProduct} alt="Placeholder" />
-						</div>
+						<img src={ImageProduct} alt="Placeholder" />
 					)}
 				</CarouselImage>
 				<div className="py-7">
@@ -210,7 +208,7 @@ const FormProduct = () => {
 					<div className="pt-1 pb-1">
 						<Input
 							type="file"
-							variants="rounded-lg ring-1 ring-black border-0 w-full py-2 px-3"
+							variants="rounded-lg ring-1 ring-primary focus:outline-none border-0 w-full py-2 px-3"
 							name="image"
 							placeholder="Choose Image"
 							multiple
