@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchCategories } from '../../../redux/actions/categoryAction';
 import { fetchSubCategories } from '../../../redux/actions/subCategoryAction';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CarouselImage from './Carousel';
 
 const FormProduct = () => {
@@ -245,12 +245,14 @@ const FormProduct = () => {
 							</p>
 							<div className="flex justify-end">
 								<div className="px-2">
-									<Button
-										type="button"
-										variants="py-2 px-5 rounded-lg bg-red text-white"
-									>
-										Cancel
-									</Button>
+									<Link to="/dashboard/product">
+										<Button
+											type="button"
+											variants="py-2 px-5 rounded-lg bg-red text-white"
+										>
+											Cancel
+										</Button>
+									</Link>
 								</div>
 								<div className="px-2">
 									<Button

@@ -15,9 +15,9 @@ const Navigation = () => {
 		<>
 			<Link
 				to="/dashboard"
-				className={`relative px-4 py-3 flex items-center rounded-lg space-x-4 ${
+				className={`relative px-4 py-3 flex items-center rounded-lg hover:bg-gray-200 transition-all ease-in 5s-lg space-x-4 ${
 					isActive == '/dashboard'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -26,12 +26,12 @@ const Navigation = () => {
 			</Link>
 			<Link
 				to="/dashboard/product"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
 					isActive == '/dashboard/product'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray' &&
 							  isActive == '/dashboard/product/productdetails'
-							? 'bg-primary text-white'
+							? 'bg-primary hover:bg-primary text-white'
 							: 'text-gray'
 				} `}
 			>
@@ -40,9 +40,9 @@ const Navigation = () => {
 			</Link>
 			<Link
 				to="/dashboard/order"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
 					isActive == '/dashboard/order'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -51,9 +51,9 @@ const Navigation = () => {
 			</Link>
 			<Link
 				to="/dashboard/category"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
 					isActive == '/dashboard/category'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -62,12 +62,12 @@ const Navigation = () => {
 			</Link>
 			<Link
 				to="/dashboard/user"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
 					isActive == '/dashboard/user'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray' &&
 							  isActive == '/dashboard/user/userdetails'
-							? 'bg-primary text-white'
+							? 'bg-primary hover:bg-primary text-white'
 							: 'text-gray'
 				} `}
 			>
@@ -76,9 +76,9 @@ const Navigation = () => {
 			</Link>
 			<Link
 				to="/dashboard/role"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
 					isActive == '/dashboard/role'
-						? 'bg-primary text-white'
+						? 'bg-primary hover:bg-primary  text-white'
 						: 'text-gray'
 				} `}
 			>

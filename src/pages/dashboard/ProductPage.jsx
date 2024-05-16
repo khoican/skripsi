@@ -23,7 +23,7 @@ const DashboardProduct = () => {
 						<Link to={'/dashboard/product/productdetails'}>
 							<Button
 								type="button"
-								variants="flex bg-success rounded-md py-2 px-3 text-white"
+								variants="flex bg-success rounded-md py-2 px-3 text-white hover:bg-primary transition-all ease-in 5s"
 							>
 								Add Product
 								<PlusIcon className="w-8 pl-2 mx-auto" />
@@ -32,7 +32,7 @@ const DashboardProduct = () => {
 					</div>
 				</div>
 				<div className="my-10 px-7">
-					<div className="mt-2 w-full bg-white shadow-lg px-2">
+					<div className="mt-2 py-2 w-full bg-white rounded-md shadow-lg px-2">
 						<TableProduct />
 						<ModalProduct id="delete" />
 					</div>

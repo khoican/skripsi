@@ -39,7 +39,7 @@ const DashboardRolePage = () => {
 					</div>
 					<Button
 						type="button"
-						variants="bg-success rounded-md py-2 px-3 text-white flex"
+						variants="bg-success rounded-md py-2 px-3 text-white flex hover:bg-primary transition-all ease-in 5s"
 						onClick={() =>
 							document.getElementById('add').showModal()
 						}

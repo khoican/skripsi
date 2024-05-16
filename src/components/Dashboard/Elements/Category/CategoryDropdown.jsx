@@ -17,7 +17,7 @@ import {
 } from '../../../../../services/category';
 
 const CategoryDropdown = (props) => {
-	const { categories, children, id } = props;
+	const { categories, children, id, hidden } = props;
 
 	const [open, setOpen] = useState(false);
 	const handleDropdown = () => setOpen(!open);
@@ -47,6 +47,7 @@ const CategoryDropdown = (props) => {
 					open && 'bg-success text-white'
 				}`}
 				onClick={handleDropdown}
+				hidden={hidden}
 			>
 				<div
 					className={`flex justify-between items-center px-2.5 py-2.5 border-b border-b-slate-300 hover:border-b ${
@@ -68,7 +69,7 @@ const CategoryDropdown = (props) => {
 						>
 							<img
 								src={PencilIcon}
-								className="w-7 pl-2"
+								className="w-7 pl-2 transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
 								alt="pencilicon"
 							/>
 						</Button>
@@ -110,7 +111,7 @@ const CategoryDropdown = (props) => {
 						>
 							<img
 								src={TrashIcon}
-								className="w-6 pl-2"
+								className="w-6 pl-2 transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
 								alt="trashicon"
 							/>
 						</Button>
@@ -134,7 +135,7 @@ const CategoryDropdown = (props) => {
 								</Button>
 								<Button
 									type="submit"
-									variants="px-4 py-2 rounded-lg bg-danger text-white"
+									variants="px-4 py-2 rounded-lg bg-danger text-white "
 									onClick={handleDelete}
 								>
 									Delete
