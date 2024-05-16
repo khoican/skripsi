@@ -14,54 +14,42 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchCategories } from '../../../redux/actions/categoryAction';
 import { fetchSubCategories } from '../../../redux/actions/subCategoryAction';
-
-const PhotoData = [
-	{
-		id: 1,
-		name: 'assakinah-22-3-23-145601.jpg',
-	},
-	{
-		id: 2,
-		name: 'assakinah-22-3-23-145602.jpg',
-	},
-	{
-		id: 1,
-		name: 'assakinah-22-3-23-145603.jpg',
-	},
-];
+import { useParams } from 'react-router-dom';
+import CarouselImage from './Carousel';
 
 const FormProduct = () => {
+	const productId = useParams();
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.fetchCategories.category);
-	const subCategories = useSelector(
+	let subCategories = useSelector(
 		(state) => state.fetchSubCategories.category,
 	);
 	const count = useSelector((state) => state.counter.count);
 
 	useEffect(() => {
+		dispatch(fetchCategories(productId.id));
 		dispatch(fetchCategories());
 		dispatch(fetchSubCategories());
 	}, [dispatch]);
 
-	// if (!categories && !subCategories) {
-	// 	return <p>Loading....</p>;
-	// }
-
 	const [addProduct, setAddProduct] = useState({});
 	const [addImage, setAddImage] = useState([]);
-	const [categoriesValue, setCategoriesValue] = useState();
+	const [addPreviewImage, setPreviewImage] = useState([]);
 
-	let images = [];
 	const handleImage = (e) => {
-		// for (let i = 0; i < e.target.files.length; i++) {
-		// 	images.push(e.target.files[i]);
-		// }
-		setAddImage(e.target.files);
+		setAddImage(e.target.files[0]);
+		const filesArray = Array.from(e.target.files);
+		setPreviewImage(filesArray);
 	};
 
+	const [categoriesValue, setCategoriesValue] = useState(0);
 	const handleChangeCategories = (e) => {
 		setCategoriesValue(e.target.value);
 	};
+
+	subCategories = subCategories.filter(
+		(subCategory) => subCategory.categoryId === categoriesValue,
+	);
 
 	const handleAddProduct = (e) => {
 		setAddProduct({ ...addProduct, [e.target.name]: e.target.value });
@@ -71,17 +59,14 @@ const FormProduct = () => {
 		const productData = {
 			name: addProduct.name,
 			description: addProduct.description,
-			price: Number(addProduct.price),
+			price: addProduct.price,
 			stock: count,
 			image: addImage,
 			subCategoryId: addProduct.subCategoryId,
+			imagepreview: addPreviewImage,
 		};
-		console.log(productData);
 		postProduct(productData);
-
-		// if (!response.status == 200) {
-		// 	images = [];
-		// }
+		window.location.reload();
 	};
 
 	return (
@@ -109,6 +94,7 @@ const FormProduct = () => {
 								variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
 								name="categoryId"
 								title="Category"
+								onChange={handleChangeCategories}
 							>
 								<Option
 									value="Choose Category"
@@ -198,9 +184,23 @@ const FormProduct = () => {
 				</div>
 			</div>
 			<div className="w-2/5">
-				<div className="flex justify-center">
-					<img src={ImageProduct} alt="" />
-				</div>
+				<CarouselImage>
+					{addPreviewImage && addPreviewImage.length > 0 ? (
+						addPreviewImage.map((image, index) => (
+							<div className="img" key={index}>
+								<img
+									className="w-full object-cover"
+									src={URL.createObjectURL(image)}
+									alt={`Image ${index}`}
+								/>
+							</div>
+						))
+					) : (
+						<div className="img">
+							<img src={ImageProduct} alt="Placeholder" />
+						</div>
+					)}
+				</CarouselImage>
 				<div className="py-7">
 					<div className="pb-1 pt-4">
 						<Label htmlFor="imageproduct" variants="font-semibold">
@@ -220,26 +220,26 @@ const FormProduct = () => {
 							<span className="text-danger pr-2">*</span>
 							Please input file with jpg, jpeg, png, gif extension
 						</p>
-						{PhotoData.map((item) => (
-							<div className="pt-4" key={item} value={item.id}>
-								<div className="rounded-lg py-2 px-3 flex justify-center">
-									<Button
-										type="button"
-										variants="flex items-center focus:outline-none"
-									>
-										<DocumentTextIcon className="w-9 pr-2" />
-										<p>{item.name}</p>
-									</Button>
-									<Button type="button">
-										<img
-											src={TrashIcon}
-											alt=""
-											className="h-5 my-auto pl-2"
-										/>
-									</Button>
-								</div>
+						{/* {addImage.map((file, index) => (
+						<div className="pt-4" key={index} value={file.id}>
+							<div className="rounded-lg py-2 px-3 flex justify-center">
+								<Button
+									type="button"
+									variants="flex items-center focus:outline-none"
+								>
+									<DocumentTextIcon className="w-9 pr-2" />
+									<p>{file.name}</p>
+								</Button>
+								<Button type="button">
+									<img
+										src={TrashIcon}
+										alt=""
+										className="h-5 my-auto pl-2"
+									/>
+								</Button>
 							</div>
-						))}
+						</div>
+						))}  */}
 						<div className="pt-2">
 							<p className="py-4 text-justify">
 								Double check the data you entered before saving
@@ -248,7 +248,7 @@ const FormProduct = () => {
 							<div className="flex justify-end">
 								<div className="px-2">
 									<Button
-										type="submit"
+										type="button"
 										variants="py-2 px-5 rounded-lg bg-red text-white"
 									>
 										Cancel
@@ -256,7 +256,7 @@ const FormProduct = () => {
 								</div>
 								<div className="px-2">
 									<Button
-										type="button"
+										type="submit"
 										variants="py-2 px-5 rounded-lg bg-danger text-white"
 										onClick={() =>
 											document

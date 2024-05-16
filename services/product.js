@@ -1,13 +1,22 @@
 import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
-export const postProduct = async (body, ) => {
-	await axios.post(`${getAppUrl()}api/products`, body, {
+export const postProduct = async (body) => {
+	const formData = new FormData()
+
+	formData.append('name', body.name)
+	formData.append('description', body.description)
+	formData.append('stock', body.stock)
+	formData.append('subCategoryId', body.subCategoryId)
+	formData.append('price', body.price)
+	formData.append('image', body.image)
+
+	await axios.post(`${getAppUrl()}api/products`, formData, {
 		headers: {
-			'Accept': '*/*',
 			'Content-Type': 'multipart/form-data',
 		},
-	})
+	}
+	)
 	.then(res => {
 		if(res.status == 201) console.log(res.data)
 	})
@@ -15,7 +24,20 @@ export const postProduct = async (body, ) => {
 }
 
 export const editProduct = async (id, body) => {
-	await axios.patch(`${getAppUrl()}api/products/${id}`, body)
+	const formData = new FormData()
+
+	formData.append('name', body.name)
+	formData.append('description', body.description)
+	formData.append('stock', body.stock)
+	formData.append('subCategoryId', body.subCategoryId)
+	formData.append('price', body.price)
+	formData.append('image', body.image)
+
+	await axios.patch(`${getAppUrl()}api/products/${id}`, formData, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		}
+	})
 	.then(res => {if(res.status == 200) console.log(res.data)})
 	.catch (e => console.log(e))
 }
