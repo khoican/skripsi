@@ -63,10 +63,10 @@ const FormProduct = () => {
 			stock: count,
 			image: addImage,
 			subCategoryId: addProduct.subCategoryId,
-			imagepreview: addPreviewImage,
 		};
+		console.log(productData);
 		postProduct(productData);
-		window.location.reload();
+		// window.location.reload();
 	};
 
 	return (
