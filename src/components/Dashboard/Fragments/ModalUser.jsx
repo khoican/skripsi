@@ -9,7 +9,7 @@ const ModalUser = () => {
 					<h3 className="font-bold text-lg">Alert!</h3>
 					<p className="py-4 flex">
 						Are you sure you want to delete this
-						<p className="px-1 font-bold">"user"</p>?
+						<span className="px-1 font-bold">"user"?</span>
 					</p>
 					<div className="modal-action">
 						<form method="dialog">
