@@ -17,4 +17,9 @@ export const login = async (data) => {
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+export const getAllUsers = async () => {
+	const response = await axios.get(`${getAppUrl()}api/users`);
+	return response.data.data;
 };
