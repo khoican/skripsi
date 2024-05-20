@@ -12,7 +12,13 @@ const postCardByUser = async (qty, note, productId) => {
 
 	try {
 		const response = await postCartProduct(data);
-		setLocalStorage(response.data, qty);
+
+		if (response.status !== 200) {
+			return {
+				status: 'error',
+				message: 'Barang gagal ditambahkan ke keranjang',
+			};
+		}
 
 		return {
 			status: 'success',

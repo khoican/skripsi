@@ -50,7 +50,7 @@ const InvoicePage = () => {
 					<div className="flex w-full">
 						<p className="w-2/6 font-semibold">ID Invoice</p>
 						<p className="w-1/6 text-end pe-5">:</p>
-						<p className="w-3/6">{order.invoice}</p>
+						<p className="w-3/6 font-semibold">#{order.invoice}</p>
 					</div>
 					<div className="flex w-full">
 						<p className="w-2/6 font-semibold">Nama Lengkap</p>
@@ -86,8 +86,10 @@ const InvoicePage = () => {
 						<thead className="border-b border-collapse border-black text-md">
 							<tr className="text-center">
 								<th className="w-1/12 pb-2">No</th>
-								<th className="w-5/12 pb-2">Nama produk</th>
-								<th className="w-2/12 pb-2">Qty</th>
+								<th className="w-4/12 pb-2">Nama produk</th>
+								<th className="w-3/12 pb-2">Harga</th>
+								<th className="w-1/12 pb-2">Qty</th>
+								<th className="w-3/12 pb-2">Total</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,15 +103,31 @@ const InvoicePage = () => {
 										<td className="py-2 pl-5 text-start">
 											{products.productName}
 										</td>
+										<td className="py-2 pl-5">
+											<NumericFormat
+												value={products.price}
+												displayType="text"
+												thousandSeparator={true}
+												prefix={'Rp. '}
+											/>
+										</td>
 										<td className="py-2">
 											{products.quantity}
+										</td>
+										<td className="py-2">
+											<NumericFormat
+												value={products.totalPrice}
+												displayType="text"
+												thousandSeparator={true}
+												prefix={'Rp. '}
+											/>
 										</td>
 									</tr>
 								))}
 
 							<tr className="text-danger text-md">
 								<td
-									colSpan={2}
+									colSpan={4}
 									className="text-end font-semibold uppercase"
 								>
 									Total Bayar

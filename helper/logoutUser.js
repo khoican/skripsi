@@ -18,7 +18,6 @@ export const logoutUser = async () => {
 		}
 
 		localStorage.removeItem('user');
-		localStorage.removeItem('cart');
 		return {
 			status: response.status,
 			message: 'Logout berhasil',

@@ -49,6 +49,7 @@ const Navbar = () => {
 			}, 5000);
 		}
 
+		navigate('/');
 		setStatus(response);
 		setOpenDropdown(false);
 
@@ -91,9 +92,21 @@ const Navbar = () => {
 					</button>
 				</div>
 				<div className="flex items-center justify-end gap-5 text-gray-400 w-1/3">
-					<NavbarIcon link={'/'} icon={faHome} />
-					<NavbarIcon link={'/products'} icon={faShoppingBag} />
-					<NavbarIcon link={'/cart'} icon={faShoppingCart} />
+					<NavbarIcon
+						link={'/'}
+						icon={faHome}
+						onClick={() => setOpenDropdown(false)}
+					/>
+					<NavbarIcon
+						link={'/products'}
+						icon={faShoppingBag}
+						onClick={() => setOpenDropdown(false)}
+					/>
+					<NavbarIcon
+						link={'/cart'}
+						icon={faShoppingCart}
+						onClick={() => setOpenDropdown(false)}
+					/>
 					{user ? (
 						<Dropdown icon={faUser} onClick={handleOpenDropdown} />
 					) : (

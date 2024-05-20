@@ -11,6 +11,7 @@ import { faBox } from '@fortawesome/free-solid-svg-icons';
 import { updateCart } from '../../../helper/updateCart';
 import Button from '../../components/user/elements/button/Index';
 import Alert from '../../components/user/elements/alert/Index';
+import Loading from '../../components/user/fragments/loading/Index';
 
 const ProductDetail = (product, error) => {
 	const user = JSON.parse(localStorage.getItem('user'));
@@ -46,7 +47,7 @@ const ProductDetail = (product, error) => {
 	}, [productId]);
 
 	if (!products && !products.images) {
-		return <p>Loading...</p>;
+		return <Loading text={'Mengambil data'} />;
 	}
 
 	const handleNote = (e) => {
@@ -100,6 +101,8 @@ const ProductDetail = (product, error) => {
 					onClick={() => setStatus('')}
 				/>
 			)}
+
+			{loading && <Loading text={'Menambahkan ke keranjang'} />}
 			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
 				<div className="w-5/12">
 					<div className="w-full">

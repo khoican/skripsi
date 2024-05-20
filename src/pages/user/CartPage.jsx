@@ -7,13 +7,29 @@ import { NumericFormat } from 'react-number-format';
 import { deleteCart } from '../../../helper/deleteCart';
 import Modal from '../../components/user/fragments/modal/Index';
 import Alert from '../../components/user/elements/alert/Index';
+import { getCartByUserId } from '../../../services/cartProduct';
 
 const CartPage = () => {
+	const user = JSON.parse(localStorage.getItem('user'));
 	const [total, setTotal] = useState(0);
-	const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')));
+	const [cart, setCart] = useState();
 	const [openModal, setOpenModal] = useState(false);
 	const [idDelete, setIdDelete] = useState(null);
 	const [status, setStatus] = useState('');
+
+	useEffect(() => {
+		const fetchCart = async () => {
+			try {
+				const response = await getCartByUserId(user.id);
+
+				setCart(response);
+			} catch (error) {
+				console.error('Failed to fetch cart:', error);
+			}
+		};
+
+		fetchCart();
+	}, [user.id]);
 
 	useEffect(() => {
 		let totalPrice = 0;
@@ -121,6 +137,7 @@ const CartPage = () => {
 									name={item.product.name}
 									quantity={item.quantity}
 									note={item.notes}
+									image={item.product.images[0].image}
 									price={item.product.price}
 									productId={item.productId}
 									onClick={handleOpenModal({

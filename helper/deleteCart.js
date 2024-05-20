@@ -1,8 +1,6 @@
 import { deleteCartProduct } from '../services/cartProduct';
 
 export const deleteCart = async (id) => {
-	const existingCart = JSON.parse(localStorage.getItem('cart'));
-
 	try {
 		const response = await deleteCartProduct(id);
 
@@ -13,12 +11,6 @@ export const deleteCart = async (id) => {
 				status: response.status,
 				message: 'Produk gagal di hapus dari keranjang',
 			};
-		}
-
-		if (Array.isArray(existingCart) && existingCart.length > 0) {
-			const updatedCart = existingCart.filter((item) => item.id !== id);
-
-			localStorage.setItem('cart', JSON.stringify(updatedCart));
 		}
 
 		return {

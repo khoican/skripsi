@@ -29,7 +29,6 @@ export const postLogin = async (username, password) => {
 		};
 
 		localStorage.setItem('user', JSON.stringify(user));
-		getCartUser(response.data.id);
 
 		return {
 			status: response.status,

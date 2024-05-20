@@ -9,6 +9,7 @@ import { NumericFormat } from 'react-number-format';
 import { postOrder } from '../../../helper/postOrder';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/user/fragments/modal/Index';
+import { getCartByUserId } from '../../../services/cartProduct';
 
 const CheckoutPage = () => {
 	const user = JSON.parse(localStorage.getItem('user'));
@@ -16,7 +17,7 @@ const CheckoutPage = () => {
 	const [phone, setPhone] = useState(user.phoneNumber);
 	const [country, setCountry] = useState('ID');
 	const [openAddress, setOpenAddress] = useState(false);
-	const carts = JSON.parse(localStorage.getItem('cart'));
+	const [carts, setCarts] = useState();
 	const [openModal, setOpenModal] = useState(false);
 	const [orderInput, setOrderInput] = useState({
 		name: user.name,
@@ -40,10 +41,25 @@ const CheckoutPage = () => {
 	};
 
 	useEffect(() => {
+		const fetchCart = async () => {
+			try {
+				const response = await getCartByUserId(user.id);
+
+				setCarts(response);
+			} catch (error) {
+				console.error('Failed to fetch cart:', error);
+			}
+		};
+
+		fetchCart();
+	}, [user.id]);
+
+	useEffect(() => {
 		let totalPrice = 0;
-		carts.forEach((item) => {
-			totalPrice += item.product.price * item.quantity;
-		});
+		carts &&
+			carts.forEach((item) => {
+				totalPrice += item.product.price * item.quantity;
+			});
 		setTotal(totalPrice);
 	}, [carts]);
 
@@ -67,7 +83,7 @@ const CheckoutPage = () => {
 			{openModal && (
 				<Modal
 					title={'Konfirmasi Pesanan'}
-					onClick={() => setOpenModal(false)}
+					onClose={() => setOpenModal(false)}
 					onSave={handleSubmit}
 				>
 					<p className={'text-sm'}>

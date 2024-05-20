@@ -6,7 +6,6 @@ import { deleteCart } from './deleteCart';
 
 export const postOrder = async (data) => {
 	const user = JSON.parse(localStorage.getItem('user'));
-	const carts = JSON.parse(localStorage.getItem('cart'));
 
 	const orderData = {
 		name: data.name,
@@ -25,11 +24,6 @@ export const postOrder = async (data) => {
 			console.log('error :' + response.data);
 		}
 
-		carts.forEach((cart) => {
-			deleteCart(cart.id);
-		});
-
-		localStorage.removeItem('cart');
 		return response.data;
 	} catch (error) {
 		console.log(error);
