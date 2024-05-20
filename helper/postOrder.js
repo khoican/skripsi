@@ -2,6 +2,7 @@ import {
 	postOrderHistoryProduct,
 	postOrderProduct,
 } from '../services/orderProduct';
+import { deleteCart } from './deleteCart';
 
 export const postOrder = async (data) => {
 	const user = JSON.parse(localStorage.getItem('user'));
@@ -16,17 +17,12 @@ export const postOrder = async (data) => {
 		status: 'PROSES',
 	};
 
-	console.log(orderData);
-
 	try {
 		const response = await postOrderProduct(orderData);
 
 		if (response.status !== 200) {
 			console.log('error :' + response.data);
 		}
-
-		localStorage.removeItem('cart');
-		console.log(response.data);
 
 		return response.data;
 	} catch (error) {

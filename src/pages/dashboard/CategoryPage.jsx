@@ -5,22 +5,22 @@ import SearchInput from '../../components/Dashboard/Elements/SearchInput';
 import Category from '../../components/Dashboard/Elements/Category';
 import ModalCategory from '../../components/Dashboard/Fragments/ModalCategory';
 import Input from '../../components/Dashboard/Elements/Input';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // import axios from "axios";
-import { postCategory } from '../../config/services/category';
+import { postCategory } from '../../../services/category';
 
-function DashboardCategory() {
+const DashboardCategory = () => {
 	const [category, setCategory] = useState('');
 
 	function handleCategory(e) {
 		setCategory(e.target.value);
 	}
 
-	console.log(category);
-
 	function handleSubmit() {
 		postCategory({
 			name: category,
+		}).then((res) => {
+			console.log(res);
 		});
 	}
 
@@ -35,7 +35,7 @@ function DashboardCategory() {
 
 					<Button
 						type="button"
-						variants="bg-success rounded-md py-2 px-3 text-white flex"
+						variants="bg-success rounded-md py-2 px-3 text-white flex hover:bg-primary transition-all ease-in 5s"
 						onClick={() =>
 							document.getElementById('add').showModal()
 						}
@@ -49,16 +49,18 @@ function DashboardCategory() {
 						title="Add Category"
 						btn="Save"
 					>
-						<Input
-							variants="rounded-lg ring-1 border-0 w-full  ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
-							type="text"
-							name="categoryname"
-							placeholder="Insert Category Name"
-							onChange={handleCategory}
-						/>
+						<div className="">
+							<Input
+								variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+								type="text"
+								name="categoryname"
+								placeholder="Insert Category Name"
+								onChange={handleCategory}
+							/>
+						</div>
 						<div className="flex justify-end gap-2 pt-3">
 							<Button
-								type="button"
+								type="submit"
 								variants="mr-2 px-4 py-2 border border-danger hover:text-red-700 hover:border-red-700 transition ease-in-out 5s rounded-lg text-danger"
 							>
 								Cancel
@@ -81,6 +83,6 @@ function DashboardCategory() {
 			</div>
 		</>
 	);
-}
+};
 
 export default DashboardCategory;

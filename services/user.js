@@ -17,4 +17,43 @@ export const login = async (data) => {
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+export const getAllUsers = async () => {
+	const response = await axios.get(`${getAppUrl()}api/users`);
+	return response.data.data;
+};
+
+export const updateUser = async (id, data) => {
+	try {
+		const response = await axios.patch(
+			`${getAppUrl()}api/users/${id}`,
+			data,
+		);
+		if (response.status !== 200) {
+			console.log('error :' + response.data);
+
+			return response.data;
+		}
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const logout = async (body) => {
+	try {
+		const response = await axios.post(
+			`${getAppUrl()}api/users/logout`,
+			body,
+		);
+		if (response.status !== 200) {
+			console.log('error :' + response.data);
+		}
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
 };

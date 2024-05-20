@@ -1,7 +1,7 @@
 import Button from '../Elements/Button';
 import Modal from '../Elements/Modal';
 
-function ModalRole(props) {
+const ModalRole = (props) => {
 	const { children, title, btn, id, variants } = props;
 	return (
 		<>
@@ -33,6 +33,6 @@ function ModalRole(props) {
 			</Modal>
 		</>
 	);
-}
+};
 
 export default ModalRole;

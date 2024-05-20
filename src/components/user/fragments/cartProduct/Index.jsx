@@ -3,9 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
+import { getAppUrl } from '../../../../../config/app';
+import logo from '/logo.png';
 
 const CartProduct = (props) => {
-	const { id, name, price, quantity, note, productId, onClick } = props;
+	const {
+		id,
+		name,
+		price,
+		quantity,
+		note,
+		productId,
+		onClick,
+		image,
+		onDelete,
+	} = props;
 
 	let totalPrice = price * quantity;
 
@@ -13,7 +25,7 @@ const CartProduct = (props) => {
 		<div className="flex justify-between rounded-md shadow-lg w-full overflow-hidden">
 			<div className="flex gap-5">
 				<img
-					src="https://picsum.photos/200"
+					src={image ? getAppUrl() + image : logo}
 					alt=""
 					className="h-32 w-auto"
 				/>
@@ -44,7 +56,7 @@ const CartProduct = (props) => {
 				</div>
 				<FontAwesomeIcon
 					icon={faTrash}
-					className="text-danger h-8"
+					className="cursor-pointer text-danger h-8"
 					onClick={onClick}
 				/>
 			</div>

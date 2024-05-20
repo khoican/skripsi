@@ -2,9 +2,10 @@ import { useState } from 'react';
 import Button from '../../../components/user/elements/button/Index';
 import Input from '../../../components/user/elements/input/Index';
 import logo from '/logo.png';
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { postLogin } from '../../../../helper/postLogin';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const LoginPage = () => {
 	const [inputLogin, setInputLogin] = useState({
@@ -41,8 +42,12 @@ const LoginPage = () => {
 					<h1 className="text-3xl font-semibold">Login</h1>
 
 					{status && (
-						<p className="text-sm bg-danger text-white p-5 rounded-md mt-5">
+						<p className="text-sm bg-danger flex justify-between items-center text-white p-5 rounded-md mt-5">
 							{status}
+							<FontAwesomeIcon
+								icon={faClose}
+								onClick={() => setStatus('')}
+							/>
 						</p>
 					)}
 

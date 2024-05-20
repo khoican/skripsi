@@ -19,6 +19,10 @@ import DashboardProfile from './pages/dashboard/ProfilePage';
 import Auth from './pages/dashboard/LoginPage';
 import OrderDetailsPage from './pages/dashboard/OrderDetailsPage';
 import InvoicePage from './pages/user/InvoicePage';
+import EditProfilePage from './pages/user/EditProfilePage';
+import EditProfile from './layouts/EditProfile';
+import ChangePasswordPage from './pages/user/ChangePasswordPage';
+import OrderHistoryPage from './pages/user/OrderHistoryPage';
 
 export const router = createBrowserRouter([
 	{
@@ -38,6 +42,10 @@ export const router = createBrowserRouter([
 				element: <ProductPage />,
 			},
 			{
+				path: '/products?search=:query',
+				element: <ProductPage />,
+			},
+			{
 				path: '/products/show/:id',
 				element: <ProductDetail />,
 			},
@@ -50,8 +58,26 @@ export const router = createBrowserRouter([
 				element: <CheckoutPage />,
 			},
 			{
-				path: '/invoice',
+				path: '/invoice/:id',
 				element: <InvoicePage />,
+			},
+			{
+				path: '',
+				element: <EditProfile />,
+				children: [
+					{
+						path: 'editprofile',
+						element: <EditProfilePage />,
+					},
+					{
+						path: 'changepassword',
+						element: <ChangePasswordPage />,
+					},
+				],
+			},
+			{
+				path: '/orderhistory',
+				element: <OrderHistoryPage />,
 			},
 		],
 	},
@@ -64,7 +90,7 @@ export const router = createBrowserRouter([
 		element: <Auth />,
 	},
 	{
-		path: '/Dashboard',
+		path: '/dashboard',
 		element: <AdminLayout />,
 		children: [
 			{
@@ -72,40 +98,40 @@ export const router = createBrowserRouter([
 				element: <Dashboard />,
 			},
 			{
-				path: 'User',
+				path: 'user',
 				element: <DashboardUser />,
 			},
 			{
-				path: 'Profile',
+				path: 'profile',
 				element: <DashboardProfile />,
 			},
 
 			{
-				path: 'User/UserDetails',
+				path: 'user/userdetails',
 				element: <DashboardUserDetails />,
 			},
 			{
-				path: 'Product',
+				path: 'product',
 				element: <DashboardProduct />,
 			},
 			{
-				path: 'Product/ProductDetails',
+				path: 'product/productdetails',
 				element: <DashboardProductDetails />,
 			},
 			{
-				path: 'Order',
+				path: 'order',
 				element: <DashboardOrder />,
 			},
 			{
-				path: 'Order/OrderDetails',
+				path: 'order/orderdetails',
 				element: <OrderDetailsPage />,
 			},
 			{
-				path: 'Category',
+				path: 'category',
 				element: <DashboardCategory />,
 			},
 			{
-				path: 'Role',
+				path: 'role',
 				element: <DashboardRole />,
 			},
 		],

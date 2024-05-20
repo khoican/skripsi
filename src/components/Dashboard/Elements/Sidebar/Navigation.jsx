@@ -14,10 +14,10 @@ const Navigation = () => {
 	return (
 		<>
 			<Link
-				to="/Dashboard"
-				className={`relative px-4 py-3 flex items-center rounded-lg space-x-4 ${
-					isActive == '/Dashboard'
-						? 'bg-success text-white'
+				to="/dashboard"
+				className={`relative px-4 py-3 flex items-center rounded-lg hover:bg-gray-200 transition-all ease-in 5s-lg space-x-4 ${
+					isActive == '/dashboard'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -25,27 +25,13 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Dashboard</p>
 			</Link>
 			<Link
-				to="/Dashboard/User"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/User'
-						? 'bg-success text-white'
+				to="/dashboard/product"
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
+					isActive == '/dashboard/product'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray' &&
-							  isActive == '/Dashboard/User/UserDetails'
-							? 'bg-success text-white'
-							: 'text-gray'
-				} `}
-			>
-				<span>{<UserGroupIcon className="w-6" />}</span>
-				<p className="-mr-1 font-medium">User</p>
-			</Link>
-			<Link
-				to="/Dashboard/Product"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Product'
-						? 'bg-success text-white'
-						: 'text-gray' &&
-							  isActive == '/Dashboard/Product/ProductDetails'
-							? 'bg-success text-white'
+							  isActive == '/dashboard/product/productdetails'
+							? 'bg-primary hover:bg-primary text-white'
 							: 'text-gray'
 				} `}
 			>
@@ -53,10 +39,10 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Product</p>
 			</Link>
 			<Link
-				to="/Dashboard/Order"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Order'
-						? 'bg-success text-white'
+				to="/dashboard/order"
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
+					isActive == '/dashboard/order'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -64,10 +50,10 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Order</p>
 			</Link>
 			<Link
-				to="/Dashboard/Category"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Category'
-						? 'bg-success text-white'
+				to="/dashboard/category"
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
+					isActive == '/dashboard/category'
+						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
 				} `}
 			>
@@ -75,10 +61,24 @@ const Navigation = () => {
 				<p className="-mr-1 font-medium">Category</p>
 			</Link>
 			<Link
-				to="/Dashboard/Role"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4  ${
-					isActive == '/Dashboard/Role'
-						? 'bg-success text-white'
+				to="/dashboard/user"
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
+					isActive == '/dashboard/user'
+						? 'bg-primary hover:bg-primary text-white'
+						: 'text-gray' &&
+							  isActive == '/dashboard/user/userdetails'
+							? 'bg-primary hover:bg-primary text-white'
+							: 'text-gray'
+				} `}
+			>
+				<span>{<UserGroupIcon className="w-6" />}</span>
+				<p className="-mr-1 font-medium">User</p>
+			</Link>
+			<Link
+				to="/dashboard/role"
+				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
+					isActive == '/dashboard/role'
+						? 'bg-primary hover:bg-primary  text-white'
 						: 'text-gray'
 				} `}
 			>
