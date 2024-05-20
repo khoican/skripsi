@@ -66,7 +66,7 @@ const FormProduct = () => {
 		};
 		console.log(productData);
 		postProduct(productData);
-		window.location.reload();
+		// window.location.reload();
 	};
 
 	return (
