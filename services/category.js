@@ -4,7 +4,7 @@ import { getAppUrl } from '../config/app';
 
 export const postCategory = async (body) => {
 	await axios.post(`${getAppUrl()}api/category`, body)
-    .then(res => {if(res.status == 200) console.log(res.data)}
+    .then(res => {if(res.status == 201) console.log(res.data)}
     ).catch(e => console.log(e));  
 }
 
