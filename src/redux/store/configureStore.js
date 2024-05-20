@@ -15,6 +15,9 @@ export default configureStore({
 		fetchSubCategories: subCategoryReducer,
 		fetchOrders: orderReducer,
 		fetchUsers: userReducer,
+		fetchUserById: userReducer,
+		createNewUser: userReducer,
+		editUserById: userReducer,
 		counter: counterReducer,
 	},
 });

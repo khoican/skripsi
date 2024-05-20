@@ -24,7 +24,7 @@ const FormProduct = () => {
 	let subCategories = useSelector(
 		(state) => state.fetchSubCategories.category,
 	);
-	const count = useSelector((state) => state.counter.count);
+	const count = useSelector((state) => state.counter[0].count);
 
 	useEffect(() => {
 		dispatch(fetchCategories(productId.id));
