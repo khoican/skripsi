@@ -1,10 +1,13 @@
 const Option = (props) => {
-    const { value, title } = props;
-    return (
-        <>
-            <option value={value}>{title}</option>
-        </>
-    );
+	const { value, title, onClick, onChange } = props;
+
+	return (
+		<>
+			<option value={value} onClick={onClick} onChange={onChange}>
+				{title}
+			</option>
+		</>
+	);
 };
 
 export default Option;

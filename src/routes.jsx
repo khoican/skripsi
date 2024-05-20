@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
 		element: <Auth />,
 	},
 	{
-		path: '/Dashboard',
+		path: '/dashboard',
 		element: <AdminLayout />,
 		children: [
 			{
@@ -98,40 +98,40 @@ export const router = createBrowserRouter([
 				element: <Dashboard />,
 			},
 			{
-				path: 'User',
+				path: 'user',
 				element: <DashboardUser />,
 			},
 			{
-				path: 'Profile',
+				path: 'profile',
 				element: <DashboardProfile />,
 			},
 
 			{
-				path: 'User/UserDetails',
+				path: 'user/userdetails',
 				element: <DashboardUserDetails />,
 			},
 			{
-				path: 'Product',
+				path: 'product',
 				element: <DashboardProduct />,
 			},
 			{
-				path: 'Product/ProductDetails',
+				path: 'product/productdetails',
 				element: <DashboardProductDetails />,
 			},
 			{
-				path: 'Order',
+				path: 'order',
 				element: <DashboardOrder />,
 			},
 			{
-				path: 'Order/OrderDetails',
+				path: 'order/orderdetails',
 				element: <OrderDetailsPage />,
 			},
 			{
-				path: 'Category',
+				path: 'category',
 				element: <DashboardCategory />,
 			},
 			{
-				path: 'Role',
+				path: 'role',
 				element: <DashboardRole />,
 			},
 		],
