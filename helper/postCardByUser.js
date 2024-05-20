@@ -12,7 +12,13 @@ const postCardByUser = async (qty, note, productId) => {
 
 	try {
 		const response = await postCartProduct(data);
-		setLocalStorage(response.data, qty);
+
+		if (response.status !== 200) {
+			return {
+				status: 'error',
+				message: 'Barang gagal ditambahkan ke keranjang',
+			};
+		}
 
 		return {
 			status: 'success',
@@ -31,7 +37,6 @@ const postCardByUser = async (qty, note, productId) => {
 const setLocalStorage = (response, qty) => {
 	let existingCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-	console.log(response);
 	let existingData = false;
 	existingCart = existingCart.map((item) => {
 		if (item.productId === response.data.productId) {

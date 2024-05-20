@@ -9,7 +9,12 @@ export const updateCart = async (id, notes, quantity, productId) => {
 			productId: productId,
 		});
 
-		setLocalStorage(response.data);
+		if (response.status !== 200) {
+			return {
+				status: 'error',
+				message: 'Barang gagal ditambahkan ke keranjang',
+			};
+		}
 
 		return {
 			status: 'success',

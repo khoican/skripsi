@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext js,jsx --fix --report-unused-disable-directives --max-warnings 0",
     "precommit": "lint-staged",
@@ -34,7 +34,8 @@
     "axios": "^1.6.3",
     "chart.js": "^4.4.2",
     "faker": "^5.5.3",
-    "flowbite-react": "^0.7.8",
+    "flowbite-react": "^0.7.2",
+    "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-data-table-component": "^7.5.4",

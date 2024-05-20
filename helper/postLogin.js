@@ -21,11 +21,14 @@ export const postLogin = async (username, password) => {
 
 		const user = {
 			id: response.data.id,
+			name: response.data.name,
+			address: response.data.address,
+			role: response.data.role,
+			phoneNumber: response.data.phoneNumber,
 			token: response.data.token,
 		};
 
 		localStorage.setItem('user', JSON.stringify(user));
-		getCartUser(response.data.id);
 
 		return {
 			status: response.status,
@@ -41,7 +44,6 @@ export const postLogin = async (username, password) => {
 
 const getCartUser = async (id) => {
 	const response = await getCartByUserId(id);
-	console.log(response);
 
 	localStorage.setItem('cart', JSON.stringify(response));
 };
