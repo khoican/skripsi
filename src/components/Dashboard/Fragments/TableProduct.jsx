@@ -85,7 +85,7 @@ const TableProduct = () => {
 			name: product.name,
 			stock: product.stock,
 			price: product.price,
-			category: product.subCategory.category.name,
+			// category: product.subCategory.category.name,
 			subCategory: product.subCategory.name,
 		};
 	});
