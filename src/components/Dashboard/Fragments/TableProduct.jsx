@@ -1,6 +1,6 @@
 import DataTable from 'react-data-table-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../../redux/actions/productsAction';
+import { fetchProductsDashboard } from '../../../redux/actions/productsAction';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PencilIcon from '../../../assets/img/icon/PencilIcon/index';
@@ -8,16 +8,16 @@ import TrashIcon from '../../../assets/img/icon/TrashIcon/index';
 import Button from '../Elements/Button';
 import { Spinner } from 'flowbite-react';
 
-export function CustomSpinner() {}
-
 const TableProduct = () => {
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
-	const products = useSelector((state) => state.fetchProducts.products);
+	const products = useSelector(
+		(state) => state.fetchProductsDashboard.products,
+	);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			dispatch(fetchProducts());
+			dispatch(fetchProductsDashboard());
 			setPending(false);
 		}, 1500);
 		return () => clearTimeout(timeout);

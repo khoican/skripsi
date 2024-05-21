@@ -55,6 +55,11 @@ export const getAllProducts = async (skip = 0, take = 10) => {
 	return response.data.data;
 };
 
+export const getAllProductsDashboard = async () => {
+	const response = await axios.get(`${getAppUrl()}api/products`);
+	return response.data.data;
+};
+
 export const getProductBySlug = async (id) => {
 	const response = await axios({
 		method: 'get',

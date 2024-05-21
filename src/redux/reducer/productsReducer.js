@@ -2,6 +2,9 @@ import {
 	FETCH_PRODUCT_ERROR,
 	FETCH_PRODUCT_SUCCESS,
 	FETCH_PRODUCT_REQUEST,
+	FETCH_PRODUCT_DASHBOARD_ERROR,
+	FETCH_PRODUCT_DASHBOARD_SUCCESS,
+	FETCH_PRODUCT_DASHBOARD_REQUEST,
 } from '../actions/productsAction';
 
 const initialState = {
@@ -25,6 +28,25 @@ const productsReducer = (state = initialState, action) => {
 				error: '',
 			};
 		case FETCH_PRODUCT_ERROR:
+			return {
+				...state,
+				loading: false,
+				products: [],
+				error: action.payload,
+			};
+		case FETCH_PRODUCT_DASHBOARD_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case FETCH_PRODUCT_DASHBOARD_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				products: action.payload,
+				error: '',
+			};
+		case FETCH_PRODUCT_DASHBOARD_ERROR:
 			return {
 				...state,
 				loading: false,

@@ -11,7 +11,6 @@ const TableOrder = () => {
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
 	const orders = useSelector((state) => state.fetchOrders.orders);
-	console.log(orders);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
