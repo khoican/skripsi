@@ -1,9 +1,10 @@
 import Button from '../Elements/Button';
 import Modal from '../Elements/Modal';
 
-const ModalProduct = () => {
+const ModalProduct = (props) => {
+	const { id, children } = props;
 	return (
-		<Modal id="delete">
+		<Modal id={id}>
 			<div className="bg-white modal-box py-3 px-9">
 				<h3 className="font-bold text-lg">Alert!</h3>
 				<p className="py-4 flex">
@@ -11,22 +12,7 @@ const ModalProduct = () => {
 					<span className="px-1 font-bold">"this product"</span>?
 				</p>
 				<div className="modal-action">
-					<form method="dialog">
-						<div className="flex mt-2 justify-end">
-							<Button
-								type="submit"
-								variants="mr-2 px-4 py-2 border border-danger text-danger rounded-lg hover:text-red hover:border-red transition ease-in 5s "
-							>
-								Cancel
-							</Button>
-							<Button
-								type="submit"
-								variants="px-4 py-2 bg-danger rounded-lg text-white hover:bg-red transition ease-in 5s"
-							>
-								Delete
-							</Button>
-						</div>
-					</form>
+					<form method="dialog">{children}</form>
 				</div>
 			</div>
 		</Modal>

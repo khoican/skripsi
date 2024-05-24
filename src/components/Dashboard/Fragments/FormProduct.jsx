@@ -9,7 +9,12 @@ import ImageProduct from '../../../../public/images/Rectangle 11.png';
 import Button from '../Elements/Button';
 import Counter from '../../user/fragments/counter/Index';
 import ModalProduct from './ModalProduct';
-import { postProduct } from '../../../../services/product';
+import {
+	postProduct,
+	getProductById,
+	editProduct,
+	deleteProduct,
+} from '../../../../services/product';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchCategories } from '../../../redux/actions/categoryAction';
@@ -24,15 +29,43 @@ const FormProduct = () => {
 	let subCategories = useSelector(
 		(state) => state.fetchSubCategories.category,
 	);
-	const count = useSelector((state) => state.counter[0].count);
+
+	const [addProduct, setAddProduct] = useState({
+		name: '',
+		description: '',
+		price: 0,
+		stock: 0,
+		subCategory: '',
+		subCategoryId: 0,
+		image: '',
+	});
+	// const [getProduct, setGetProduct] = useState({
+	// 	name: '',
+	// 	description: '',
+	// 	price: 0,
+	// 	stock: 0,
+	// 	subCategory: '',
+	// 	subCategoryId: 0,
+	// 	image: '',
+	// });
+
+	const getProductId = async () => {
+		const data = await getProductById(productId.id);
+		return data;
+	};
+
+	const count = useSelector((state) => state.counter[1]?.count);
 
 	useEffect(() => {
 		dispatch(fetchCategories(productId.id));
 		dispatch(fetchCategories());
 		dispatch(fetchSubCategories());
-	}, [dispatch]);
 
-	const [addProduct, setAddProduct] = useState({});
+		if (productId.id) {
+			getProductId().then((data) => setAddProduct(data));
+		}
+	}, [dispatch, productId]);
+
 	const [addImage, setAddImage] = useState([]);
 	const [addPreviewImage, setPreviewImage] = useState([]);
 
@@ -47,8 +80,10 @@ const FormProduct = () => {
 		setCategoriesValue(e.target.value);
 	};
 
-	subCategories = subCategories.filter(
-		(subCategory) => subCategory.categoryId === categoriesValue,
+	subCategories = subCategories.filter((subCategory) =>
+		productId.id
+			? subCategory.categoryId === addProduct.subCategory.categoryId
+			: subCategory.categoryId === categoriesValue,
 	);
 
 	const handleAddProduct = (e) => {
@@ -64,8 +99,11 @@ const FormProduct = () => {
 			image: addImage,
 			subCategoryId: addProduct.subCategoryId,
 		};
+		productId.id
+			? editProduct(productId.id, productData)
+			: postProduct(productData);
 		console.log(productData);
-		postProduct(productData);
+		// postProduct(productData);
 		// window.location.reload();
 	};
 
@@ -82,6 +120,7 @@ const FormProduct = () => {
 						name="name"
 						placeholder="Insert Product Name"
 						onChange={handleAddProduct}
+						value={addProduct.name}
 					/>
 				</div>
 				<div className="flex justify-start gap-2 ">
@@ -102,6 +141,12 @@ const FormProduct = () => {
 								/>
 								{categories.map((category, index) => (
 									<Option
+										isEdit={
+											category.id ===
+											addProduct.subCategory.categoryId
+												? true
+												: false
+										}
 										key={index}
 										value={category.id}
 										title={category.name}
@@ -131,6 +176,12 @@ const FormProduct = () => {
 								/>
 								{subCategories.map((subCategory, index) => (
 									<Option
+										isEdit={
+											subCategory.id ===
+											addProduct.subCategoryId
+												? true
+												: false
+										}
 										key={index}
 										value={subCategory.id}
 										title={subCategory.name}
@@ -156,6 +207,7 @@ const FormProduct = () => {
 							cols="66"
 							rows="10"
 							onChange={handleAddProduct}
+							value={addProduct.description}
 						/>
 					</div>
 				</div>
@@ -165,7 +217,7 @@ const FormProduct = () => {
 							Stock
 						</Label>
 						<div className="pt-3">
-							<Counter />
+							<Counter id={1} value={addProduct.stock} />
 						</div>
 					</div>
 					<div className="pt-3 ml-2 w-full">
@@ -178,6 +230,7 @@ const FormProduct = () => {
 								name="price"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
+								value={addProduct.price}
 							/>
 						</div>
 					</div>
@@ -195,8 +248,13 @@ const FormProduct = () => {
 								/>
 							</div>
 						))
+					) : addProduct && addProduct.image === true ? (
+						<img
+							src={`https://api.kunam.my.id/public/images/${addProduct.image}`}
+							alt="Product Image"
+						/>
 					) : (
-						<img src={ImageProduct} alt="Placeholder" />
+						<img src={ImageProduct} alt="Product Image" />
 					)}
 				</CarouselImage>
 				<div className="py-7">
@@ -248,7 +306,7 @@ const FormProduct = () => {
 									<Link to="/dashboard/product">
 										<Button
 											type="button"
-											variants="py-2 px-5 rounded-lg bg-red text-white"
+											variants="py-2 px-5 rounded-lg ring-1 ring-red text-red transition-all ease-in 3s hover:bg-red hover:text-white"
 										>
 											Cancel
 										</Button>
@@ -257,21 +315,7 @@ const FormProduct = () => {
 								<div className="px-2">
 									<Button
 										type="submit"
-										variants="py-2 px-5 rounded-lg bg-danger text-white"
-										onClick={() =>
-											document
-												.getElementById('delete')
-												.showModal()
-										}
-									>
-										Delete
-									</Button>
-									<ModalProduct></ModalProduct>
-								</div>
-								<div className="px-2">
-									<Button
-										type="submit"
-										variants="py-2 px-6 rounded-lg bg-success text-white"
+										variants="py-2 px-6 rounded-lg bg-success text-white transition-all ease-in 3s hover:bg-primary"
 										onClick={handleSubmitAddProduct}
 									>
 										Save

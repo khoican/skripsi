@@ -31,7 +31,6 @@ export const editProduct = async (id, body) => {
 	formData.append('stock', body.stock)
 	formData.append('subCategoryId', body.subCategoryId)
 	formData.append('price', body.price)
-	formData.append('image', body.image)
 
 	await axios.patch(`${getAppUrl()}api/products/${id}`, formData, {
 		headers: {
@@ -67,6 +66,21 @@ export const getProductBySlug = async (id) => {
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
+		},
+	}).then((res) => {
+		return res.data.data;
+	});
+
+	return response;
+};
+
+export const getProductById = async (id) => {
+	const response = await axios({
+		method: 'get',
+		url: `${getAppUrl()}api/products/${id}`,
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json',
 		},
 	}).then((res) => {
 		return res.data.data;

@@ -1,5 +1,5 @@
 const Textarea = (props) => {
-	const { name, cols, rows, variants, onChange, placeholder } = props;
+	const { name, cols, rows, variants, onChange, placeholder, value } = props;
 	return (
 		<>
 			<textarea
@@ -9,6 +9,7 @@ const Textarea = (props) => {
 				cols={cols}
 				rows={rows}
 				onChange={onChange}
+				value={value}
 			></textarea>
 		</>
 	);

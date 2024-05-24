@@ -32,7 +32,11 @@ const Navigation = () => {
 						: 'text-gray' &&
 							  isActive == '/dashboard/product/productdetails'
 							? 'bg-primary hover:bg-primary text-white'
-							: 'text-gray'
+							: 'text-gray' &&
+								  isActive ==
+										'/dashboard/product/productdetails/:id'
+								? 'bg-primary hover:bg-primary text-white'
+								: 'text-gray'
 				} `}
 			>
 				<span>{<ShoppingBagIcon className="w-6" />}</span>
