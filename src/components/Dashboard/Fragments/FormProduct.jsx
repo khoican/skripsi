@@ -39,22 +39,11 @@ const FormProduct = () => {
 		subCategoryId: 0,
 		image: '',
 	});
-	// const [getProduct, setGetProduct] = useState({
-	// 	name: '',
-	// 	description: '',
-	// 	price: 0,
-	// 	stock: 0,
-	// 	subCategory: '',
-	// 	subCategoryId: 0,
-	// 	image: '',
-	// });
 
 	const getProductId = async () => {
 		const data = await getProductById(productId.id);
 		return data;
 	};
-
-	const count = useSelector((state) => state.counter[1]?.count);
 
 	useEffect(() => {
 		dispatch(fetchCategories(productId.id));
@@ -62,9 +51,22 @@ const FormProduct = () => {
 		dispatch(fetchSubCategories());
 
 		if (productId.id) {
-			getProductId().then((data) => setAddProduct(data));
+			getProductId().then((data) => {
+				console.log(data);
+				setAddProduct({
+					name: data.name,
+					description: data.description,
+					price: data.price,
+					stock: data.stock,
+					subCategory: data.subCategory,
+					subCategoryId: data.subCategoryId,
+					image: data.images,
+				});
+			});
 		}
 	}, [dispatch, productId]);
+
+	const count = useSelector((state) => state.counter[1]?.count);
 
 	const [addImage, setAddImage] = useState([]);
 	const [addPreviewImage, setPreviewImage] = useState([]);
@@ -99,13 +101,19 @@ const FormProduct = () => {
 			image: addImage,
 			subCategoryId: addProduct.subCategoryId,
 		};
-		productId.id
-			? editProduct(productId.id, productData)
-			: postProduct(productData);
 		console.log(productData);
+		// productId.id
+		// 	? editProduct(productId.id, productData)
+		// 	: postProduct(productData);
 		// postProduct(productData);
 		// window.location.reload();
 	};
+
+	if (!addProduct) {
+		return <p>Loading...</p>;
+	}
+
+	const imageProducts = addProduct.image;
 
 	return (
 		<div className="flex justify-between">
@@ -248,13 +256,20 @@ const FormProduct = () => {
 								/>
 							</div>
 						))
-					) : addProduct && addProduct.image === true ? (
-						<img
-							src={`https://api.kunam.my.id/public/images/${addProduct.image}`}
-							alt="Product Image"
-						/>
+					) : imageProducts ? (
+						imageProducts.map((image, index) => (
+							<div className="flex justify-center ">
+								<img
+									key={index}
+									src={`https://api.kunam.my.id/${image.image}`}
+									alt={`Image ${index}`}
+								/>
+							</div>
+						))
 					) : (
-						<img src={ImageProduct} alt="Product Image" />
+						<div className="flex justify-center ">
+							<img src={ImageProduct} alt="Product Image" />
+						</div>
 					)}
 				</CarouselImage>
 				<div className="py-7">

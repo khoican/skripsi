@@ -7,8 +7,12 @@ export const getAllOrders = async () => {
 };
 
 export const getOrderById = async (id) => {
-	const response = await axios.get(`${getAppUrl()}api/orders/${id}`);
-	return response.data.data;
+	try {
+		const response = await axios.get(`${getAppUrl()}api/orders/${id}`);
+		return response.data.data;
+	} catch (error){
+		console.log(error);
+	}
 };
 
 export const editOrder = async (id, body) => {

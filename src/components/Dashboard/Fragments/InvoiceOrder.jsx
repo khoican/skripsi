@@ -2,66 +2,52 @@ import { useParams } from 'react-router-dom';
 import Button from '../Elements/Button';
 import { useEffect, useState } from 'react';
 import { editOrder } from '../../../../services/order';
-import { editProduct } from '../../../../services/product';
 import moment from 'moment/moment';
+import { getOrderProduct } from '../../../../services/orderProduct';
 
-const FormOrder = (props) => {
-	const {
-		no,
-		invoice,
-		fullName,
-		phoneNumber,
-		userAddress,
-		orderAddress,
-		description,
-		status,
-		date,
-		productName,
-		qty,
-		price,
-		totalPrice,
-	} = props;
-	const getDate = moment(date);
-	const formattedDate = getDate.locale('id').format('DD MMMM YYYY');
-
+const InvoiceOrder = () => {
 	const orderId = useParams();
-	const [orderStatus, setOrderStatus] = useState({
+	const [orderInvoice, setOrderInvoice] = useState({
 		status: '',
 	});
+	const getDate = moment(orderInvoice.createdAt);
+	const formattedDate = getDate.locale('id').format('DD MMMM YYYY');
 
-	const getOrderId = async () => {
-		const data = await editOrder(orderId.id);
-		return data;
+	const getOrderDetails = async () => {
+		const response = await getOrderProduct(orderId.id);
+		return response.data;
+	};
+
+	const handleSuccess = () => {
+		const status = {
+			status: 'SUKSES',
+		};
+		editOrder(orderId.id, status).then(() => window.location.reload());
 	};
 
 	useEffect(() => {
-		getOrderId().then((data) => setOrderStatus(data));
-	}, [orderId.id]);
+		getOrderDetails().then((data) => setOrderInvoice(data));
+	}, []);
 
-	const handleChangeStatus = (e) => {
-		setOrderStatus({ ...orderStatus, [e.target.name]: e.target.value });
-	};
+	if (!orderInvoice && !orderInvoice.orderHistory) {
+		return <p>Loading....</p>;
+	}
 
-	const handleSubmit = () => {
-		const status = {
-			status: orderStatus.status,
-		};
-		editProduct(orderId.id, status);
-		console.log(status);
-	};
 	return (
 		<>
 			<div className="flex justify-between">
-				<p className="font-bold text-2xl">#{invoice}</p>
+				<p className="font-bold text-2xl">#{orderInvoice.invoice}</p>
 				<div className="bg-light-orange px-2 py-1 rounded-md items-center">
-					<p className="font-semibold text-black text-xl">{status}</p>
+					<p className="font-semibold text-black text-xl">
+						{orderInvoice.status}
+					</p>
 				</div>
 			</div>
 			<div className="py-8">
 				<div className="flex">
 					<p className="text-md font-semibold">Full Name</p>
 					<p className="pl-44 pr-8 font-semibold">:</p>
-					<p className="font-semibold">{fullName}</p>
+					<p className="font-semibold">{orderInvoice.name}</p>
 				</div>
 				<div className="flex mt-3 items-center">
 					<p className="text-md font-semibold">Phone Number</p>
@@ -73,17 +59,17 @@ const FormOrder = (props) => {
 							alt="Wa Logo"
 						/>
 					</button>
-					<p className="font-semibold">{phoneNumber}</p>
+					<p className="font-semibold">{orderInvoice.phoneNumber}</p>
 				</div>
 				<div className="flex mt-3">
 					<p className="text-md font-semibold">Address</p>
 					<p className="pl-48 pr-8 font-semibold">:</p>
-					<p className="font-semibold">{userAddress}</p>
+					<p className="font-semibold">{orderInvoice.address}</p>
 				</div>
 				<div className="flex mt-5">
 					<p className="text-md font-semibold">Note</p>
 					<p className="pl-[13.4rem] pr-8 font-semibold">:</p>
-					<p className="font-semibold">{orderAddress}</p>
+					<p className="font-semibold">{orderInvoice.notes}</p>
 				</div>
 				<div className="flex mt-5">
 					<p className="text-md font-semibold">Order Time</p>
@@ -103,15 +89,21 @@ const FormOrder = (props) => {
 						</tr>
 					</thead>
 					<tbody>
-						<tr className="border-b-[1px] border-black">
-							<td className="py-2">{no}</td>
-							<td>{productName}</td>
-							<td>{qty}</td>
-							<td>Rp. {price}</td>
-						</tr>
+						{orderInvoice.orderHistory &&
+							orderInvoice.orderHistory.map((product, index) => (
+								<tr
+									key={index}
+									className="border-b-[1px] border-black"
+								>
+									<td className="py-2">{index + 1}</td>
+									<td>{product.productName}</td>
+									<td>{product.quantity}</td>
+									<td>Rp. {product.price}</td>
+								</tr>
+							))}
 						<tr className="border-b-[1px] border-black">
 							<td className="text-sm py-2">
-								Note: {description}
+								Note: {orderInvoice.notes}
 							</td>
 						</tr>
 					</tbody>
@@ -119,14 +111,17 @@ const FormOrder = (props) => {
 				<div className="mt-4 flex items-center justify-end pr-[5.1rem]">
 					<p className="text-lg text-light-red pr-10">Total</p>
 					<p className="text-lg font-bold text-light-red">
-						Rp. {totalPrice}
+						Rp. {orderInvoice.totalPrice}
 					</p>
 				</div>
 				<div className="mt-6 flex items-center justify-end gap-3 pb-3">
 					<Button variants="ring-1 ring-danger py-2 px-4 rounded-md text-red transition-all ease-in 3s hover:bg-red hover:text-white">
 						Cancel
 					</Button>
-					<Button variants="bg-success py-2 px-4 rounded-md text-white transition-all ease-in 3s hover:bg-primary">
+					<Button
+						variants="bg-success py-2 px-4 rounded-md text-white transition-all ease-in 3s hover:bg-primary"
+						onClick={handleSuccess}
+					>
 						Success
 					</Button>
 				</div>
@@ -136,4 +131,4 @@ const FormOrder = (props) => {
 	);
 };
 
-export default FormOrder;
+export default InvoiceOrder;

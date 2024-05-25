@@ -75,18 +75,9 @@ export const getProductBySlug = async (id) => {
 };
 
 export const getProductById = async (id) => {
-	const response = await axios({
-		method: 'get',
-		url: `${getAppUrl()}api/products/${id}`,
-		headers: {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json',
-		},
-	}).then((res) => {
-		return res.data.data;
-	});
+	const response = await axios.get(`${getAppUrl()}api/products/${id}`)
 
-	return response;
+	return response.data.data;
 };
 
 export const searchProductByName = async (query) => {
