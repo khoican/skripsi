@@ -17,3 +17,10 @@ export const editOrder = async (id, body) => {
 	.catch (e => console.log(e))
 	return response
 }
+
+export const deleteOrder = async (id) => {
+	const response = await axios.delete(`${getAppUrl()}api/orders/${id}`)
+	.then(res => {if(res.status == 201) console.log(res.data)})
+	.catch (e => console.log(e))
+	return response
+}

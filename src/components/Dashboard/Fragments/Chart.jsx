@@ -63,11 +63,11 @@ const data = {
 const Chart = () => {
 	return (
 		<div className="bg-white shadow-lg rounded-md w-full">
-			<div className="pt-4 pl-4">
+			<div className="pt-2 pl-4">
 				<h1 className="font-bold text-2xl">Chart</h1>
 			</div>
-			<div className="pl-4">
-				<Line options={options} data={data} />;
+			<div className="pb-2 pl-4">
+				<Line options={options} data={data} />
 			</div>
 		</div>
 	);
