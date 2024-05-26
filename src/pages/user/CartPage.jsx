@@ -17,6 +17,38 @@ const CartPage = () => {
 	const [idDelete, setIdDelete] = useState(null);
 	const [status, setStatus] = useState('');
 
+	if (!user) {
+		return (
+			<>
+				{status && (
+					<Alert
+						message={status.message}
+						onSuccess={status.status}
+						success={200}
+						onClick={() => setStatus('')}
+					/>
+				)}
+				<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 gap-5 mt-5">
+					<div className="mb-10 text-center">
+						<h1 className="font-semibold text-2xl">
+							Anda Belum Login
+						</h1>
+						<p>
+							Silahkan login terlebih dahulu untuk merasakan
+							kenyamanan saat berbelanja{' '}
+							<Link
+								to="/login"
+								className="text-primary underline"
+							>
+								disini
+							</Link>
+						</p>
+					</div>
+				</main>
+			</>
+		);
+	}
+
 	useEffect(() => {
 		const fetchCart = async () => {
 			try {
