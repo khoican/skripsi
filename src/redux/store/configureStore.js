@@ -11,6 +11,7 @@ export default configureStore({
 	reducer: {
 		fetchProductDetail: productDetailReducer,
 		fetchProducts: productsReducer,
+		fetchProductsDashboard: productsReducer,
 		fetchCategories: categoryReducer,
 		fetchSubCategories: subCategoryReducer,
 		fetchOrders: orderReducer,

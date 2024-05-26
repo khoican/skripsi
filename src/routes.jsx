@@ -14,7 +14,6 @@ import DashboardProduct from './pages/dashboard/ProductPage';
 import DashboardProductDetails from './pages/dashboard/ProductDetailsPage';
 import DashboardOrder from './pages/dashboard/OrderPage';
 import DashboardCategory from './pages/dashboard/CategoryPage';
-import DashboardRole from './pages/dashboard/RolePage';
 import DashboardProfile from './pages/dashboard/ProfilePage';
 import Auth from './pages/dashboard/LoginPage';
 import OrderDetailsPage from './pages/dashboard/OrderDetailsPage';
@@ -98,16 +97,16 @@ export const router = createBrowserRouter([
 				element: <Dashboard />,
 			},
 			{
-				path: 'user',
-				element: <DashboardUser />,
-			},
-			{
 				path: 'profile',
 				element: <DashboardProfile />,
 			},
+			{
+				path: 'user',
+				element: <DashboardUser />,
+			},
 
 			{
-				path: 'user/userdetails',
+				path: 'user/userdetails/:id',
 				element: <DashboardUserDetails />,
 			},
 			{
@@ -119,20 +118,20 @@ export const router = createBrowserRouter([
 				element: <DashboardProductDetails />,
 			},
 			{
+				path: 'product/productdetails/:id',
+				element: <DashboardProductDetails />,
+			},
+			{
 				path: 'order',
 				element: <DashboardOrder />,
 			},
 			{
-				path: 'order/orderdetails',
+				path: 'order/orderdetails/:id',
 				element: <OrderDetailsPage />,
 			},
 			{
 				path: 'category',
 				element: <DashboardCategory />,
-			},
-			{
-				path: 'role',
-				element: <DashboardRole />,
 			},
 		],
 	},

@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EyeIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Select from '../Elements/Select';
+import Option from '../Elements/Select/option';
 
 const FormUser = (props) => {
 	const { title, id, openModal } = props;
@@ -23,10 +25,9 @@ const FormUser = (props) => {
 		userId = useSelector((state) => state.fetchUserById.users);
 
 		useEffect(() => {
-			dispatch(fetchUserById(id));
+			dispatch(fetchUserById());
 		}, [dispatch]);
 	}
-	console.log(userId);
 
 	const [createUser, setCreateUser] = useState({
 		name: '',
@@ -34,6 +35,7 @@ const FormUser = (props) => {
 		password: '',
 		phoneNumber: '',
 		address: '',
+		role: '',
 	});
 
 	const show = () => {
@@ -46,13 +48,15 @@ const FormUser = (props) => {
 	};
 
 	const handleSubmit = () => {
-		dispatch(createNewUser(createUser));
+		dispatch(createNewUser(createUser)).then(() => {
+			window.location.reload();
+		});
 	};
 
 	return (
 		<>
 			<ModalUser title={title} id={id}>
-				<div className="flex items-center justify-center pt-2 pb-2 gap-2">
+				<div className="flex items-center justify-center pt-2 pb-2 gap-5">
 					<Input
 						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
 						type="text"
@@ -67,6 +71,7 @@ const FormUser = (props) => {
 						name="username"
 						placeholder="Insert Username"
 						onChange={handleChange}
+						value={userId.username}
 					/>
 				</div>
 				<div className="pt-2 pb-2 flex items-center justify-center">
@@ -79,7 +84,7 @@ const FormUser = (props) => {
 					/>
 					<Button
 						type="button"
-						variants="relative w-5 right-8 hover:text-success transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
+						variants="relative w-8 right-8 hover:text-success transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
 						onClick={show}
 					>
 						{icon}
@@ -90,7 +95,20 @@ const FormUser = (props) => {
 						name="phoneNumber"
 						placeholder="Insert Phone Number"
 						onChange={handleChange}
+						value={userId.phoneNumber}
 					/>
+				</div>
+				<div className="pt-2 pb-2 flex items-center justify-center">
+					<Select
+						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+						name="role"
+						title="Category"
+						onChange={handleChange}
+					>
+						<Option value="Choose Role" title="Choose Role" />
+						<Option value="ADMIN" title="ADMIN" />
+						<Option value="USER" title="USER" />
+					</Select>
 				</div>
 				<div className="pt-2 pb-2 flex items-center justify-center">
 					<Textarea
@@ -100,6 +118,7 @@ const FormUser = (props) => {
 						variants="rounded-lg ring-1 border-0 ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s"
 						placeholder="Insert Address"
 						onChange={handleChange}
+						value={userId.address}
 					/>
 				</div>
 				<div className="flex items-center justify-end gap-2 pt-4">

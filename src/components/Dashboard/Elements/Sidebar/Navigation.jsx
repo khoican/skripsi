@@ -32,7 +32,11 @@ const Navigation = () => {
 						: 'text-gray' &&
 							  isActive == '/dashboard/product/productdetails'
 							? 'bg-primary hover:bg-primary text-white'
-							: 'text-gray'
+							: 'text-gray' &&
+								  isActive ==
+										'/dashboard/product/productdetails/:id'
+								? 'bg-primary hover:bg-primary text-white'
+								: 'text-gray'
 				} `}
 			>
 				<span>{<ShoppingBagIcon className="w-6" />}</span>
@@ -73,17 +77,6 @@ const Navigation = () => {
 			>
 				<span>{<UserGroupIcon className="w-6" />}</span>
 				<p className="-mr-1 font-medium">User</p>
-			</Link>
-			<Link
-				to="/dashboard/role"
-				className={`relative px-4 py-3 flex rounded-lg space-x-4 hover:bg-gray-200 transition-all ease-in 5s  ${
-					isActive == '/dashboard/role'
-						? 'bg-primary hover:bg-primary  text-white'
-						: 'text-gray'
-				} `}
-			>
-				<span>{<UserIcon className="w-6" />}</span>
-				<p className="-mr-1 font-medium">Role</p>
 			</Link>
 		</>
 	);

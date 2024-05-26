@@ -26,6 +26,13 @@ export const postUser = async (body) => {
 	return response
 };
 
+export const deleteUser = async (id) => {
+	const response = await axios.delete(`${getAppUrl()}api/users/${id}`)
+	.then(res => {if(res.status == 201) console.log(res.data)})
+	.catch (e => console.log(e))
+	return response
+};
+
 export const editUser = async (id, body) => {
 	const response = await axios.patch(`${getAppUrl()}api/users/${id}`, body)
 	.then(res => {if(res.status == 201) console.log(res.data)})
