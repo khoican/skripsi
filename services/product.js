@@ -33,27 +33,8 @@ export const postProduct = async (body) => {
 }
 
 export const editProduct = async (id, body) => {
-	const formData = new FormData()
 
-	formData.append('name', body.name)
-	formData.append('slug', body.slug)
-	formData.append('description', body.description)
-	formData.append('stock', body.stock)
-	formData.append('subCategoryId', body.subCategoryId)
-	formData.append('price', body.price)
-
-	if (body.images && body.images.length > 0) {
-		body.images.forEach(images => {
-			formData.append('images', images);
-
-		});
-	}
-
-	await axios.patch(`${getAppUrl()}api/products/${id}`, formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		}
-	})
+	await axios.patch(`${getAppUrl()}api/products/${id}`, body, )
 	.then(res => {if(res.status == 200) console.log(res.data)})
 	.catch (e => console.log(e))
 }
