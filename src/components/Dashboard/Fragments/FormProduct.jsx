@@ -1,5 +1,3 @@
-import TrashIcon from '../../../assets/img/icon/TrashIcon/TrashIcon.png';
-import { DocumentTextIcon } from '@heroicons/react/24/solid';
 import Input from '../Elements/Input';
 import Label from '../Elements/Input/Label';
 import Select from '../Elements/Select';
@@ -8,12 +6,10 @@ import Textarea from '../Elements/Textarea';
 import ImageProduct from '../../../../public/images/Rectangle 11.png';
 import Button from '../Elements/Button';
 import Counter from '../../user/fragments/counter/Index';
-import ModalProduct from './ModalProduct';
 import {
 	postProduct,
 	getProductById,
 	editProduct,
-	deleteProduct,
 } from '../../../../services/product';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -37,7 +33,7 @@ const FormProduct = () => {
 		stock: 0,
 		subCategory: '',
 		subCategoryId: 0,
-		image: '',
+		images: '',
 	});
 
 	const getProductId = async () => {
@@ -60,7 +56,7 @@ const FormProduct = () => {
 					stock: data.stock,
 					subCategory: data.subCategory,
 					subCategoryId: data.subCategoryId,
-					image: data.images,
+					images: data.images,
 				});
 			});
 		}
@@ -72,9 +68,10 @@ const FormProduct = () => {
 	const [addPreviewImage, setPreviewImage] = useState([]);
 
 	const handleImage = (e) => {
-		setAddImage(e.target.files[0]);
-		const filesArray = Array.from(e.target.files);
-		setPreviewImage(filesArray);
+		const files = Array.from(e.target.files);
+		setAddImage((...prevImage) => [...prevImage, ...files]);
+		setPreviewImage(files);
+		console.log(files);
 	};
 
 	const [categoriesValue, setCategoriesValue] = useState(0);
@@ -98,22 +95,24 @@ const FormProduct = () => {
 			description: addProduct.description,
 			price: addProduct.price,
 			stock: count,
-			image: addImage,
+			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
 		};
 		console.log(productData);
-		// productId.id
-		// 	? editProduct(productId.id, productData)
-		// 	: postProduct(productData);
-		// postProduct(productData);
-		// window.location.reload();
+		productId.id
+			? editProduct(productId.id, productData).then(() => {
+					// window.location.reload();
+				})
+			: postProduct(productData).then(() => {
+					window.location.reload();
+				});
 	};
 
 	if (!addProduct) {
 		return <p>Loading...</p>;
 	}
 
-	const imageProducts = addProduct.image;
+	const imageProducts = addProduct.images;
 
 	return (
 		<div className="flex justify-between">
@@ -268,7 +267,11 @@ const FormProduct = () => {
 						))
 					) : (
 						<div className="flex justify-center ">
-							<img src={ImageProduct} alt="Product Image" />
+							<img
+								key={0}
+								src={ImageProduct}
+								alt="Product Image"
+							/>
 						</div>
 					)}
 				</CarouselImage>
@@ -282,7 +285,8 @@ const FormProduct = () => {
 						<Input
 							type="file"
 							variants="rounded-lg ring-1 ring-primary focus:outline-none border-0 w-full py-2 px-3"
-							name="image"
+							name="images"
+							id="images"
 							placeholder="Choose Image"
 							multiple
 							onChange={handleImage}

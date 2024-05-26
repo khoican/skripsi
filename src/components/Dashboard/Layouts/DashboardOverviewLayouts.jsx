@@ -1,6 +1,5 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
 import ListBestSellerProduct from '../Elements/ListBestSellerProduct';
-import Button from '../Elements/Button';
 import Chart from '../Fragments/Chart';
 import TableOrder from '../Fragments/TableOrder';
 
