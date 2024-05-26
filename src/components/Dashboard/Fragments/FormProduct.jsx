@@ -1,5 +1,3 @@
-import TrashIcon from '../../../assets/img/icon/TrashIcon/TrashIcon.png';
-import { DocumentTextIcon } from '@heroicons/react/24/solid';
 import Input from '../Elements/Input';
 import Label from '../Elements/Input/Label';
 import Select from '../Elements/Select';
@@ -8,8 +6,11 @@ import Textarea from '../Elements/Textarea';
 import ImageProduct from '../../../../public/images/Rectangle 11.png';
 import Button from '../Elements/Button';
 import Counter from '../../user/fragments/counter/Index';
-import ModalProduct from './ModalProduct';
-import { postProduct } from '../../../../services/product';
+import {
+	postProduct,
+	getProductById,
+	editProduct,
+} from '../../../../services/product';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchCategories } from '../../../redux/actions/categoryAction';
@@ -24,22 +25,53 @@ const FormProduct = () => {
 	let subCategories = useSelector(
 		(state) => state.fetchSubCategories.category,
 	);
-	const count = useSelector((state) => state.counter.count);
+
+	const [addProduct, setAddProduct] = useState({
+		name: '',
+		description: '',
+		price: 0,
+		stock: 0,
+		subCategory: '',
+		subCategoryId: 0,
+		images: '',
+	});
+
+	const getProductId = async () => {
+		const data = await getProductById(productId.id);
+		return data;
+	};
 
 	useEffect(() => {
 		dispatch(fetchCategories(productId.id));
 		dispatch(fetchCategories());
 		dispatch(fetchSubCategories());
-	}, [dispatch]);
 
-	const [addProduct, setAddProduct] = useState({});
+		if (productId.id) {
+			getProductId().then((data) => {
+				console.log(data);
+				setAddProduct({
+					name: data.name,
+					description: data.description,
+					price: data.price,
+					stock: data.stock,
+					subCategory: data.subCategory,
+					subCategoryId: data.subCategoryId,
+					images: data.images,
+				});
+			});
+		}
+	}, [dispatch, productId]);
+
+	const count = useSelector((state) => state.counter[1]?.count);
+
 	const [addImage, setAddImage] = useState([]);
 	const [addPreviewImage, setPreviewImage] = useState([]);
 
 	const handleImage = (e) => {
-		setAddImage(e.target.files[0]);
-		const filesArray = Array.from(e.target.files);
-		setPreviewImage(filesArray);
+		const files = Array.from(e.target.files);
+		setAddImage((...prevImage) => [...prevImage, ...files]);
+		setPreviewImage(files);
+		console.log(files);
 	};
 
 	const [categoriesValue, setCategoriesValue] = useState(0);
@@ -47,8 +79,10 @@ const FormProduct = () => {
 		setCategoriesValue(e.target.value);
 	};
 
-	subCategories = subCategories.filter(
-		(subCategory) => subCategory.categoryId === categoriesValue,
+	subCategories = subCategories.filter((subCategory) =>
+		productId.id
+			? subCategory.categoryId === addProduct.subCategory.categoryId
+			: subCategory.categoryId === categoriesValue,
 	);
 
 	const handleAddProduct = (e) => {
@@ -61,13 +95,24 @@ const FormProduct = () => {
 			description: addProduct.description,
 			price: addProduct.price,
 			stock: count,
-			image: addImage,
+			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
 		};
 		console.log(productData);
-		postProduct(productData);
-		// window.location.reload();
+		productId.id
+			? editProduct(productId.id, productData).then(() => {
+					// window.location.reload();
+				})
+			: postProduct(productData).then(() => {
+					window.location.reload();
+				});
 	};
+
+	if (!addProduct) {
+		return <p>Loading...</p>;
+	}
+
+	const imageProducts = addProduct.images;
 
 	return (
 		<div className="flex justify-between">
@@ -82,6 +127,7 @@ const FormProduct = () => {
 						name="name"
 						placeholder="Insert Product Name"
 						onChange={handleAddProduct}
+						value={addProduct.name}
 					/>
 				</div>
 				<div className="flex justify-start gap-2 ">
@@ -102,6 +148,12 @@ const FormProduct = () => {
 								/>
 								{categories.map((category, index) => (
 									<Option
+										isEdit={
+											category.id ===
+											addProduct.subCategory.categoryId
+												? true
+												: false
+										}
 										key={index}
 										value={category.id}
 										title={category.name}
@@ -131,6 +183,12 @@ const FormProduct = () => {
 								/>
 								{subCategories.map((subCategory, index) => (
 									<Option
+										isEdit={
+											subCategory.id ===
+											addProduct.subCategoryId
+												? true
+												: false
+										}
 										key={index}
 										value={subCategory.id}
 										title={subCategory.name}
@@ -156,6 +214,7 @@ const FormProduct = () => {
 							cols="66"
 							rows="10"
 							onChange={handleAddProduct}
+							value={addProduct.description}
 						/>
 					</div>
 				</div>
@@ -165,7 +224,7 @@ const FormProduct = () => {
 							Stock
 						</Label>
 						<div className="pt-3">
-							<Counter />
+							<Counter id={1} value={addProduct.stock} />
 						</div>
 					</div>
 					<div className="pt-3 ml-2 w-full">
@@ -178,6 +237,7 @@ const FormProduct = () => {
 								name="price"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
+								value={addProduct.price}
 							/>
 						</div>
 					</div>
@@ -195,8 +255,24 @@ const FormProduct = () => {
 								/>
 							</div>
 						))
+					) : imageProducts ? (
+						imageProducts.map((image, index) => (
+							<div className="flex justify-center ">
+								<img
+									key={index}
+									src={`https://api.kunam.my.id/${image.image}`}
+									alt={`Image ${index}`}
+								/>
+							</div>
+						))
 					) : (
-						<img src={ImageProduct} alt="Placeholder" />
+						<div className="flex justify-center ">
+							<img
+								key={0}
+								src={ImageProduct}
+								alt="Product Image"
+							/>
+						</div>
 					)}
 				</CarouselImage>
 				<div className="py-7">
@@ -209,7 +285,8 @@ const FormProduct = () => {
 						<Input
 							type="file"
 							variants="rounded-lg ring-1 ring-primary focus:outline-none border-0 w-full py-2 px-3"
-							name="image"
+							name="images"
+							id="images"
 							placeholder="Choose Image"
 							multiple
 							onChange={handleImage}
@@ -248,7 +325,7 @@ const FormProduct = () => {
 									<Link to="/dashboard/product">
 										<Button
 											type="button"
-											variants="py-2 px-5 rounded-lg bg-red text-white"
+											variants="py-2 px-5 rounded-lg ring-1 ring-red text-red transition-all ease-in 3s hover:bg-red hover:text-white"
 										>
 											Cancel
 										</Button>
@@ -257,21 +334,7 @@ const FormProduct = () => {
 								<div className="px-2">
 									<Button
 										type="submit"
-										variants="py-2 px-5 rounded-lg bg-danger text-white"
-										onClick={() =>
-											document
-												.getElementById('delete')
-												.showModal()
-										}
-									>
-										Delete
-									</Button>
-									<ModalProduct></ModalProduct>
-								</div>
-								<div className="px-2">
-									<Button
-										type="submit"
-										variants="py-2 px-6 rounded-lg bg-success text-white"
+										variants="py-2 px-6 rounded-lg bg-success text-white transition-all ease-in 3s hover:bg-primary"
 										onClick={handleSubmitAddProduct}
 									>
 										Save

@@ -1,61 +1,7 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
 import ListBestSellerProduct from '../Elements/ListBestSellerProduct';
-import Table from '../Elements/Table';
-import Button from '../Elements/Button';
 import Chart from '../Fragments/Chart';
-
-const columns = [
-	{
-		name: 'Invoice',
-		selector: (row) => row.invoice,
-		sortable: true,
-	},
-	{
-		name: 'Customer Name',
-		selector: (row) => row.customerName,
-		sortable: true,
-	},
-	{
-		name: 'Status',
-		selector: (row) => row.status,
-		sortable: true,
-	},
-	{
-		name: 'Action',
-		cell: (row) => (
-			<>
-				<Button onClick={() => handleEdit(row.id)}>Details</Button>
-			</>
-		),
-	},
-];
-
-const data = [
-	{
-		id: 1,
-		invoice: '#10435634',
-		customerName: 'John Doe',
-		status: 'Pending',
-	},
-	{
-		id: 2,
-		invoice: '#10435634',
-		customerName: 'Jane Doe',
-		status: 'Paid',
-	},
-	{
-		id: 3,
-		invoice: '#10435634',
-		customerName: 'John Doe',
-		status: 'Pending',
-	},
-	{
-		id: 4,
-		invoice: '#10435634',
-		customerName: 'Jane Doe',
-		status: 'Paid',
-	},
-];
+import TableOrder from '../Fragments/TableOrder';
 
 const DashboardOverview = () => {
 	return (
@@ -120,7 +66,7 @@ const DashboardOverview = () => {
 					<div className="pb-4">
 						<h2 className="font-bold text-2xl">Order</h2>
 					</div>
-					<Table data={data} columns={columns} />
+					<TableOrder />
 				</div>
 			</div>
 		</>

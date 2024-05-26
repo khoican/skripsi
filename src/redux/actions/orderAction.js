@@ -23,7 +23,6 @@ export const fetchOrders = () => {
 		dispatch(fetchOrdersRequest());
 		try {
 			const data = await getAllOrders();
-			console.log(data);
 			dispatch(fetchOrdersSuccess(data));
 		} catch (error) {
 			dispatch(fetchOrdersError(error.message));

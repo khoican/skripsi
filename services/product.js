@@ -9,29 +9,45 @@ export const postProduct = async (body) => {
 	formData.append('stock', body.stock)
 	formData.append('subCategoryId', body.subCategoryId)
 	formData.append('price', body.price)
-	formData.append('image', body.image)
+	
+	if (body.images && body.images.length > 0) {
+		body.images.forEach(images => {
+			formData.append('images', images);
 
-	await axios.post(`${getAppUrl()}api/products`, formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
+		});
 	}
-	)
-	.then(res => {
-		if(res.status == 201) console.log(res.data)
-	})
-	.catch (e => console.log(e))
+
+	try {
+        const response = await axios.post(`${getAppUrl()}api/products`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        if (response.status === 201) {
+            console.log(response.data);
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export const editProduct = async (id, body) => {
 	const formData = new FormData()
 
 	formData.append('name', body.name)
+	formData.append('slug', body.slug)
 	formData.append('description', body.description)
 	formData.append('stock', body.stock)
 	formData.append('subCategoryId', body.subCategoryId)
 	formData.append('price', body.price)
-	formData.append('image', body.image)
+
+	if (body.images && body.images.length > 0) {
+		body.images.forEach(images => {
+			formData.append('images', images);
+
+		});
+	}
 
 	await axios.patch(`${getAppUrl()}api/products/${id}`, formData, {
 		headers: {
@@ -55,6 +71,11 @@ export const getAllProducts = async (skip = 0, take = 10) => {
 	return response.data.data;
 };
 
+export const getAllProductsDashboard = async () => {
+	const response = await axios.get(`${getAppUrl()}api/products`);
+	return response.data.data;
+};
+
 export const getProductBySlug = async (id) => {
 	const response = await axios({
 		method: 'get',
@@ -68,6 +89,12 @@ export const getProductBySlug = async (id) => {
 	});
 
 	return response;
+};
+
+export const getProductById = async (id) => {
+	const response = await axios.get(`${getAppUrl()}api/products/${id}`)
+
+	return response.data.data;
 };
 
 export const searchProductByName = async (query) => {

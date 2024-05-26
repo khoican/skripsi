@@ -11,10 +11,14 @@ export default configureStore({
 	reducer: {
 		fetchProductDetail: productDetailReducer,
 		fetchProducts: productsReducer,
+		fetchProductsDashboard: productsReducer,
 		fetchCategories: categoryReducer,
 		fetchSubCategories: subCategoryReducer,
 		fetchOrders: orderReducer,
 		fetchUsers: userReducer,
+		fetchUserById: userReducer,
+		createNewUser: userReducer,
+		editUserById: userReducer,
 		counter: counterReducer,
 	},
 });
