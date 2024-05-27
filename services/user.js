@@ -23,7 +23,9 @@ export const postUser = async (body) => {
 	const response = await axios
 		.post(`${getAppUrl()}api/users/register`, body)
 		.then((res) => {
-			if (res.status == 201) return res.data;
+			if (res.status == 201) {
+				return res.data;
+			}
 		})
 		.catch((e) => console.log(e));
 

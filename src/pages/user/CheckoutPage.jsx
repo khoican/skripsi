@@ -10,9 +10,10 @@ import { postOrder } from '../../../helper/postOrder';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/user/fragments/modal/Index';
 import { getCartByUserId } from '../../../services/cartProduct';
+import { decryptData } from '../../../helper/cryptoData';
 
 const CheckoutPage = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 	const navigate = useNavigate();
 	const [phone, setPhone] = useState(user.phoneNumber);
 	const [country, setCountry] = useState('ID');

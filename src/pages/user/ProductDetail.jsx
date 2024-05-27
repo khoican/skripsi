@@ -13,9 +13,10 @@ import Button from '../../components/user/elements/button/Index';
 import Alert from '../../components/user/elements/alert/Index';
 import Loading from '../../components/user/fragments/loading/Index';
 import { Helmet } from 'react-helmet';
+import { decryptData } from '../../../helper/cryptoData';
 
 const ProductDetail = (product, error) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = localStorage.getItem('user') && decryptData('user');
 	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();

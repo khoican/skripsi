@@ -1,7 +1,8 @@
 import { postCartProduct } from '../services/cartProduct';
+import { decryptData } from './cryptoData';
 
 const postCardByUser = async (qty, note, productId) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 
 	const data = {
 		quantity: qty,

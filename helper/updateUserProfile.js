@@ -1,4 +1,5 @@
 import { updateUser } from '../services/user';
+import { encryptData } from './cryptoData';
 
 export const updateUserProfile = async (id, data) => {
 	const profile = {
@@ -31,7 +32,7 @@ export const updateUserProfile = async (id, data) => {
 			token: response.data.token,
 		};
 
-		localStorage.setItem('user', JSON.stringify(user));
+		encryptData('user', user);
 
 		return {
 			status: response.status,

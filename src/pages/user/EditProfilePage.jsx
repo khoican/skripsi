@@ -5,9 +5,10 @@ import { useState } from 'react';
 import Button from '../../components/user/elements/button/Index';
 import { updateUserProfile } from '../../../helper/updateUserProfile';
 import Alert from '../../components/user/elements/alert/Index';
+import { decryptData } from '../../../helper/cryptoData';
 
 const EditProfilePage = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 	const [phone, setPhone] = useState(user.phoneNumber);
 	const [country, setCountry] = useState('ID');
 	const [input, setInput] = useState({

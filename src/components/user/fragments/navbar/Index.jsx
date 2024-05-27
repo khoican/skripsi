@@ -18,9 +18,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../elements/button/Index';
 import { logoutUser } from '../../../../../helper/logoutUser';
 import Alert from '../../elements/alert/Index';
+import { decryptData } from '../../../../../helper/cryptoData';
 
 const Navbar = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = localStorage.getItem('user') && decryptData('user');
 	const [navbar, setNavbar] = useState(false);
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const [status, setStatus] = useState('');
@@ -120,18 +121,22 @@ const Navbar = () => {
 				</div>
 				{openDropdown && (
 					<div className="absolute right-20 top-20 bg-white shadow-md p-4 rounded-md flex flex-col gap-2">
-						<DropdownMenu
-							icon={faUser}
-							text="Edit Profil"
-							link={'/editprofile'}
-							onClick={handleOpenDropdown}
-						/>
-						<DropdownMenu
-							icon={faKey}
-							text="Ganti Password"
-							link={'/changepassword'}
-							onClick={handleOpenDropdown}
-						/>
+						{user.role !== 'GUEST' && (
+							<>
+								<DropdownMenu
+									icon={faUser}
+									text="Edit Profil"
+									link={'/editprofile'}
+									onClick={handleOpenDropdown}
+								/>
+								<DropdownMenu
+									icon={faKey}
+									text="Ganti Password"
+									link={'/changepassword'}
+									onClick={handleOpenDropdown}
+								/>
+							</>
+						)}
 						<DropdownMenu
 							icon={faClipboard}
 							text="Riwayat Transaksi"

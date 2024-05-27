@@ -1,5 +1,6 @@
 import { getCartByUserId } from '../services/cartProduct';
 import { login, postUser } from '../services/user';
+import { encryptData } from './cryptoData';
 
 export const postLogin = async (username, password) => {
 	const data = {
@@ -28,7 +29,7 @@ export const postLogin = async (username, password) => {
 			token: response.data.token,
 		};
 
-		localStorage.setItem('user', JSON.stringify(user));
+		encryptData('user', user);
 
 		return {
 			status: response.status,
@@ -66,11 +67,10 @@ export const postLoginAsGuest = async () => {
 			name: response.data.name,
 			address: response.data.address,
 			role: response.data.role,
-			phoneNumber: response.data.phoneNumber,
 			token: response.data.token,
 		};
 
-		localStorage.setItem('user', JSON.stringify(user));
+		encryptData('user', user);
 
 		return {
 			status: response.status,

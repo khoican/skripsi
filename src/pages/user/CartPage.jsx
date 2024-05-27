@@ -8,9 +8,10 @@ import { deleteCart } from '../../../helper/deleteCart';
 import Modal from '../../components/user/fragments/modal/Index';
 import Alert from '../../components/user/elements/alert/Index';
 import { getCartByUserId } from '../../../services/cartProduct';
+import { decryptData } from '../../../helper/cryptoData';
 
 const CartPage = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = localStorage.getItem('user') && decryptData('user');
 	const [total, setTotal] = useState(0);
 	const [cart, setCart] = useState();
 	const [openModal, setOpenModal] = useState(false);

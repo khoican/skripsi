@@ -2,10 +2,11 @@ import {
 	postOrderHistoryProduct,
 	postOrderProduct,
 } from '../services/orderProduct';
+import { decryptData } from './cryptoData';
 import { deleteCart } from './deleteCart';
 
 export const postOrder = async (data) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 
 	const orderData = {
 		name: data.name,
