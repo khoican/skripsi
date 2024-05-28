@@ -34,7 +34,7 @@ const ProductDetail = (product, error) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const cartProduct = JSON.parse(localStorage.getItem('cart')) || [];
+		const cartProduct = decryptData('cart') || [];
 		const existing = cartProduct
 			.filter((item) => item.productId === productId.id)
 			.map((item) => {
@@ -71,6 +71,7 @@ const ProductDetail = (product, error) => {
 					: await postCardByUser(count, note, productId.id);
 
 				if (response.status !== 'success') {
+					setLoading(false);
 					setStatus(response);
 				} else {
 					navigate('/cart');

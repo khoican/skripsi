@@ -25,7 +25,7 @@ const CartProduct = (props) => {
 		<div className="flex justify-between rounded-md shadow-lg w-full overflow-hidden">
 			<div className="flex gap-5">
 				<img
-					src={image ? getAppUrl() + image : logo}
+					src={image !== null ? getAppUrl() + image : logo}
 					alt=""
 					className="h-32 w-auto"
 				/>

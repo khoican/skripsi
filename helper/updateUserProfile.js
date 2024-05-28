@@ -1,3 +1,4 @@
+import { getCartByUserId } from '../services/cartProduct';
 import { updateUser } from '../services/user';
 import { encryptData } from './cryptoData';
 
@@ -23,6 +24,12 @@ export const updateUserProfile = async (id, data) => {
 		}
 		localStorage.removeItem('user');
 
+		const carts = await getCartByUserId(response.data.id);
+		let cartTotal;
+		carts.forEach((cart) => {
+			cartTotal = cartTotal ? cartTotal + cart.quantity : cart.quantity;
+		});
+
 		const user = {
 			id: response.data.id,
 			name: response.data.name,
@@ -30,6 +37,7 @@ export const updateUserProfile = async (id, data) => {
 			role: response.data.role,
 			phoneNumber: response.data.phoneNumber,
 			token: response.data.token,
+			cart: cartTotal,
 		};
 
 		encryptData('user', user);

@@ -1,6 +1,6 @@
 import { getCartByUserId } from '../services/cartProduct';
 import { login, postUser } from '../services/user';
-import { encryptData } from './cryptoData';
+import { decryptData, encryptData } from './cryptoData';
 
 export const postLogin = async (username, password) => {
 	const data = {
@@ -30,6 +30,11 @@ export const postLogin = async (username, password) => {
 		};
 
 		encryptData('user', user);
+		console.log(decryptData('user'));
+
+		localStorage.removeItem('cart');
+		const carts = await getCartByUserId(response.data.id);
+		encryptData('cart', carts);
 
 		return {
 			status: response.status,

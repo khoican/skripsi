@@ -9,6 +9,7 @@ import Modal from '../../components/user/fragments/modal/Index';
 import Alert from '../../components/user/elements/alert/Index';
 import { getCartByUserId } from '../../../services/cartProduct';
 import { decryptData } from '../../../helper/cryptoData';
+import logo from '/logo.png';
 
 const CartPage = () => {
 	const user = localStorage.getItem('user') && decryptData('user');
@@ -79,7 +80,6 @@ const CartPage = () => {
 		if (response.status === 200) {
 			handleStatus(response);
 			const updatedCart = cart.filter((item) => item.id !== id);
-			localStorage.setItem('cart', JSON.stringify(updatedCart));
 			setCart(updatedCart);
 		} else {
 			handleStatus(response);
@@ -170,7 +170,11 @@ const CartPage = () => {
 									name={item.product.name}
 									quantity={item.quantity}
 									note={item.notes}
-									image={item.product.images[0].image}
+									image={
+										item.product.images.length > 0
+											? item.product.images[0].image
+											: null
+									}
 									price={item.product.price}
 									productId={item.productId}
 									onClick={handleOpenModal({

@@ -6,6 +6,7 @@ export const getAllOrderByUserId = async (id) => {
 		const response = await axios.get(
 			`${getAppUrl()}api/orders?userId=${id}`,
 		);
+		console.log(response.data);
 
 		return response.data;
 	} catch (error) {

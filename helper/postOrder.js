@@ -1,12 +1,13 @@
+import { getCartByUserId } from '../services/cartProduct';
 import {
 	postOrderHistoryProduct,
 	postOrderProduct,
 } from '../services/orderProduct';
-import { decryptData } from './cryptoData';
+import { decryptData, encryptData } from './cryptoData';
 import { deleteCart } from './deleteCart';
 
 export const postOrder = async (data) => {
-	const user = decryptData('user');
+	let user = decryptData('user');
 
 	const orderData = {
 		name: data.name,
@@ -24,6 +25,10 @@ export const postOrder = async (data) => {
 		if (response.status !== 200) {
 			console.log('error :' + response.data);
 		}
+
+		localStorage.removeItem('cart');
+		const carts = await getCartByUserId(user.id);
+		encryptData('cart', carts);
 
 		return response.data;
 	} catch (error) {

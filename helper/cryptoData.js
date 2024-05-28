@@ -7,7 +7,6 @@ export const encryptData = (name, data) => {
 		SECRET_KEY,
 	).toString();
 	localStorage.setItem(name, encryptedData);
-	console.log(decryptData('user'));
 };
 
 export const decryptData = (name) => {
