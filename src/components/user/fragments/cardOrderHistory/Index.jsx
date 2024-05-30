@@ -61,7 +61,7 @@ const StatusProcess = () => {
 const SuccessProcess = () => {
 	return (
 		<div className="bg-success p-2 rounded-md">
-			<p className="text-white text-sm">Sedang Diproses</p>
+			<p className="text-white text-sm">Berhasil</p>
 		</div>
 	);
 };
@@ -69,7 +69,7 @@ const SuccessProcess = () => {
 const CanceledProcess = () => {
 	return (
 		<div className="bg-danger p-2 rounded-md">
-			<p className="text-white text-sm">Sedang Diproses</p>
+			<p className="text-white text-sm">Dibatalkan</p>
 		</div>
 	);
 };
