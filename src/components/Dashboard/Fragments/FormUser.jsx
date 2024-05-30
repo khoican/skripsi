@@ -75,22 +75,24 @@ const FormUser = (props) => {
 					/>
 				</div>
 				<div className="pt-2 pb-2 flex items-center justify-center">
+					<div className="flex">
+						<Input
+							variants="rounded-lg ring-1 w-full border-0 ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
+							type={type}
+							name="password"
+							placeholder="Insert Password"
+							onChange={handleChange}
+						/>
+						<Button
+							type="button"
+							variants="relative w-5 right-8 hover:text-success transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
+							onClick={show}
+						>
+							{icon}
+						</Button>
+					</div>
 					<Input
-						variants="rounded-lg ring-1 border-0 w-[500px] ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
-						type={type}
-						name="password"
-						placeholder="Insert Password"
-						onChange={handleChange}
-					/>
-					<Button
-						type="button"
-						variants="relative w-8 right-8 hover:text-success transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
-						onClick={show}
-					>
-						{icon}
-					</Button>
-					<Input
-						variants="rounded-lg ring-1 border-0 w-[500px] ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
+						variants="rounded-lg ring-1 border-0 w-[205px] ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
 						type="number"
 						name="phoneNumber"
 						placeholder="Insert Phone Number"
@@ -98,7 +100,7 @@ const FormUser = (props) => {
 						value={userId.phoneNumber}
 					/>
 				</div>
-				<div className="pt-2 pb-2 flex items-center justify-center">
+				{/* <div className="pt-2 pb-2 flex items-center justify-center">
 					<Select
 						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
 						name="role"
@@ -109,7 +111,7 @@ const FormUser = (props) => {
 						<Option value="ADMIN" title="ADMIN" />
 						<Option value="USER" title="USER" />
 					</Select>
-				</div>
+				</div> */}
 				<div className="pt-2 pb-2 flex items-center justify-center">
 					<Textarea
 						name="address"
