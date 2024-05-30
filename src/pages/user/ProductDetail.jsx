@@ -12,9 +12,11 @@ import { updateCart } from '../../../helper/updateCart';
 import Button from '../../components/user/elements/button/Index';
 import Alert from '../../components/user/elements/alert/Index';
 import Loading from '../../components/user/fragments/loading/Index';
+import { Helmet } from 'react-helmet';
+import { decryptData } from '../../../helper/cryptoData';
 
 const ProductDetail = (product, error) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = localStorage.getItem('user') && decryptData('user');
 	const navigate = useNavigate();
 	const productId = useParams();
 	const dispatch = useDispatch();
@@ -32,7 +34,7 @@ const ProductDetail = (product, error) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const cartProduct = JSON.parse(localStorage.getItem('cart')) || [];
+		const cartProduct = decryptData('cart') || [];
 		const existing = cartProduct
 			.filter((item) => item.productId === productId.id)
 			.map((item) => {
@@ -47,7 +49,7 @@ const ProductDetail = (product, error) => {
 	}, [productId]);
 
 	if (!products && !products.images) {
-		return <Loading text={'Mengambil data'} />;
+		return <Loading />;
 	}
 
 	const handleNote = (e) => {
@@ -69,6 +71,7 @@ const ProductDetail = (product, error) => {
 					: await postCardByUser(count, note, productId.id);
 
 				if (response.status !== 'success') {
+					setLoading(false);
 					setStatus(response);
 				} else {
 					navigate('/cart');
@@ -102,7 +105,11 @@ const ProductDetail = (product, error) => {
 				/>
 			)}
 
-			{loading && <Loading text={'Menambahkan ke keranjang'} />}
+			<Helmet>
+				<title>{products.name}</title>
+			</Helmet>
+
+			{loading && <Loading />}
 			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
 				<div className="w-5/12">
 					<div className="w-full">

@@ -1,6 +1,8 @@
-import { deleteCartProduct } from '../services/cartProduct';
+import { deleteCartProduct, getCartByUserId } from '../services/cartProduct';
+import { decryptData, encryptData } from './cryptoData';
 
 export const deleteCart = async (id) => {
+	let user = decryptData('user');
 	try {
 		const response = await deleteCartProduct(id);
 
@@ -12,6 +14,10 @@ export const deleteCart = async (id) => {
 				message: 'Produk gagal di hapus dari keranjang',
 			};
 		}
+
+		localStorage.removeItem('cart');
+		const carts = await getCartByUserId(user.id);
+		encryptData('cart', carts);
 
 		return {
 			status: response.status,

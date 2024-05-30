@@ -17,7 +17,7 @@ const ProductPage = () => {
 	const [search, setSearch] = useState('');
 
 	useEffect(() => {
-		dispatch(fetchProducts(0, 100));
+		dispatch(fetchProducts());
 	}, [dispatch]);
 
 	const getProductBySearch = async () => {

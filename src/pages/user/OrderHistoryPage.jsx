@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import Button from '../../components/user/elements/button/Index';
 import CardOrderHitory from '../../components/user/fragments/cardOrderHistory/Index';
 import { getAllOrderByUserId } from '../../../services/orderProduct';
+import { decryptData } from '../../../helper/cryptoData';
 
 const OrderHistoryPage = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 	let [orderHistory, setOrderHistory] = useState([]);
 	const [status, setStatus] = useState('all');
 

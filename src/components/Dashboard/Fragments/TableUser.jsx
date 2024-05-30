@@ -9,24 +9,72 @@ import Button from '../Elements/Button';
 import { Spinner } from 'flowbite-react';
 import FormUser from './FormUser';
 import ModalOrder from './ModalOrder';
-import { deleteUser } from '../../../../services/user';
+import { deleteUser, getUserById, editUser } from '../../../../services/user';
+import ModalUser from './ModalUser';
+import Input from '../Elements/Input';
+import { EyeIcon } from '@heroicons/react/24/outline';
+import Select from '../Elements/Select';
+import Textarea from '../Elements/Textarea';
+import Option from '../Elements/Select/option';
 
-const TableUser = (props) => {
-	const { id } = props;
+const TableUser = () => {
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
 	const [getDeleteId, setGetDeleteId] = useState();
+	const [getEditId, setGetEditId] = useState();
+	const [type, setType] = useState('password');
+	const [icon, setIcon] = useState(<EyeIcon />);
 	const hideData = true;
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 	const users = useSelector((state) => state.fetchUsers.users);
-	const [modal, setModal] = useState(false);
+	const [editUserData, setEditUserData] = useState({
+		name: '',
+		username: '',
+		password: '',
+		phoneNumber: '',
+		address: '',
+		role: '',
+	});
+
+	const getUserDetail = async () => {
+		const data = await getUserById();
+		return data;
+	};
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchUsers());
 			setPending(false);
 		}, 1500);
+
+		if (getEditId !== undefined) {
+			getUserDetail().then((data) => {
+				console.log(data);
+				setEditUserData({
+					name: data.name,
+					username: data.username,
+					password: data.password,
+					phoneNumber: data.phoneNumber,
+					address: data.address,
+					role: data.role,
+				});
+			});
+		}
 		return () => clearTimeout(timeout);
-	}, [dispatch]);
+	}, [dispatch, getEditId]);
+
+	const show = () => {
+		type === 'password' ? setType('text') : setType('password');
+		icon === <EyeIcon /> ? setIcon(<EyeIcon />) : setIcon(<EyeIcon />);
+	};
+
+	const handleOpenEditModal = async (id) => {
+		setGetEditId(id);
+		const userData = await getUserById(id);
+		setEditUserData({ ...userData });
+		document.getElementById('edit').showModal();
+		setIsEditModalOpen(true);
+	};
 
 	const handleOpenDeleteModal = (id) => {
 		setGetDeleteId(id);
@@ -69,11 +117,10 @@ const TableUser = (props) => {
 			name: 'Action',
 			cell: (row) => (
 				<>
-					{/* <Link> */}
 					<Button
 						onClick={() => {
-							setModal(true);
-							document.getElementById(row.id).showModal();
+							console.log(getEditId);
+							handleOpenEditModal(row.id);
 						}}
 					>
 						<img
@@ -82,8 +129,6 @@ const TableUser = (props) => {
 							alt="pencilicon"
 						/>
 					</Button>
-
-					<FormUser id={row.id} title="Edit User" openModal={modal} />
 
 					<Button
 						onClick={() => {
@@ -96,7 +141,6 @@ const TableUser = (props) => {
 							alt="trashicon"
 						/>
 					</Button>
-					{/* </Link> */}
 				</>
 			),
 		},
@@ -121,8 +165,22 @@ const TableUser = (props) => {
 		},
 	};
 
+	const handleEdit = () => {
+		const userData = {
+			name: editUserData.name,
+			username: editUserData.username,
+			password: editUserData.password,
+			phoneNumber: editUserData.phoneNumber,
+			address: editUserData.address,
+			role: editUserData.role,
+		};
+		editUser(getEditId, userData).then(() => {
+			window.location.reload();
+		});
+	};
+
 	const handleDelete = () => {
-		deleteUser(getDeleteId).then((res) => {
+		deleteUser(getDeleteId).then(() => {
 			window.location.reload();
 		});
 	};
@@ -149,8 +207,119 @@ const TableUser = (props) => {
 				}
 			/>
 
-			<ModalOrder id={'delete'}>
-				<div className="flex mt-2 justify-end pb-4">
+			<ModalUser
+				title="Edit User"
+				id={'edit'}
+				open={isEditModalOpen}
+				onClose={() => setIsEditModalOpen(false)}
+			>
+				<div className="flex items-center justify-center pt-2 pb-2 gap-5">
+					<Input
+						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+						type="text"
+						name="name"
+						placeholder="Insert Name"
+						value={editUserData.name}
+						onChange={(e) =>
+							setEditUserData({
+								...editUserData,
+								name: e.target.value,
+							})
+						}
+					/>
+					<Input
+						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+						type="text"
+						name="username"
+						placeholder="Insert Username"
+						value={editUserData.username}
+						onChange={(e) =>
+							setEditUserData({
+								...editUserData,
+								username: e.target.value,
+							})
+						}
+					/>
+				</div>
+				<div className="pt-2 pb-2 flex items-center justify-center">
+					<Input
+						variants="rounded-lg ring-1 border-0 w-[500px] ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
+						type={type}
+						name="password"
+						placeholder="Insert Password"
+						onChange={(e) =>
+							setEditUserData({
+								...editUserData,
+								password: e.target.value,
+							})
+						}
+					/>
+					<Button
+						type="button"
+						variants="relative w-8 right-8 hover:text-success transition-all ease-out delay-100 hover:-translate-y-1 hover:scale-110 hover:rounded-lg hover:shadow-xl duration-300"
+						onClick={show}
+					>
+						{icon}
+					</Button>
+					<Input
+						variants="rounded-lg ring-1 border-0 w-[500px] ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s py-2 px-3"
+						type="number"
+						name="phoneNumber"
+						placeholder="Insert Phone Number"
+						value={editUserData.phoneNumber}
+						onChange={(e) =>
+							setEditUserData({
+								...editUserData,
+								phoneNumber: e.target.value,
+							})
+						}
+					/>
+				</div>
+				{/* <div className="pt-2 pb-2 flex items-center justify-center">
+					<Select
+						variants="rounded-lg ring-1 border-0 w-full ring-primary focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+						name="role"
+						title="Role"
+						value={editUserData.role}
+					>
+						<Option value="Choose Role" title="Choose Role" />
+						<Option value="ADMIN" title="ADMIN" />
+						<Option value="USER" title="USER" />
+					</Select>
+				</div> */}
+				<div className="pt-2 pb-2 flex items-center justify-center">
+					<Textarea
+						name="address"
+						rows="4"
+						cols="50"
+						variants="rounded-lg ring-1 border-0 ring-primary focus:outline-none focus:ring-1 focus:ring-success transition-all ease-in-out 5s"
+						placeholder="Insert Address"
+						value={editUserData.address}
+						onChange={(e) =>
+							setEditUserData({
+								...editUserData,
+								address: e.target.value,
+							})
+						}
+					/>
+				</div>
+				<div className="flex items-center justify-end gap-2 pt-4">
+					<Button variants="py-2 px-5 rounded-lg outline outline-1 outline-danger text-danger transition-all ease-in 3s hover:bg-red hover:outline-none hover:text-white btn">
+						Cancel
+					</Button>
+					<Button
+						type="submit"
+						variants="py-2 px-6 rounded-lg bg-success text-white hover:bg-primary transition-all ease-in 3s"
+						onClick={handleEdit}
+					>
+						Submit
+					</Button>
+				</div>
+			</ModalUser>
+
+			<ModalUser id={'delete'} title="Delete User">
+				<p>Are you sure you want to delete this user?</p>
+				<div className="flex pt-4 justify-end pb-4">
 					<Button
 						type="submit"
 						variants="mr-2 px-4 py-2 border border-danger text-danger rounded-lg hover:text-red hover:border-red transition ease-in 5s "
@@ -165,7 +334,7 @@ const TableUser = (props) => {
 						Delete
 					</Button>
 				</div>
-			</ModalOrder>
+			</ModalUser>
 		</>
 	);
 };

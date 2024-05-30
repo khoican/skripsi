@@ -11,16 +11,19 @@ import {
 	faShoppingCart,
 	faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Logo from '../../elements/logo/Index';
 import NavbarIcon from '../../elements/navbarIcon/Index';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../elements/button/Index';
 import { logoutUser } from '../../../../../helper/logoutUser';
 import Alert from '../../elements/alert/Index';
+import { decryptData } from '../../../../../helper/cryptoData';
+import { getCartByUserId } from '../../../../../services/cartProduct';
 
 const Navbar = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	let user = localStorage.getItem('user') && decryptData('user');
+	let cart = localStorage.getItem('cart') && decryptData('cart');
 	const [navbar, setNavbar] = useState(false);
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const [status, setStatus] = useState('');
@@ -68,6 +71,12 @@ const Navbar = () => {
 		}
 	};
 
+	let cartTotal = 0;
+
+	if (cart && cart.length > 0) {
+		cartTotal = cart.length;
+	}
+
 	return (
 		<Fragment>
 			<nav
@@ -106,6 +115,7 @@ const Navbar = () => {
 						link={'/cart'}
 						icon={faShoppingCart}
 						onClick={() => setOpenDropdown(false)}
+						// badge={cart && String(cartTotal)}
 					/>
 					{user ? (
 						<Dropdown icon={faUser} onClick={handleOpenDropdown} />
@@ -120,18 +130,22 @@ const Navbar = () => {
 				</div>
 				{openDropdown && (
 					<div className="absolute right-20 top-20 bg-white shadow-md p-4 rounded-md flex flex-col gap-2">
-						<DropdownMenu
-							icon={faUser}
-							text="Edit Profil"
-							link={'/editprofile'}
-							onClick={handleOpenDropdown}
-						/>
-						<DropdownMenu
-							icon={faKey}
-							text="Ganti Password"
-							link={'/changepassword'}
-							onClick={handleOpenDropdown}
-						/>
+						{user.role !== 'GUEST' && (
+							<>
+								<DropdownMenu
+									icon={faUser}
+									text="Edit Profil"
+									link={'/editprofile'}
+									onClick={handleOpenDropdown}
+								/>
+								<DropdownMenu
+									icon={faKey}
+									text="Ganti Password"
+									link={'/changepassword'}
+									onClick={handleOpenDropdown}
+								/>
+							</>
+						)}
 						<DropdownMenu
 							icon={faClipboard}
 							text="Riwayat Transaksi"

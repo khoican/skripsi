@@ -80,9 +80,11 @@ const FormProduct = () => {
 	};
 
 	subCategories = subCategories.filter((subCategory) =>
-		productId.id
+		productId.id && !categoriesValue
 			? subCategory.categoryId === addProduct.subCategory.categoryId
-			: subCategory.categoryId === categoriesValue,
+			: productId.id && categoriesValue
+				? subCategory.categoryId === categoriesValue
+				: subCategory.categoryId === categoriesValue,
 	);
 
 	const handleAddProduct = (e) => {

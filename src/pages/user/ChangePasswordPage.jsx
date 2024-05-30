@@ -3,9 +3,10 @@ import Button from '../../components/user/elements/button/Index';
 import Input from '../../components/user/elements/input/Index';
 import Alert from '../../components/user/elements/alert/Index';
 import { updateUserProfile } from '../../../helper/updateUserProfile';
+import { decryptData } from '../../../helper/cryptoData';
 
 const ChangePasswordPage = () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 	const [input, setInput] = useState('');
 	const [status, setStatus] = useState('');
 

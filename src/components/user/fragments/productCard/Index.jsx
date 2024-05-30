@@ -5,10 +5,11 @@ import { NumericFormat } from 'react-number-format';
 import { getAppUrl } from '../../../../../config/app';
 import logo from '/logo.png';
 import postCardByUser from '../../../../../helper/postCardByUser';
+import { decryptData } from '../../../../../helper/cryptoData';
 
 const ProductCard = (props) => {
 	const { link, image, title, price, onStatus } = props;
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = localStorage.getItem('user') && decryptData('user');
 
 	const handlePostCart = async () => {
 		if (user) {

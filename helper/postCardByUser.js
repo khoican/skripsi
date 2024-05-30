@@ -1,7 +1,8 @@
-import { postCartProduct } from '../services/cartProduct';
+import { getCartByUserId, postCartProduct } from '../services/cartProduct';
+import { decryptData, encryptData } from './cryptoData';
 
 const postCardByUser = async (qty, note, productId) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 
 	const data = {
 		quantity: qty,
@@ -19,6 +20,10 @@ const postCardByUser = async (qty, note, productId) => {
 				message: 'Barang gagal ditambahkan ke keranjang',
 			};
 		}
+
+		localStorage.removeItem('cart');
+		const carts = await getCartByUserId(user.id);
+		encryptData('cart', carts);
 
 		return {
 			status: 'success',

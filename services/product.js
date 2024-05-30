@@ -2,71 +2,60 @@ import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
 export const postProduct = async (body) => {
-	const formData = new FormData()
+	const formData = new FormData();
 
-	formData.append('name', body.name)
-	formData.append('description', body.description)
-	formData.append('stock', body.stock)
-	formData.append('subCategoryId', body.subCategoryId)
-	formData.append('price', body.price)
-	
+	formData.append('name', body.name);
+	formData.append('description', body.description);
+	formData.append('stock', body.stock);
+	formData.append('subCategoryId', body.subCategoryId);
+	formData.append('price', body.price);
+
 	if (body.images && body.images.length > 0) {
-		body.images.forEach(images => {
+		body.images.forEach((images) => {
 			formData.append('images', images);
-
 		});
 	}
 
 	try {
-        const response = await axios.post(`${getAppUrl()}api/products`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+		const response = await axios.post(
+			`${getAppUrl()}api/products`,
+			formData,
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			},
+		);
 
-        if (response.status === 201) {
-            console.log(response.data);
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
+		if (response.status === 201) {
+			console.log(response.data);
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 export const editProduct = async (id, body) => {
-	const formData = new FormData()
-
-	formData.append('name', body.name)
-	formData.append('slug', body.slug)
-	formData.append('description', body.description)
-	formData.append('stock', body.stock)
-	formData.append('subCategoryId', body.subCategoryId)
-	formData.append('price', body.price)
-
-	if (body.images && body.images.length > 0) {
-		body.images.forEach(images => {
-			formData.append('images', images);
-
-		});
-	}
-
-	await axios.patch(`${getAppUrl()}api/products/${id}`, formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		}
-	})
-	.then(res => {if(res.status == 200) console.log(res.data)})
-	.catch (e => console.log(e))
-}
+	await axios
+		.patch(`${getAppUrl()}api/products/${id}`, body)
+		.then((res) => {
+			if (res.status == 200) console.log(res.data);
+		})
+		.catch((e) => console.log(e));
+};
 
 export const deleteProduct = async (id) => {
-	await axios.delete(`${getAppUrl()}api/products/${id}`)
-	.then(res => {if(res.status == 200) console.log(res.data)})
-	.catch (e => console.log(e))
-}
+	await axios
+		.delete(`${getAppUrl()}api/products/${id}`)
+		.then((res) => {
+			if (res.status == 200) console.log(res.data);
+		})
+		.catch((e) => console.log(e));
+};
 
-export const getAllProducts = async (skip = 0, take = 10) => {
+export const getAllProducts = async (skip, take) => {
 	const response = await axios.get(
-		`${getAppUrl()}api/products?skip=${skip}&take=${take}`,
+		`${getAppUrl()}api/products?${skip || take ? `skip=${skip}&take=${take}` : ''}`,
 	);
 	return response.data.data;
 };
@@ -92,7 +81,7 @@ export const getProductBySlug = async (id) => {
 };
 
 export const getProductById = async (id) => {
-	const response = await axios.get(`${getAppUrl()}api/products/${id}`)
+	const response = await axios.get(`${getAppUrl()}api/products/${id}`);
 
 	return response.data.data;
 };

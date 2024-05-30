@@ -1,6 +1,16 @@
-import { updatedCartProduct } from '../services/cartProduct';
+import { getCartByUserId, updatedCartProduct } from '../services/cartProduct';
+import { decryptData, encryptData } from './cryptoData';
 
 export const updateCart = async (id, notes, quantity, productId) => {
+	let user = decryptData('user');
+
+	if (!user) {
+		return {
+			status: 'error',
+			message: 'User tidak ditemukan. Harap login kembali.',
+		};
+	}
+
 	try {
 		const response = await updatedCartProduct(id, {
 			quantity: quantity,
@@ -9,12 +19,16 @@ export const updateCart = async (id, notes, quantity, productId) => {
 			productId: productId,
 		});
 
-		if (response.status !== 200) {
+		if (response.status !== 'success') {
 			return {
 				status: 'error',
 				message: 'Barang gagal ditambahkan ke keranjang',
 			};
 		}
+
+		localStorage.removeItem('cart');
+		const carts = await getCartByUserId(user.id);
+		encryptData('cart', carts);
 
 		return {
 			status: 'success',

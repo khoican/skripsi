@@ -1,8 +1,6 @@
-const Loading = (props) => {
-	const { text } = props;
-
+const LoadingScreen = (props) => {
 	return (
-		<div className="fixed top-0 left-0 bg-white bg-opacity-50 z-50 h-screen w-screen flex items-center justify-center">
+		<div className="bg-white bg-opacity-50 z-50 h-[90vh] w-screen flex items-center justify-center">
 			<div className="flex items-center flex-col">
 				<svg
 					className="animate-spin h-5 w-5 text-green-800"
@@ -24,10 +22,9 @@ const Loading = (props) => {
 						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 					></path>
 				</svg>
-				{text && <span className="text-xl mt-2">{text}</span>}
 			</div>
 		</div>
 	);
 };
 
-export default Loading;
+export default LoadingScreen;

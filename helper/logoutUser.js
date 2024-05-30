@@ -1,7 +1,8 @@
 import { logout } from '../services/user';
+import { decryptData } from './cryptoData';
 
 export const logoutUser = async () => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = decryptData('user');
 
 	try {
 		const response = await logout({

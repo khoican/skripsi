@@ -6,14 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../../redux/actions/productsAction';
 import Alert from '../../components/user/elements/alert/Index';
+import { Helmet } from 'react-helmet';
+import LoadingScreen from '../../components/user/fragments/LoadingScreen/Index';
 
 const HomePage = () => {
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState();
 	const products = useSelector((state) => state.fetchProducts.products);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		dispatch(fetchProducts(0, 10));
+		dispatch(fetchProducts(0, 12));
+		setLoading(false);
 	}, [dispatch]);
 
 	const handleStatus = (message) => {
@@ -28,8 +32,15 @@ const HomePage = () => {
 		setStatus('');
 	};
 
+	if (loading) {
+		return <LoadingScreen />;
+	}
+
 	return (
 		<>
+			<Helmet>
+				<title>As-Sakinah Mart</title>
+			</Helmet>
 			{status && (
 				<Alert
 					message={status.message}
@@ -38,7 +49,7 @@ const HomePage = () => {
 					onClick={handleClose}
 				/>
 			)}
-			<main className="min-h-screen">
+			<main className="min-h-screen scroll-smooth">
 				<header className="flex flex-col items-center justify-center p-5 h-[80vh] bg-green-700">
 					<h1 className="text-5xl font-medium text-white">
 						Selamat Datang
@@ -48,14 +59,17 @@ const HomePage = () => {
 						tempat belanja terpercaya dan amanah
 					</p>
 					<a
-						href=""
+						href="#product"
 						className="text-white py-3 px-5 mt-5 bg-yellow-300 rounded-full"
 					>
 						Jelajahi Sekarang
 					</a>
 				</header>
 
-				<main className="p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
+				<main
+					className="p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5"
+					id="product"
+				>
 					<CategoriesMenu />
 
 					<div className="w-3/4">
@@ -83,7 +97,7 @@ const HomePage = () => {
 							</div>
 							<Link
 								to={'/products'}
-								className="text-xs text-green-700"
+								className="text-sm text-green-700"
 							>
 								Lihat produk lainnya...
 							</Link>
