@@ -41,22 +41,22 @@ const OrderHistoryPage = () => {
 				<div className="flex gap-3 mt-1">
 					<Button
 						text={'Semua Riwayat'}
-						style={`border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white text-sm ${status === 'all' ? 'bg-blue-500 text-white' : ''}`}
+						style={`border text-sm ${status === 'all' ? 'bg-blue-500 text-white' : 'border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'}`}
 						onClick={() => handleStatus('all')}
 					/>
 					<Button
 						text={'Sedang Diproses'}
-						style={`border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white text-sm ${status === 'PROSES' ? 'bg-yellow-500 text-white' : ''}`}
+						style={`border text-sm ${status === 'PROSES' ? 'bg-yellow-500 text-white' : 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white'}`}
 						onClick={() => handleStatus('PROSES')}
 					/>
 					<Button
 						text={'Berhasil'}
-						style={`border border-success text-success hover:bg-success hover:text-white text-sm ${status === 'SUKSES' ? 'bg-success text-white' : ''}`}
+						style={`border text-sm ${status === 'SUKSES' ? 'bg-success text-white' : 'border-success text-success hover:bg-success hover:text-white'}`}
 						onClick={() => handleStatus('SUKSES')}
 					/>
 					<Button
 						text={'Dibatalkan'}
-						style={`border border-danger text-danger hover:bg-danger hover:text-white text-sm ${status === 'BATAL' ? 'bg-danger text-white' : ''}`}
+						style={`border  text-sm ${status === 'BATAL' ? 'bg-danger text-white' : 'border-danger text-danger hover:bg-danger hover:text-white'}`}
 						onClick={() => handleStatus('BATAL')}
 					/>
 				</div>
