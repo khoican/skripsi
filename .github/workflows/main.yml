@@ -33,4 +33,4 @@ jobs:
             npm install 
             npm run build
             sudo rm -r /var/www/frontend/html/*
-            sudo cp -r dist/* /var/www/frontend/html
+            sudo cp -r ~/aisyiyah/frontend-ecatalog/dist/* /var/www/frontend/html
