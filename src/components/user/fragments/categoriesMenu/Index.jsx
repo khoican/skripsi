@@ -12,7 +12,7 @@ const CategoriesMenu = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="w-1/4 overflow-hidden h-full rounded-xl shadow">
+		<div className="hidden md:block w-1/4 overflow-hidden h-full rounded-xl shadow">
 			<h1 className="bg-gray-200 px-5 py-3 font-semibold text-lg uppercase tracking-widest">
 				Kategori
 			</h1>

@@ -50,11 +50,11 @@ const HomePage = () => {
 				/>
 			)}
 			<main className="min-h-screen scroll-smooth">
-				<header className="flex flex-col items-center justify-center p-5 h-[80vh] bg-green-700">
+				<header className="flex flex-col items-center justify-center p-10 h-[80vh] bg-green-700">
 					<h1 className="text-5xl font-medium text-white">
 						Selamat Datang
 					</h1>
-					<p className="text-md text-white font-extralight">
+					<p className="text-md text-white font-extralight mt-3">
 						di <b className="text-yellow-100">As-Sakinah Mart</b>,
 						tempat belanja terpercaya dan amanah
 					</p>
@@ -67,12 +67,12 @@ const HomePage = () => {
 				</header>
 
 				<main
-					className="p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5"
+					className="p-5 max-w-screen-xl mx-auto px-5 md:px-20 flex gap-5 mt-5"
 					id="product"
 				>
 					<CategoriesMenu />
 
-					<div className="w-3/4">
+					<div className="w-full md:w-3/4">
 						<div className="">
 							<h1 className="font-semibold text-lg mb-3">
 								Produk Terbaru
