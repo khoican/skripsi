@@ -34,17 +34,19 @@ const ProductDetail = (product, error) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const cartProduct = decryptData('cart') || [];
-		const existing = cartProduct
-			.filter((item) => item.productId === productId.id)
-			.map((item) => {
-				setNote(item.notes);
-				return {
-					id: item.id,
-					quantity: item.quantity,
-					notes: item.notes,
-				};
-			});
+		const cartProduct = localStorage.getItem('cart') && decryptData('cart');
+		const existing =
+			cartProduct &&
+			cartProduct
+				.filter((item) => item.productId === productId.id)
+				.map((item) => {
+					setNote(item.notes);
+					return {
+						id: item.id,
+						quantity: item.quantity,
+						notes: item.notes,
+					};
+				});
 		setExistingProduct(existing[0]);
 	}, [productId]);
 
