@@ -125,7 +125,7 @@ const CategoryDropdown = (props) => {
 							<p className="flex text-black">
 								Are you sure you want to delete this
 								<span className="font-semibold pl-1">
-									"Category ?"
+									"{editNameCategory} ?"
 								</span>
 							</p>
 							<div className="flex justify-end pt-2">
@@ -254,7 +254,7 @@ const SubCategory = (props) => {
 							<p className="flex text-black">
 								Are you sure you want to delete
 								<span className="font-semibold pl-1">
-									"this Sub Category ?"
+									"{editNameSubCategory} ?"
 								</span>
 							</p>
 							<div className="flex justify-end gap-2 pt-3">
@@ -266,7 +266,7 @@ const SubCategory = (props) => {
 								</Button>
 								<Button
 									type="submit"
-									variants="px-4 py-2 rounded-lg bg-success text-white"
+									variants="px-4 py-2 rounded-lg bg-danger text-white"
 									onClick={handleDelete}
 								>
 									Delete
