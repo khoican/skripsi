@@ -14,6 +14,8 @@ import {
 	editCategory,
 	deleteCategory,
 	postSubCategory,
+	editSubCategory,
+	deleteSubCategory,
 } from '../../../../../services/category';
 
 const CategoryDropdown = (props) => {
@@ -151,8 +153,25 @@ const CategoryDropdown = (props) => {
 };
 
 const SubCategory = (props) => {
-	const { subCategories } = props;
+	const { subCategories, id } = props;
 
+	const [editNameSubCategory, setEditSubCategory] = useState(subCategories);
+
+	function handleEditSubCategory(e) {
+		setEditSubCategory(e.target.value);
+	}
+
+	function handleEdit() {
+		editSubCategory(id, { name: editNameSubCategory }).then((res) => {
+			window.location.reload();
+		});
+	}
+
+	function handleDelete() {
+		deleteSubCategory(id).then((res) => {
+			window.location.reload();
+		});
+	}
 	return (
 		<>
 			<div className="ps-10 pe-4 text-slate-700 cursor-pointer hover:bg-success hover:text-white transition-all 3s ease-in">
@@ -167,7 +186,9 @@ const SubCategory = (props) => {
 							type="button"
 							variants="focus:outline-none"
 							onClick={() =>
-								document.getElementById('editsub').showModal()
+								document
+									.getElementById('editsub' + id)
+									.showModal()
 							}
 						>
 							<img
@@ -177,24 +198,45 @@ const SubCategory = (props) => {
 							/>
 						</Button>
 						<ModalCategory
-							id="editsub"
+							id={'editsub' + id}
 							title="Edit Sub Category"
 							btn="Save"
 							variants="bg-success"
 						>
-							<Input
-								type="text"
-								name="category"
-								placeholder="Insert Sub Category"
-								variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
-							/>
+							<div>
+								<Input
+									type="text"
+									name="category"
+									placeholder="Insert Sub Category"
+									variants="rounded-lg ring-1 border-0 w-full ring-dark-green focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s py-2 px-3"
+									onChange={handleEditSubCategory}
+									value={editNameSubCategory}
+								/>
+							</div>
+							<div className="flex justify-end gap-2 pt-3">
+								<Button
+									type="submit"
+									variants="mr-2 px-4 py-2 border border-danger hover:text-red-700 hover:border-red-700 transition ease-in-out 5s rounded-lg text-danger"
+								>
+									Cancel
+								</Button>
+								<Button
+									type="submit"
+									variants="px-4 py-2 rounded-lg bg-success text-white"
+									onClick={handleEdit}
+								>
+									Save
+								</Button>
+							</div>
 						</ModalCategory>
 
 						<Button
 							type="button"
 							variants="focus:outline-none"
 							onClick={() =>
-								document.getElementById('deleteSub').showModal()
+								document
+									.getElementById('deleteSub' + id)
+									.showModal()
 							}
 						>
 							<img
@@ -204,7 +246,7 @@ const SubCategory = (props) => {
 							/>
 						</Button>
 						<ModalCategory
-							id="deleteSub"
+							id={'deleteSub' + id}
 							title="Delete Sub Category"
 							btn="Delete"
 							variants="bg-light-red hover:bg-red-700 transition ease-in-out 5s"
@@ -215,6 +257,21 @@ const SubCategory = (props) => {
 									"this Sub Category ?"
 								</span>
 							</p>
+							<div className="flex justify-end gap-2 pt-3">
+								<Button
+									type="submit"
+									variants="mr-2 px-4 py-2 border border-danger hover:text-red-700 hover:border-red-700 transition ease-in-out 5s rounded-lg text-danger"
+								>
+									Cancel
+								</Button>
+								<Button
+									type="submit"
+									variants="px-4 py-2 rounded-lg bg-success text-white"
+									onClick={handleDelete}
+								>
+									Delete
+								</Button>
+							</div>
 						</ModalCategory>
 					</div>
 				</div>

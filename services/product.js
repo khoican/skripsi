@@ -9,6 +9,7 @@ export const postProduct = async (body) => {
 	formData.append('stock', body.stock)
 	formData.append('subCategoryId', body.subCategoryId)
 	formData.append('price', body.price)
+	formData.append('purchasePrice', body.purchasePrice)
 	
 	if (body.images && body.images.length > 0) {
 		body.images.forEach(images => {
