@@ -226,7 +226,14 @@ const FormProduct = () => {
 							Stock
 						</Label>
 						<div className="pt-3">
-							<Counter id={1} value={addProduct.stock} />
+							{/* <Counter id={1} value={addProduct.stock} /> */}
+							<Input
+								type="number"
+								name="price"
+								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+								onChange={handleAddProduct}
+								value={addProduct.stock}
+							/>
 						</div>
 					</div>
 					<div className="pt-3 ml-2 w-full">
