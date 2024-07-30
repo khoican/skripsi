@@ -30,6 +30,7 @@ const FormProduct = () => {
 		name: '',
 		description: '',
 		price: 0,
+		purchasePrice: 0,
 		stock: 0,
 		subCategory: '',
 		subCategoryId: 0,
@@ -53,6 +54,7 @@ const FormProduct = () => {
 					name: data.name,
 					description: data.description,
 					price: data.price,
+					purchasePrice: data.purchasePrice,
 					stock: data.stock,
 					subCategory: data.subCategory,
 					subCategoryId: data.subCategoryId,
@@ -96,6 +98,7 @@ const FormProduct = () => {
 			name: addProduct.name,
 			description: addProduct.description,
 			price: addProduct.price,
+			purchasePrice: addProduct.purchasePrice,
 			stock: count,
 			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
@@ -247,6 +250,20 @@ const FormProduct = () => {
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
 								value={addProduct.price}
+							/>
+						</div>
+					</div>
+					<div className="pt-3 ml-2 w-full">
+						<Label htmlFor="purchaseprice" variants="font-semibold">
+							Harga Beli
+						</Label>
+						<div className="pt-3">
+							<Input
+								type="number"
+								name="price"
+								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+								onChange={handleAddProduct}
+								value={addProduct.purchasePrice}
 							/>
 						</div>
 					</div>

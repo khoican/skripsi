@@ -4,12 +4,13 @@ import { getAppUrl } from '../config/app';
 export const postProduct = async (body) => {
 	const formData = new FormData();
 
-	formData.append('name', body.name);
-	formData.append('description', body.description);
-	formData.append('stock', body.stock);
-	formData.append('subCategoryId', body.subCategoryId);
-	formData.append('price', body.price);
-
+	formData.append('name', body.name)
+	formData.append('description', body.description)
+	formData.append('stock', body.stock)
+	formData.append('subCategoryId', body.subCategoryId)
+	formData.append('price', body.price)
+	formData.append('purchasePrice', body.purchasePrice)
+	
 	if (body.images && body.images.length > 0) {
 		body.images.forEach((images) => {
 			formData.append('images', images);
