@@ -128,6 +128,8 @@ const CartPage = () => {
 		setIdDelete(id);
 	};
 
+	const isMobile = window.innerWidth <= 768;
+
 	return (
 		<>
 			{openModal && (
@@ -154,14 +156,14 @@ const CartPage = () => {
 					onClick={() => setStatus('')}
 				/>
 			)}
-			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 gap-5 mt-5">
+			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-20 gap-5 md:mt-5">
 				<div className="mb-10">
 					<h1 className="font-semibold text-2xl">Keranjang Anda</h1>
 					<p>Segera checkout barang anda sebelum kehabisan</p>
 				</div>
 
 				<div className="flex justify-between gap-6">
-					<div className="w-9/12 flex flex-col gap-3">
+					<div className="w-full md:w-9/12 flex flex-col gap-3">
 						{cart &&
 							cart.map((item, index) => (
 								<CartProduct
@@ -184,29 +186,67 @@ const CartPage = () => {
 								/>
 							))}
 					</div>
-					<div className="w-3/12">
-						<h1 className="text-2xl font-bold mb-1">
-							Total Belanja
-						</h1>
-						<p className="text-sm">Total yang harus anda bayar</p>
 
-						<h3 className="text-2xl text-danger mt-3 mb-8 font-semibold">
-							<NumericFormat
-								value={total}
-								displayType={'text'}
-								prefix={'Rp. '}
-								thousandSeparator={true}
-							/>
-						</h3>
+					{!isMobile && (
+						<div className="w-3/12">
+							<h1 className="text-2xl font-bold mb-1">
+								Total Belanja
+							</h1>
+							<p className="text-sm">
+								Total yang harus anda bayar
+							</p>
 
-						<Link to={'/checkout'}>
-							<Button
-								style={'bg-success text-white hover:bg-primary'}
-								text={'Pesan'}
-								icon={faBox}
-							/>
-						</Link>
-					</div>
+							<h3 className="text-2xl text-danger mt-3 mb-8 font-semibold">
+								<NumericFormat
+									value={total}
+									displayType={'text'}
+									prefix={'Rp. '}
+									thousandSeparator={true}
+								/>
+							</h3>
+
+							<Link to={'/checkout'}>
+								<Button
+									style={
+										'bg-success text-white hover:bg-primary'
+									}
+									text={'Pesan'}
+									icon={faBox}
+								/>
+							</Link>
+						</div>
+					)}
+
+					{isMobile && (
+						<div className="fixed bottom-0 left-0 w-full p-5 shadow-sm flex justify-between items-center bg-white drop-shadow-top">
+							<div className="w-8/12">
+								<h1 className="text-xs font-semibold mb-1">
+									Total Belanja
+								</h1>
+
+								<h3 className="text-xl text-danger font-semibold">
+									<NumericFormat
+										value={total}
+										displayType={'text'}
+										prefix={'Rp. '}
+										thousandSeparator={true}
+									/>
+								</h3>
+							</div>
+
+							<div className="w-4/12">
+								<Link to={'/checkout'}>
+									<Button
+										style={
+											'bg-success text-white hover:bg-primary text-sm'
+										}
+										text={'Pesan'}
+										icon={faBox}
+									/>
+								</Link>
+							</div>
+						</div>
+					)}
 				</div>
 			</main>
 		</>
