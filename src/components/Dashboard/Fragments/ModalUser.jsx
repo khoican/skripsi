@@ -7,7 +7,7 @@ const ModalUser = (props) => {
 		<>
 			<Modal
 				id={id}
-				variants="border-none z-10 w-1/3 m-auto bg-white opacity-100"
+				variants="border-none z-10 w-[500px] m-auto bg-white opacity-100"
 			>
 				<div className="bg-white modal-box py-4 px-9">
 					<h3 className="text-black font-bold text-lg pb-2">
