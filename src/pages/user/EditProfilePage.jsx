@@ -48,8 +48,10 @@ const EditProfilePage = () => {
 				/>
 			)}
 			<div className="pe-5">
-				<h1 className="font-semibold text-xl">Edit Profile</h1>
-				<p className="text-sm mt-2">
+				<h1 className="font-semibold text-lg md:text-xl">
+					Edit Profile
+				</h1>
+				<p className=" text-xs md:text-sm mt-1 md:mt-2">
 					Perbarui informasi pribadi anda untuk meningkatkan
 					pengalaman berbelanja
 				</p>
@@ -65,7 +67,7 @@ const EditProfilePage = () => {
 
 					<div className="mt-4">
 						<label
-							className="text-sm font-semibold"
+							className=" text-xs md:text-sm font-semibold"
 							htmlFor="phone"
 						>
 							Nomor Telepon
@@ -84,13 +86,13 @@ const EditProfilePage = () => {
 								onChange={setPhone}
 								defaultCountry={country}
 								id="phone"
-								className="w-full border border-l-primary border-y-0 border-r-0"
+								className="w-full border border-l-primary border-y-0 border-r-0 text-xs md:text-sm"
 							/>
 						</div>
 					</div>
 					<div className="mt-4">
 						<label
-							className="text-sm font-semibold"
+							className=" text-xs md:text-sm font-semibold"
 							htmlFor="address"
 						>
 							Alamat Lengkap
@@ -102,20 +104,20 @@ const EditProfilePage = () => {
 							rows={3}
 							value={input.address}
 							onChange={handleInput}
-							className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none"
+							className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none text-xs md:text-sm"
 						></textarea>
 					</div>
 
 					<div className="mt-4 w-full flex justify-end">
 						<div className="">
-							<p className="text-sm text-end">
+							<p className="text-xs md:text-sm text-end">
 								Pastikan kembali data pribadi anda sesuai untuk
 								menghindari kesalahan
 							</p>
 							<div className="flex justify-end">
 								<Button
 									style={
-										'text-white bg-success hover:bg-primary mt-2 text-sm'
+										'text-white bg-success hover:bg-primary mt-2 text-sm  text-xs md:text-sm'
 									}
 									text={'Simpan'}
 									onClick={handleSubmit}

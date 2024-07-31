@@ -54,8 +54,10 @@ const ChangePasswordPage = () => {
 				/>
 			)}
 			<div className="pe-5">
-				<h1 className="font-semibold text-xl">Ganti Password</h1>
-				<p className="text-sm mt-2">
+				<h1 className="font-semibold text-lg md:text-xl">
+					Ganti Password
+				</h1>
+				<p className=" text-xs md:text-sm mt-2">
 					Perbarui kata sandi anda secara berkala agar akun anda lebih
 					aman
 				</p>
@@ -88,7 +90,7 @@ const ChangePasswordPage = () => {
 
 				<div className="mt-4 w-full flex justify-end">
 					<div className="">
-						<p className="text-sm text-end">
+						<p className=" text-xs md:text-sm text-end">
 							Pastikan anda dapat mengingat dengan mudah kata
 							sandi baru anda
 						</p>
