@@ -28,8 +28,5 @@ export default {
 			},
 		},
 	},
-	plugins: [
-		require('@tailwindcss/forms'),
-		[flowbite],
-	],
+	plugins: [require('@tailwindcss/forms'), [flowbite]],
 };
