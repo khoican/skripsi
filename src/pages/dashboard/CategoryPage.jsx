@@ -47,7 +47,6 @@ const DashboardCategory = () => {
 						variants="bg-success hover:bg-primary transition ease-in-out 5s"
 						id="add"
 						title="Add Category"
-						btn="Save"
 					>
 						<div className="">
 							<Input
