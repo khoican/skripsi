@@ -76,10 +76,12 @@ const LoginPage = () => {
 				<title>Login</title>
 			</Helmet>
 			<main className="h-screen max-w-screen-2xl mx-auto flex">
-				<div className="w-5/12 h-full flex justify-center items-center">
+				<div className="w-full md:w-5/12 h-full flex flex-col md:flex-row justify-center items-center">
 					<div className="w-2/3">
-						<h1 className="text-3xl font-semibold">Login</h1>
-						<p className="text-sm mt-2">
+						<h1 className="text-xl md:text-3xl font-semibold">
+							Login
+						</h1>
+						<p className="text-xs md:text-sm mt-2">
 							Pastikan anda sudah terdaftar sebagai anggota dari
 							As-Sakinah Mart
 						</p>
@@ -94,7 +96,7 @@ const LoginPage = () => {
 							</p>
 						)}
 
-						<div className="mt-8 flex flex-col gap-4 w-full">
+						<div className="mt-8 flex flex-col gap-2 md:gap-4 w-full">
 							<Input
 								text={'Username'}
 								id={'username'}
@@ -111,16 +113,19 @@ const LoginPage = () => {
 								onKeyDown={handleKeyPress}
 								refer={passwordRef}
 							/>
-
-							<label htmlFor="remember">
+							<div>
 								<input
 									id="remember"
 									type="checkbox"
-									className="appearance-none indeterminate:bg-gray-300 checked:bg-primary"
+									className="appearance-none indeterminate:bg-gray-300 checked:bg-primary w-3 h-3 md:w-5 md:h-5"
 								/>{' '}
-								Remember me
-							</label>
-
+								<label
+									htmlFor="remember"
+									className="text-xs md:text-base ms-1"
+								>
+									Remember me
+								</label>
+							</div>
 							<div className="flex flex-col gap-3 mt-3">
 								<Button
 									text={'Login'}
@@ -130,13 +135,11 @@ const LoginPage = () => {
 									onClick={handleSubmitLogin}
 								/>
 							</div>
-
-							<div className="flex items-center justify-center">
+							<div className="flex items-center justify-center text-xs md:text-base">
 								<div className="w-full border-t border-gray-300"></div>
 								<span className="text-gray-500 mx-2">atau</span>
 								<div className="w-full border-t border-gray-300"></div>
 							</div>
-
 							<div>
 								<Button
 									text={'masuk sebagai tamu'}
@@ -151,7 +154,7 @@ const LoginPage = () => {
 					</div>
 				</div>
 
-				<div className="w-7/12 h-full flex items-center justify-center">
+				<div className="w-7/12 h-full hidden md:flex items-center justify-center">
 					<div className="w-full flex flex-col items-center">
 						<img src={logo} alt="" className="w-3/12" />
 
