@@ -1,6 +1,16 @@
 import axios from "axios";
 import { getAppUrl } from "../config/app";
 
+export const getOrderOmzet = async () => {
+	const response = await axios.get(`${getAppUrl()}api/ordersomzet`);
+	return response.data.data;
+}
+
+export const getOrderCount = async () => {
+	const response = await axios.get(`${getAppUrl()}api/orderscount`);
+	return response.data.data;
+}
+
 export const getAllOrders = async () => {
 	const response = await axios.get(`${getAppUrl()}api/orders`);
 	return response.data.data;

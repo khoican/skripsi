@@ -1,9 +1,31 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
+import { NumericFormat } from 'react-number-format';
+import { fetchProductCount } from '../../../redux/actions/productsAction';
+import {
+	fetchOrderCount,
+	fetchOrderOmzet,
+} from '../../../redux/actions/orderAction';
 import ListBestSellerProduct from '../Elements/ListBestSellerProduct';
 import Chart from '../Fragments/Chart';
 import TableOrder from '../Fragments/TableOrder';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Spinner } from 'flowbite-react';
 
 const DashboardOverview = () => {
+	const dispatch = useDispatch();
+	const productCount = useSelector(
+		(state) => state.fetchProductCount.product,
+	);
+	const orderCount = useSelector((state) => state.fetchOrderCount.order);
+	const orderOmzet = useSelector((state) => state.fetchOrderOmzet.omzet);
+
+	useEffect(() => {
+		dispatch(fetchProductCount());
+		dispatch(fetchOrderCount());
+		dispatch(fetchOrderOmzet());
+	}, [dispatch]);
+
 	return (
 		<>
 			<div className="lg:flex gap-4 items-stretch px-7 my-10">
@@ -12,7 +34,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Products</p>
 							<p className="text-3xl font-bold text-primary pb-2">
-								20
+								{productCount === null ? '0' : productCount}
 							</p>
 						</div>
 						<div className="m-auto">
@@ -25,7 +47,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Orders</p>
 							<h2 className="text-3xl font-bold text-secondary pb-2">
-								548
+								{orderCount === null ? '0' : orderCount}
 							</h2>
 						</div>
 						<div className="m-auto">
@@ -38,7 +60,16 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Omzet</p>
 							<h2 className="text-3xl font-bold text-danger pb-2">
-								Rp. 10.000.000
+								{orderOmzet === null ? (
+									'0'
+								) : (
+									<NumericFormat
+										value={orderOmzet}
+										displayType={'text'}
+										thousandSeparator={true}
+										prefix={'Rp. '}
+									/>
+								)}
 							</h2>
 						</div>
 						<div className="m-auto">
