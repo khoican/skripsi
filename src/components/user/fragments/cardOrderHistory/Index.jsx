@@ -13,7 +13,9 @@ const CardOrderHitory = (props) => {
 	return (
 		<div className="w-full p-5 rounded-md shadow-md">
 			<div className="flex justify-between items-center w-full border-b border-gray-200 pb-4">
-				<h1 className="font-semibold">#{invoice}</h1>
+				<h1 className="font-semibold text-sm md:text-base">
+					#{invoice}
+				</h1>
 
 				{status === 'PROSES' ? (
 					<StatusProcess />
@@ -25,23 +27,23 @@ const CardOrderHitory = (props) => {
 			</div>
 			<div className="flex justify-between items-center w-full mt-3 text-gray-500">
 				<div className="flex gap-5 items-center">
-					<div className="flex gap-2 items-center">
+					<div className="flex gap-1 md:gap-2 items-center">
 						<div className="w-6 h-6 flex justify-center items-center">
 							<FontAwesomeIcon icon={faCalendar} />
 						</div>
-						<p className="text-sm">{formattedDate}</p>
+						<p className="text-xs md:text-sm">{formattedDate}</p>
 					</div>
-					<div className="flex gap-2 items-center">
+					<div className="flex gap-1 md:gap-2 items-center">
 						<div className="w-6 h-6 flex justify-center items-center">
 							<FontAwesomeIcon icon={faMapLocationDot} />
 						</div>
-						<p className="text-sm">{address}</p>
+						<p className="text-xs md:text-sm">{address}</p>
 					</div>
 				</div>
 
 				<Link
 					to={`/invoice/${id}`}
-					className="text-sm text-primary hover:underline"
+					className="text-xs md:text-sm text-primary hover:underline"
 				>
 					Lihat Invoice
 				</Link>
@@ -53,7 +55,7 @@ const CardOrderHitory = (props) => {
 const StatusProcess = () => {
 	return (
 		<div className="bg-yellow-500 p-2 rounded-md">
-			<p className="text-white text-sm">Sedang Diproses</p>
+			<p className="text-white text-xs md:text-sm">Sedang Diproses</p>
 		</div>
 	);
 };
@@ -61,7 +63,7 @@ const StatusProcess = () => {
 const SuccessProcess = () => {
 	return (
 		<div className="bg-success p-2 rounded-md">
-			<p className="text-white text-sm">Berhasil</p>
+			<p className="text-white text-xs md:text-sm">Berhasil</p>
 		</div>
 	);
 };
@@ -69,7 +71,7 @@ const SuccessProcess = () => {
 const CanceledProcess = () => {
 	return (
 		<div className="bg-danger p-2 rounded-md">
-			<p className="text-white text-sm">Dibatalkan</p>
+			<p className="text-white text-xs md:text-sm">Dibatalkan</p>
 		</div>
 	);
 };

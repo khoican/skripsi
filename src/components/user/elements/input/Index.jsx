@@ -22,13 +22,13 @@ const Input = (props) => {
 
 	return (
 		<div>
-			<label className="text-sm font-semibold" htmlFor={id}>
+			<label className="text-xs md:text-sm font-semibold" htmlFor={id}>
 				{text}
 			</label>
 			<div className="flex relative mt-1">
 				<input
 					type={password && hidden ? 'password' : 'text'}
-					className={`form-input w-full border border-primary rounded-md focus:border-primary`}
+					className={`form-input w-full border border-primary rounded-md focus:border-primary text-xs md:text-base`}
 					id={id}
 					name={name}
 					onChange={onChange}
@@ -39,7 +39,7 @@ const Input = (props) => {
 
 				{password && (
 					<div
-						className="absolute inset-y-0 right-0 flex items-center justify-center pr-3 cursor-pointer h-full w-1/12"
+						className="absolute inset-y-0 right-0 flex items-center justify-center pr-3 cursor-pointer h-full w-1/12 "
 						onClick={togglePassword}
 					>
 						{hidden ? (

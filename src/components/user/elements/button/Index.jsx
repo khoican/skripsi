@@ -5,7 +5,7 @@ const Button = (props) => {
 
 	return (
 		<button
-			className={`${style} p-3 text-md ${bold ? bold : 'font-semibold'} shadow-sm rounded-md ${icon ? 'flex' : ''} gap-10 justify-between items-center ${
+			className={`${style} p-3 text-xs md:text-base ${bold ? bold : 'font-semibold'} shadow-sm rounded-md ${icon ? 'flex' : ''} gap-10 justify-between items-center ${
 				active ? 'bg-primary text-white' : ''
 			}`}
 			onClick={onClick}

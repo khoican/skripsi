@@ -87,25 +87,25 @@ const CheckoutPage = () => {
 					onClose={() => setOpenModal(false)}
 					onSave={handleSubmit}
 				>
-					<p className={'text-sm'}>
+					<p className={'text-xs md:text-sm'}>
 						Klik lanjutkan jika semua data pemesanan sudah benar
 					</p>
 				</Modal>
 			)}
 
-			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 gap-5 mt-5">
+			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-20 gap-5 md:mt-5">
 				<div className="mb-10">
-					<h1 className="font-semibold text-2xl">
+					<h1 className="font-semibold text-xl md:text-2xl">
 						Formulir Pemesanan
 					</h1>
-					<p>
+					<p className="text-xs md:text-base">
 						Isi formulir pemesanan dibawah ini dengan benar guna
 						meminimalisir kesalahan
 					</p>
 				</div>
 
-				<div className="flex justify-between">
-					<div className="w-6/12 flex flex-col gap-6">
+				<div className="flex flex-col md:flex-row justify-between">
+					<div className="w-full md:w-6/12 flex flex-col gap-3 md:gap-6">
 						<Input
 							text={'Nama Lengkap'}
 							id={'email'}
@@ -116,7 +116,7 @@ const CheckoutPage = () => {
 
 						<div>
 							<label
-								className="text-sm font-semibold"
+								className="text-xs md:text-sm font-semibold"
 								htmlFor="phone"
 							>
 								Nomor Telepon
@@ -135,7 +135,7 @@ const CheckoutPage = () => {
 									onChange={setPhone}
 									defaultCountry={country}
 									id="phone"
-									className="w-full border border-l-primary border-y-0 border-r-0"
+									className="w-full border border-l-primary border-y-0 border-r-0 text-xs md:text-base"
 								/>
 							</div>
 							<p className="text-xs">
@@ -155,7 +155,7 @@ const CheckoutPage = () => {
 								<Button
 									text={'Antar Sesuai Alamat'}
 									style={
-										'border border-primary text-primary hover:bg-primary hover:text-white mt-2'
+										'border border-primary text-primary hover:bg-primary hover:text-white mt-2 text-xs md:text-base'
 									}
 									icon={faTruckFast}
 									onClick={handleOpenAddress}
@@ -164,7 +164,7 @@ const CheckoutPage = () => {
 								<Button
 									text={'Ambil di Toko'}
 									style={
-										'border border-primary text-primary hover:bg-primary hover:text-white mt-2'
+										'border border-primary text-primary hover:bg-primary hover:text-white mt-2 text-xs md:text-base'
 									}
 									icon={faStore}
 									onClick={handleCloseAddress}
@@ -187,7 +187,7 @@ const CheckoutPage = () => {
 										rows={5}
 										onChange={input}
 										value={orderInput.address}
-										className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none"
+										className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none text-xs md:text-base"
 									></textarea>
 									<p className="text-xs">
 										{' '}
@@ -210,7 +210,7 @@ const CheckoutPage = () => {
 						/>
 					</div>
 
-					<div className="w-5/12">
+					<div className="w-full md:w-5/12 mt-16 md:mt-0">
 						<h2 className="text-md font-semibold">Daftar Produk</h2>
 
 						<table className="w-full mt-3">
@@ -271,7 +271,7 @@ const CheckoutPage = () => {
 							</tbody>
 						</table>
 
-						<p className="text-xs font-light mt-5 ms-20 text-justify">
+						<p className="text-xs font-light mt-5 md:ms-20 text-justify">
 							Pastikan semua data sudah benar sebelum melanjutkan
 							pesanan. Jika data sudah benar, silahkan klik tombol
 							dibawah untuk memesan produk
@@ -281,7 +281,7 @@ const CheckoutPage = () => {
 							<Button
 								text={'Pesan'}
 								style={
-									'bg-success text-white hover:bg-primary mt-5'
+									'bg-success text-white hover:bg-primary mt-5 text-sm md:text-base'
 								}
 								onClick={() => setOpenModal(true)}
 							/>

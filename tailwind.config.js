@@ -11,6 +11,12 @@ export default {
 	],
 	theme: {
 		extend: {
+			dropShadow: {
+				top: [
+					'0 -4px 3px rgb(0 0 0 / 0.07)',
+					'0 -2px 2px rgb(0 0 0 / 0.06)',
+				],
+			},
 			fontFamily: {
 				sans: [
 					'Poppins',
@@ -28,8 +34,5 @@ export default {
 			},
 		},
 	},
-	plugins: [
-		require('@tailwindcss/forms'),
-		[flowbite],
-	],
+	plugins: [require('@tailwindcss/forms'), [flowbite]],
 };

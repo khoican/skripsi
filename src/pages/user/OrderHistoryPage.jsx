@@ -34,29 +34,29 @@ const OrderHistoryPage = () => {
 			: orderHistory.filter((order) => order.status === status);
 
 	return (
-		<main className="min-h-[70vh] p-5 max-w-screen-xl mx-auto px-20 mt-5">
-			<div className="flex justify-between items-center w-full">
+		<main className="min-h-[70vh] p-5 max-w-screen-xl mx-auto px-5 md:px-20">
+			<div className="flex flex-col md:flex-row justify-between md:items-center">
 				<h1 className="font-semibold text-2xl">Order History</h1>
 
-				<div className="flex gap-3 mt-1">
+				<div className="flex gap-3 mt-3 lg:mt-1 w-full overflow-y-auto lg:overflow-y-visible lg:justify-end">
 					<Button
 						text={'Semua Riwayat'}
-						style={`border text-sm ${status === 'all' ? 'bg-blue-500 text-white' : 'border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'}`}
+						style={`border text-nowrap text-sm ${status === 'all' ? 'bg-blue-500 text-white' : 'border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'}`}
 						onClick={() => handleStatus('all')}
 					/>
 					<Button
 						text={'Sedang Diproses'}
-						style={`border text-sm ${status === 'PROSES' ? 'bg-yellow-500 text-white' : 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white'}`}
+						style={`border text-nowrap text-sm ${status === 'PROSES' ? 'bg-yellow-500 text-white' : 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white'}`}
 						onClick={() => handleStatus('PROSES')}
 					/>
 					<Button
 						text={'Berhasil'}
-						style={`border text-sm ${status === 'SUKSES' ? 'bg-success text-white' : 'border-success text-success hover:bg-success hover:text-white'}`}
+						style={`border text-nowrap text-sm ${status === 'SUKSES' ? 'bg-success text-white' : 'border-success text-success hover:bg-success hover:text-white'}`}
 						onClick={() => handleStatus('SUKSES')}
 					/>
 					<Button
 						text={'Dibatalkan'}
-						style={`border  text-sm ${status === 'BATAL' ? 'bg-danger text-white' : 'border-danger text-danger hover:bg-danger hover:text-white'}`}
+						style={`border text-nowrap text-sm ${status === 'BATAL' ? 'bg-danger text-white' : 'border-danger text-danger hover:bg-danger hover:text-white'}`}
 						onClick={() => handleStatus('BATAL')}
 					/>
 				</div>

@@ -20,8 +20,6 @@ const CategoryMenu = (props) => {
 		(item) => item.categoryId === id,
 	);
 
-	console.log(handleSubCategory);
-
 	return (
 		<>
 			{handleSubCategory.length > 0 ? (

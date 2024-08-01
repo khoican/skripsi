@@ -66,10 +66,10 @@ const ProductPage = () => {
 				/>
 			)}
 
-			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
+			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-20 flex gap-5 mt-5">
 				<CategoriesMenu />
 
-				<div className="w-3/4">
+				<div className="w-full md:w-3/4">
 					<div className="">
 						<h1 className="font-semibold text-lg mb-3">
 							{path

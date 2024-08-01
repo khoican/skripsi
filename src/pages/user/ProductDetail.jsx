@@ -34,17 +34,19 @@ const ProductDetail = (product, error) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const cartProduct = decryptData('cart') || [];
-		const existing = cartProduct
-			.filter((item) => item.productId === productId.id)
-			.map((item) => {
-				setNote(item.notes);
-				return {
-					id: item.id,
-					quantity: item.quantity,
-					notes: item.notes,
-				};
-			});
+		const cartProduct = localStorage.getItem('cart') && decryptData('cart');
+		const existing =
+			cartProduct &&
+			cartProduct
+				.filter((item) => item.productId === productId.id)
+				.map((item) => {
+					setNote(item.notes);
+					return {
+						id: item.id,
+						quantity: item.quantity,
+						notes: item.notes,
+					};
+				});
 		setExistingProduct(existing[0]);
 	}, [productId]);
 
@@ -110,13 +112,13 @@ const ProductDetail = (product, error) => {
 			</Helmet>
 
 			{loading && <Loading />}
-			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 flex gap-5 mt-5">
-				<div className="w-5/12">
+			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-20 flex flex-col md:flex-row gap-5 md:mt-5">
+				<div className="w-full md:w-5/12">
 					<div className="w-full">
 						{getImages && <Carousel images={getImages} />}
 					</div>
 				</div>
-				<div className="w-7/12">
+				<div className="w-full md:w-7/12">
 					<div className="p-3">
 						<div className="flex justify-between pb-1 border-b border-gray-300">
 							<div className="flex flex-col">
