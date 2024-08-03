@@ -5,7 +5,6 @@ import Option from '../Elements/Select/option';
 import Textarea from '../Elements/Textarea';
 import ImageProduct from '../../../../public/images/Rectangle 11.png';
 import Button from '../Elements/Button';
-import Counter from '../../user/fragments/counter/Index';
 import {
 	postProduct,
 	getProductById,
@@ -64,8 +63,6 @@ const FormProduct = () => {
 		}
 	}, [dispatch, productId]);
 
-	const count = useSelector((state) => state.counter[1]?.count);
-
 	const [addImage, setAddImage] = useState([]);
 	const [addPreviewImage, setPreviewImage] = useState([]);
 
@@ -99,7 +96,7 @@ const FormProduct = () => {
 			description: addProduct.description,
 			price: addProduct.price,
 			purchasePrice: addProduct.purchasePrice,
-			stock: count,
+			stock: addProduct.stock,
 			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
 		};
@@ -232,7 +229,7 @@ const FormProduct = () => {
 							{/* <Counter id={1} value={addProduct.stock} /> */}
 							<Input
 								type="number"
-								name="price"
+								name="stock"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
 								value={addProduct.stock}
@@ -260,7 +257,7 @@ const FormProduct = () => {
 						<div className="pt-3">
 							<Input
 								type="number"
-								name="price"
+								name="purchasePrice"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
 								value={addProduct.purchasePrice}
