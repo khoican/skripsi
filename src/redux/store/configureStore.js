@@ -9,6 +9,7 @@ import counterReducer from '../reducer/counterReducer';
 
 export default configureStore({
 	reducer: {
+		fetchBestSeller: productsReducer,
 		fetchProductCount: productsReducer,
 		fetchProductDetail: productDetailReducer,
 		fetchProducts: productsReducer,

@@ -1,16 +1,18 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
 import { NumericFormat } from 'react-number-format';
-import { fetchProductCount } from '../../../redux/actions/productsAction';
+import {
+	fetchProductCount,
+	fetchBestSeller,
+} from '../../../redux/actions/productsAction';
 import {
 	fetchOrderCount,
 	fetchOrderOmzet,
 } from '../../../redux/actions/orderAction';
-import ListBestSellerProduct from '../Elements/ListBestSellerProduct';
+import BestSellerImage from '../../../assets/img/Logo Image.png';
 import Chart from '../Fragments/Chart';
 import TableOrder from '../Fragments/TableOrder';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { Spinner } from 'flowbite-react';
+import { useEffect } from 'react';
 
 const DashboardOverview = () => {
 	const dispatch = useDispatch();
@@ -19,11 +21,13 @@ const DashboardOverview = () => {
 	);
 	const orderCount = useSelector((state) => state.fetchOrderCount.order);
 	const orderOmzet = useSelector((state) => state.fetchOrderOmzet.omzet);
+	const bestSeller = useSelector((state) => state.fetchBestSeller.products);
 
 	useEffect(() => {
 		dispatch(fetchProductCount());
 		dispatch(fetchOrderCount());
 		dispatch(fetchOrderOmzet());
+		dispatch(fetchBestSeller());
 	}, [dispatch]);
 
 	return (
@@ -86,9 +90,35 @@ const DashboardOverview = () => {
 					<div className="pb-5">
 						<h1 className="font-bold text-2xl">Best Seller</h1>
 					</div>
-					<ListBestSellerProduct />
-					<ListBestSellerProduct />
-					<ListBestSellerProduct />
+					{bestSeller.map((product, index) => (
+						<div
+							className="flex justify-between gap-5 pb-5"
+							key={index}
+						>
+							<div className="gap-5 flex justify-center">
+								<div className="m-auto">
+									<img
+										src={BestSellerImage}
+										className="w-20"
+										alt="BestSellerProduct"
+									/>
+								</div>
+								<div className="m-auto">
+									<h2 className="font-semibold text-lg">
+										{product.name}
+									</h2>
+									<p className="font-semibold text-light-red text-xl">
+										Rp. {product.price}
+									</p>
+								</div>
+							</div>
+							<div className="my-auto">
+								<p className="font-semibold text-xl">
+									{product.totalSold}
+								</p>
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 
