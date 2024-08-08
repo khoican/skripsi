@@ -19,7 +19,7 @@ const Textarea = (props) => {
 	const { name, cols, rows, variants, onChange, placeholder, value } = props;
 	return (
 		<>
-			{/* <textarea
+			<textarea
 				placeholder={placeholder}
 				className={variants}
 				name={name}
@@ -27,38 +27,7 @@ const Textarea = (props) => {
 				rows={rows}
 				onChange={onChange}
 				value={value}
-			></textarea> */}
-			<CKEditor
-				editor={ClassicEditor}
-				config={{
-					toolbar: {
-						items: [
-							'undo',
-							'redo',
-							'|',
-							'bold',
-							'italic',
-							'underline',
-							'numberedList',
-						],
-					},
-					plugins: [
-						Bold,
-						Essentials,
-						Italic,
-						Mention,
-						Paragraph,
-						Undo,
-						Underline,
-						List,
-					],
-					licenseKey: '<YOUR_LICENSE_KEY>',
-					mention: {
-						// Mention configuration
-					},
-					initialData: '<p>Hello from CKEditor 5 in React!</p>',
-				}}
-			/>
+			></textarea>
 		</>
 	);
 };
