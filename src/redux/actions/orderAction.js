@@ -57,7 +57,6 @@ export const fetchOrderOmzet = () => {
 		dispatch(fetchOrderOmzetRequest());
 		try {
 			const data = await getOrderOmzet();
-			console.log(data);
 			dispatch(fetchOrderOmzetSuccess(data));
 		} catch (error) {
 			dispatch(fetchOrderOmzetError(error.message));

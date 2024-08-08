@@ -8,6 +8,9 @@ import {
 	FETCH_PRODUCT_COUNT_REQUEST,
 	FETCH_PRODUCT_COUNT_SUCCESS,
 	FETCH_PRODUCT_COUNT_ERROR,
+	FETCH_BEST_SELLER_REQUEST,
+	FETCH_BEST_SELLER_SUCCESS,
+	FETCH_BEST_SELLER_ERROR
 } from '../actions/productsAction';
 
 const initialState = {
@@ -19,6 +22,25 @@ const initialState = {
 
 const productsReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case FETCH_BEST_SELLER_REQUEST:
+			return {
+				...state,
+				loading: true,
+			}
+		case FETCH_BEST_SELLER_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				products: action.payload,
+				error: '',
+			}
+		case FETCH_BEST_SELLER_ERROR:
+			return {
+				...state,
+				loading: false,
+				products: [],
+				error: action.payload,
+			}
 		case FETCH_PRODUCT_COUNT_REQUEST:
 			return {
 				...state,
