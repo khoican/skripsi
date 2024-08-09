@@ -23,7 +23,7 @@ const TableProduct = (props) => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchProductsDashboard());
 			setPending(false);
-		}, 1500);
+		}, 500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
 
@@ -60,6 +60,11 @@ const TableProduct = (props) => {
 			sortable: true,
 		},
 		{
+			name: 'Harga Beli',
+			selector: (row) => row.price,
+			sortable: true,
+		},
+		{
 			name: 'Category',
 			selector: (row) => row.category,
 			sortable: true,
@@ -84,9 +89,6 @@ const TableProduct = (props) => {
 					</Link>
 					<Button
 						onClick={() => {
-							// setGetDeleteId(row.id),
-							// 	document.getElementById(row.id).showModal();
-							// 	// console.log(row.id);
 							handleOpenDeleteModal(row.id);
 						}}
 					>

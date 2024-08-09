@@ -1,6 +1,16 @@
 import axios from 'axios';
 import { getAppUrl } from '../config/app';
 
+export const getProductCount = async () => {
+	const response = await axios.get(`${getAppUrl()}api/productscount`);
+	return response.data.data;
+}
+
+export const getBestSeller = async () => {
+	const response = await axios.get(`${getAppUrl()}api/products/bestseller`);
+	return response.data.data;
+}
+
 export const postProduct = async (body) => {
 	const formData = new FormData();
 
