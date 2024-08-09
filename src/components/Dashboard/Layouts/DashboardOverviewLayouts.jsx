@@ -113,7 +113,12 @@ const DashboardOverview = () => {
 										{product.name}
 									</h2>
 									<p className="font-semibold text-light-red text-xl">
-										Rp. {product.price}
+										<NumericFormat
+											value={product.price}
+											displayType={'text'}
+											thousandSeparator={true}
+											prefix={'Rp. '}
+										/>
 									</p>
 								</div>
 							</div>
