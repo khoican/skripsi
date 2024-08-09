@@ -40,7 +40,7 @@ const TableUser = () => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchUsers());
 			setPending(false);
-		}, 1500);
+		}, 500);
 
 		if (getEditId !== undefined) {
 			getUserDetail().then((data) => {

@@ -23,7 +23,7 @@ const TableProduct = (props) => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchProductsDashboard());
 			setPending(false);
-		}, 1500);
+		}, 500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
 

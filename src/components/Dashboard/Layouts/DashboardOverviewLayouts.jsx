@@ -1,4 +1,5 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
+import { getAppUrl } from '../../../../config/app';
 import { NumericFormat } from 'react-number-format';
 import {
 	fetchProductCount,
@@ -98,9 +99,13 @@ const DashboardOverview = () => {
 							<div className="gap-5 flex justify-center">
 								<div className="m-auto">
 									<img
-										src={BestSellerImage}
+										src={
+											product.images.length > 0
+												? `${getAppUrl()}${product.images[0].image}`
+												: BestSellerImage
+										}
 										className="w-20"
-										alt="BestSellerProduct"
+										alt="ProductImage"
 									/>
 								</div>
 								<div className="m-auto">
