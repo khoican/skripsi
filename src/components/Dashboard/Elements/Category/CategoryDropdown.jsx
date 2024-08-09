@@ -295,8 +295,6 @@ const AddSubCategory = ({ id }) => {
 		}).then(() => {
 			window.location.reload();
 		});
-
-		console.log(postSubCategory);
 	}
 	return (
 		<>
@@ -322,7 +320,7 @@ const AddSubCategory = ({ id }) => {
 								id="addSub"
 								title="Add Sub Category"
 								btn="Save"
-								variants="bg-success"
+								variants="bg-success z-50"
 							>
 								<div className="flex mt-2 justify-end">
 									<Input

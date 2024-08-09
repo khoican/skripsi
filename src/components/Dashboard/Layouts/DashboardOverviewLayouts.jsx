@@ -39,7 +39,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Products</p>
 							<p className="text-3xl font-bold text-primary pb-2">
-								{productCount === null ? '0' : productCount}
+								{productCount > 0 ? productCount : '0'}
 							</p>
 						</div>
 						<div className="m-auto">
@@ -52,7 +52,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Orders</p>
 							<h2 className="text-3xl font-bold text-secondary pb-2">
-								{orderCount === null ? '0' : orderCount}
+								{orderCount > 0 ? orderCount : '0'}
 							</h2>
 						</div>
 						<div className="m-auto">
@@ -65,15 +65,15 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Omzet</p>
 							<h2 className="text-3xl font-bold text-danger pb-2">
-								{orderOmzet === null ? (
-									'0'
-								) : (
+								{orderOmzet > 0 ? (
 									<NumericFormat
 										value={orderOmzet}
 										displayType={'text'}
 										thousandSeparator={true}
 										prefix={'Rp. '}
 									/>
+								) : (
+									'0'
 								)}
 							</h2>
 						</div>

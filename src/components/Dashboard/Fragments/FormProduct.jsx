@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import Input from '../Elements/Input';
 import Label from '../Elements/Input/Label';
 import Select from '../Elements/Select';
@@ -18,6 +20,7 @@ import { Link, useParams } from 'react-router-dom';
 import CarouselImage from './Carousel';
 
 const FormProduct = () => {
+	const MySwal = withReactContent(Swal);
 	const productId = useParams();
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.fetchCategories.category);
@@ -100,13 +103,31 @@ const FormProduct = () => {
 			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
 		};
-		console.log(productData);
 		productId.id
 			? editProduct(productId.id, productData).then(() => {
-					// window.location.reload();
+					MySwal.fire({
+						title: <p>Edit Product</p>,
+					});
 				})
 			: postProduct(productData).then(() => {
-					window.location.reload();
+					postProduct(productData) === true
+						? MySwal.fire({
+								title: <p>Product Created Succesfully</p>,
+								icon: 'success',
+								showConfirmButton: false,
+								timer: 1000,
+							}).then(() => {
+								console.log(productData);
+								// window.location.reload();
+							})
+						: MySwal.fire({
+								title: <p>Product Failed to Create</p>,
+								icon: 'error',
+								showConfirmButton: false,
+								timer: 1000,
+							}).then(() => {
+								console.log(productData);
+							});
 				});
 	};
 
@@ -226,7 +247,6 @@ const FormProduct = () => {
 							Stock
 						</Label>
 						<div className="pt-3">
-							{/* <Counter id={1} value={addProduct.stock} /> */}
 							<Input
 								type="number"
 								name="stock"
