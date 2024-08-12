@@ -6,7 +6,7 @@ const Sidebar = () => {
 		<>
 			<div
 				id="sideNav"
-				className="w-64 h-screen absolute overflow-y-auto z-50 rounded-none shadow-lg"
+				className="w-64 min-h-screen h-screen fixed overflow-y-auto z-50 rounded-none shadow-lg"
 			>
 				<div className="pt-10 pr-4 pl-4">
 					<div className="flex justify-center pb-4">
