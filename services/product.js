@@ -39,11 +39,13 @@ export const postProduct = async (body) => {
 		);
 
 		if (response.status === 201) {
+			console.log(response.data);
 			return true;
 		}
 
-		// return false;
+		return false;
 	} catch (error) {
+		console.log(error)
 		return false;
 	}
 };

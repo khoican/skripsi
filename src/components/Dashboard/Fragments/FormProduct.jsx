@@ -109,25 +109,27 @@ const FormProduct = () => {
 						title: <p>Edit Product</p>,
 					});
 				})
-			: postProduct(productData).then(() => {
-					postProduct(productData) === true
-						? MySwal.fire({
-								title: <p>Product Created Succesfully</p>,
-								icon: 'success',
-								showConfirmButton: false,
-								timer: 1000,
-							}).then(() => {
-								console.log(productData);
-								// window.location.reload();
-							})
-						: MySwal.fire({
-								title: <p>Product Failed to Create</p>,
-								icon: 'error',
-								showConfirmButton: false,
-								timer: 1000,
-							}).then(() => {
-								console.log(productData);
-							});
+			: postProduct(productData).then((res) => {
+					if (res === true) {
+						MySwal.fire({
+							title: <p>Product Created Successfully</p>,
+							icon: 'success',
+							showConfirmButton: false,
+							timer: 1000,
+						}).then(() => {
+							console.log(productData);
+							// window.location.reload();
+						});
+					} else {
+						MySwal.fire({
+							title: <p>Product Failed to Create</p>,
+							icon: 'error',
+							showConfirmButton: false,
+							timer: 1000,
+						}).then(() => {
+							console.log(productData);
+						});
+					}
 				});
 	};
 
@@ -338,26 +340,6 @@ const FormProduct = () => {
 							<span className="text-danger pr-2">*</span>
 							Please input file with jpg, jpeg, png, gif extension
 						</p>
-						{/* {addImage.map((file, index) => (
-						<div className="pt-4" key={index} value={file.id}>
-							<div className="rounded-lg py-2 px-3 flex justify-center">
-								<Button
-									type="button"
-									variants="flex items-center focus:outline-none"
-								>
-									<DocumentTextIcon className="w-9 pr-2" />
-									<p>{file.name}</p>
-								</Button>
-								<Button type="button">
-									<img
-										src={TrashIcon}
-										alt=""
-										className="h-5 my-auto pl-2"
-									/>
-								</Button>
-							</div>
-						</div>
-						))}  */}
 						<div className="pt-2">
 							<p className="py-4 text-justify">
 								Double check the data you entered before saving
