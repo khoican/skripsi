@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 import { fetchProducts } from '../../redux/actions/productsAction';
 import Alert from '../../components/user/elements/alert/Index';
 import { Helmet } from 'react-helmet';
+import logo from '/logo.png';
 import LoadingScreen from '../../components/user/fragments/LoadingScreen/Index';
+import Logo from '../../components/user/elements/logo/Index';
 
 const HomePage = () => {
 	const dispatch = useDispatch();
@@ -16,6 +18,7 @@ const HomePage = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		setLoading(true);
 		dispatch(fetchProducts(0, 12));
 		setLoading(false);
 	}, [dispatch]);
@@ -33,7 +36,7 @@ const HomePage = () => {
 	};
 
 	if (loading) {
-		return <LoadingScreen />;
+		<LoadingScreen />;
 	}
 
 	return (
