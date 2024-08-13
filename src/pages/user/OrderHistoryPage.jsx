@@ -38,7 +38,7 @@ const OrderHistoryPage = () => {
 			<div className="flex flex-col md:flex-row justify-between md:items-center">
 				<h1 className="font-semibold text-2xl">Order History</h1>
 
-				<div className="flex gap-3 mt-3 lg:mt-1 w-full overflow-y-auto lg:overflow-y-visible lg:justify-end">
+				<div className="flex gap-3 mt-3 lg:mt-1 w-full overflow-y-auto lg:overflow-y-visible lg:justify-end no-scrollbar">
 					<Button
 						text={'Semua Riwayat'}
 						style={`border text-nowrap text-sm ${status === 'all' ? 'bg-blue-500 text-white' : 'border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'}`}

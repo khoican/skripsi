@@ -8,14 +8,14 @@ import {
 	UserIcon,
 } from '@heroicons/react/24/solid';
 
-const Navigation = () => {
+const NavLink = () => {
 	const isActive = useLocation().pathname;
 
 	return (
 		<>
 			<Link
 				to="/dashboard"
-				className={`relative px-4 py-3 flex items-center rounded-lg hover:bg-gray-200 transition-all ease-in 5s-lg space-x-4 ${
+				className={`relative px-4 cursor-pointer py-3 flex items-center rounded-lg hover:bg-gray-200 transition-all ease-in 5s space-x-4 ${
 					isActive == '/dashboard'
 						? 'bg-primary hover:bg-primary text-white'
 						: 'text-gray'
@@ -82,4 +82,4 @@ const Navigation = () => {
 	);
 };
 
-export default Navigation;
+export default NavLink;

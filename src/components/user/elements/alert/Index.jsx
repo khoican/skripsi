@@ -5,7 +5,7 @@ const Alert = (props) => {
 	const { success, message, onClick, onSuccess } = props;
 	return (
 		<div
-			className={`fixed flex items-center gap-5 md:gap-10 top-10 right-4 w-3/4 md:w-full md:right-10 rounded-md p-5 text-white z-10 shadow-lg ${onSuccess === success ? 'bg-success' : 'bg-danger'}`}
+			className={`fixed flex items-center gap-5 md:gap-10 top-10 right-4 w-3/4 md:w-auto md:right-10 rounded-md p-5 text-white z-10 shadow-lg ${onSuccess === success ? 'bg-success' : 'bg-danger'}`}
 		>
 			<div className="flex items-center gap-2">
 				<FontAwesomeIcon

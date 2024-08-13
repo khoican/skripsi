@@ -99,7 +99,7 @@ const InvoicePage = () => {
 						</h2>
 
 						<table className="w-full mt-5">
-							<thead className="border-b border-collapse border-black text-xs md:text-md">
+							<thead className="border-b border-collapse border-black text-xs md:text-base">
 								<tr className="text-center">
 									<th className="w-1/12 pb-2">No</th>
 									<th className="w-4/12 pb-2">Nama produk</th>
@@ -112,7 +112,7 @@ const InvoicePage = () => {
 								{products &&
 									products.map((products, index) => (
 										<tr
-											className="text-center border-collapse border-b border-gray-400 text-xs md:text-md"
+											className="text-center border-collapse border-b border-gray-400 text-xs md:text-base"
 											key={index}
 										>
 											<th className="py-2">
@@ -143,7 +143,7 @@ const InvoicePage = () => {
 										</tr>
 									))}
 
-								<tr className="text-danger text-sm md:text-md">
+								<tr className="text-danger text-sm md:text-base">
 									<td
 										colSpan={4}
 										className="text-end font-semibold uppercase"
