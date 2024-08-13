@@ -20,7 +20,7 @@ const Category = () => {
 			dispatch(fetchCategories());
 			dispatch(fetchSubCategories());
 			setLoading(true);
-		}, 1500);
+		}, 500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
 

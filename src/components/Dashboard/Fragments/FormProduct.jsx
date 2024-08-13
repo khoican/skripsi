@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import Input from '../Elements/Input';
 import Label from '../Elements/Input/Label';
 import Select from '../Elements/Select';
@@ -5,7 +7,6 @@ import Option from '../Elements/Select/option';
 import Textarea from '../Elements/Textarea';
 import ImageProduct from '../../../../public/images/Rectangle 11.png';
 import Button from '../Elements/Button';
-import Counter from '../../user/fragments/counter/Index';
 import {
 	postProduct,
 	getProductById,
@@ -19,6 +20,7 @@ import { Link, useParams } from 'react-router-dom';
 import CarouselImage from './Carousel';
 
 const FormProduct = () => {
+	const MySwal = withReactContent(Swal);
 	const productId = useParams();
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.fetchCategories.category);
@@ -64,8 +66,6 @@ const FormProduct = () => {
 		}
 	}, [dispatch, productId]);
 
-	const count = useSelector((state) => state.counter[1]?.count);
-
 	const [addImage, setAddImage] = useState([]);
 	const [addPreviewImage, setPreviewImage] = useState([]);
 
@@ -99,17 +99,37 @@ const FormProduct = () => {
 			description: addProduct.description,
 			price: addProduct.price,
 			purchasePrice: addProduct.purchasePrice,
-			stock: count,
+			stock: addProduct.stock,
 			images: addImage.slice(1).map((file) => file),
 			subCategoryId: addProduct.subCategoryId,
 		};
-		console.log(productData);
 		productId.id
 			? editProduct(productId.id, productData).then(() => {
-					// window.location.reload();
+					MySwal.fire({
+						title: <p>Edit Product</p>,
+					});
 				})
-			: postProduct(productData).then(() => {
-					window.location.reload();
+			: postProduct(productData).then((res) => {
+					if (res === true) {
+						MySwal.fire({
+							title: <p>Product Created Successfully</p>,
+							icon: 'success',
+							showConfirmButton: false,
+							timer: 1000,
+						}).then(() => {
+							console.log(productData);
+							// window.location.reload();
+						});
+					} else {
+						MySwal.fire({
+							title: <p>Product Failed to Create</p>,
+							icon: 'error',
+							showConfirmButton: false,
+							timer: 1000,
+						}).then(() => {
+							console.log(productData);
+						});
+					}
 				});
 	};
 
@@ -229,10 +249,9 @@ const FormProduct = () => {
 							Stock
 						</Label>
 						<div className="pt-3">
-							{/* <Counter id={1} value={addProduct.stock} /> */}
 							<Input
 								type="number"
-								name="price"
+								name="stock"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
 								value={addProduct.stock}
@@ -260,7 +279,7 @@ const FormProduct = () => {
 						<div className="pt-3">
 							<Input
 								type="number"
-								name="price"
+								name="purchasePrice"
 								variants="w-full rounded-lg border-0 ring-primary ring-1 focus:ring-1 focus:outline-none focus:ring-success transition ease-in-out 5s px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 								onChange={handleAddProduct}
 								value={addProduct.purchasePrice}
@@ -321,26 +340,6 @@ const FormProduct = () => {
 							<span className="text-danger pr-2">*</span>
 							Please input file with jpg, jpeg, png, gif extension
 						</p>
-						{/* {addImage.map((file, index) => (
-						<div className="pt-4" key={index} value={file.id}>
-							<div className="rounded-lg py-2 px-3 flex justify-center">
-								<Button
-									type="button"
-									variants="flex items-center focus:outline-none"
-								>
-									<DocumentTextIcon className="w-9 pr-2" />
-									<p>{file.name}</p>
-								</Button>
-								<Button type="button">
-									<img
-										src={TrashIcon}
-										alt=""
-										className="h-5 my-auto pl-2"
-									/>
-								</Button>
-							</div>
-						</div>
-						))}  */}
 						<div className="pt-2">
 							<p className="py-4 text-justify">
 								Double check the data you entered before saving

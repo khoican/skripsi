@@ -1,9 +1,36 @@
 import { CurrencyDollarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
-import ListBestSellerProduct from '../Elements/ListBestSellerProduct';
+import { getAppUrl } from '../../../../config/app';
+import { NumericFormat } from 'react-number-format';
+import {
+	fetchProductCount,
+	fetchBestSeller,
+} from '../../../redux/actions/productsAction';
+import {
+	fetchOrderCount,
+	fetchOrderOmzet,
+} from '../../../redux/actions/orderAction';
+import BestSellerImage from '../../../assets/img/Logo Image.png';
 import Chart from '../Fragments/Chart';
 import TableOrder from '../Fragments/TableOrder';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const DashboardOverview = () => {
+	const dispatch = useDispatch();
+	const productCount = useSelector(
+		(state) => state.fetchProductCount.product,
+	);
+	const orderCount = useSelector((state) => state.fetchOrderCount.order);
+	const orderOmzet = useSelector((state) => state.fetchOrderOmzet.omzet);
+	const bestSeller = useSelector((state) => state.fetchBestSeller.products);
+
+	useEffect(() => {
+		dispatch(fetchProductCount());
+		dispatch(fetchOrderCount());
+		dispatch(fetchOrderOmzet());
+		dispatch(fetchBestSeller());
+	}, [dispatch]);
+
 	return (
 		<>
 			<div className="lg:flex gap-4 items-stretch px-7 my-10">
@@ -12,7 +39,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Products</p>
 							<p className="text-3xl font-bold text-primary pb-2">
-								20
+								{productCount > 0 ? productCount : '0'}
 							</p>
 						</div>
 						<div className="m-auto">
@@ -25,7 +52,7 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Orders</p>
 							<h2 className="text-3xl font-bold text-secondary pb-2">
-								548
+								{orderCount > 0 ? orderCount : '0'}
 							</h2>
 						</div>
 						<div className="m-auto">
@@ -38,7 +65,16 @@ const DashboardOverview = () => {
 						<div className="m-auto">
 							<p className="font-semibold py-2">Omzet</p>
 							<h2 className="text-3xl font-bold text-danger pb-2">
-								Rp. 10.000.000
+								{orderOmzet > 0 ? (
+									<NumericFormat
+										value={orderOmzet}
+										displayType={'text'}
+										thousandSeparator={true}
+										prefix={'Rp. '}
+									/>
+								) : (
+									'0'
+								)}
 							</h2>
 						</div>
 						<div className="m-auto">
@@ -55,9 +91,44 @@ const DashboardOverview = () => {
 					<div className="pb-5">
 						<h1 className="font-bold text-2xl">Best Seller</h1>
 					</div>
-					<ListBestSellerProduct />
-					<ListBestSellerProduct />
-					<ListBestSellerProduct />
+					{bestSeller.map((product, index) => (
+						<div
+							className="flex justify-between gap-5 pb-5"
+							key={index}
+						>
+							<div className="gap-5 flex justify-center">
+								<div className="m-auto">
+									<img
+										src={
+											product.images.length > 0
+												? `${getAppUrl()}${product.images[0].image}`
+												: BestSellerImage
+										}
+										className="w-20"
+										alt="ProductImage"
+									/>
+								</div>
+								<div className="m-auto">
+									<h2 className="font-semibold text-lg">
+										{product.name}
+									</h2>
+									<p className="font-semibold text-light-red text-xl">
+										<NumericFormat
+											value={product.price}
+											displayType={'text'}
+											thousandSeparator={true}
+											prefix={'Rp. '}
+										/>
+									</p>
+								</div>
+							</div>
+							<div className="my-auto">
+								<p className="font-semibold text-xl">
+									{product.totalSold}
+								</p>
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 

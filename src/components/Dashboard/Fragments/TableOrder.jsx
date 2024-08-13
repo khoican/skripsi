@@ -20,7 +20,7 @@ const TableOrder = () => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchOrders());
 			setPending(false);
-		}, 1500);
+		}, 500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
 
