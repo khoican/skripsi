@@ -10,10 +10,11 @@ import {
 const Carousel = ({ images }) => {
 	const [selectedImage, setSelectedImage] = useState(0);
 
-	if (!images) {
+	if (images.length === 0) {
 		return <p>Loading...</p>;
 	}
 
+	console.log(images);
 	const handleNextImage = () => {
 		setSelectedImage((prev) => (prev + 1) % images.length);
 	};
