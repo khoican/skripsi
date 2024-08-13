@@ -27,14 +27,22 @@ const ProductDetail = (product, error) => {
 
 	const products = useSelector((state) => state.fetchProductDetail.product);
 
-	const count = useSelector((state) => state.counter[productId.id]?.count);
+	const count = useSelector(
+		(state) => state.counter[productId.id]?.count || 0,
+	);
 
 	useEffect(() => {
 		dispatch(fetchProductDetail(productId.id));
 	}, [dispatch]);
 
+	if (!products) {
+		return <Loading />;
+	}
+
 	useEffect(() => {
-		const cartProduct = localStorage.getItem('cart') && decryptData('cart');
+		const cartProduct = localStorage.getItem('cart')
+			? decryptData('cart')
+			: [];
 		const existing =
 			cartProduct &&
 			cartProduct
@@ -49,10 +57,6 @@ const ProductDetail = (product, error) => {
 				});
 		setExistingProduct(existing[0]);
 	}, [productId]);
-
-	if (!products && !products.images) {
-		return <Loading />;
-	}
 
 	const handleNote = (e) => {
 		setNote(e.target.value);
@@ -94,7 +98,8 @@ const ProductDetail = (product, error) => {
 			});
 		}
 	};
-	const getImages = products.images ? products.images : [];
+
+	let getImages = products.images ? products.images : [];
 
 	return (
 		<>
