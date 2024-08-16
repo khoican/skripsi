@@ -10,6 +10,7 @@ export const getCartByUserId = async (id) => {
 };
 
 export const postCartProduct = async (data) => {
+	console.log(data);
 	try {
 		const response = await axios.post(
 			`${getAppUrl()}api/cartproducts`,

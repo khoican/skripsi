@@ -71,6 +71,31 @@ const ProductPage = () => {
 
 				<div className="w-full md:w-3/4">
 					<div className="">
+						<div className="mb-5 text-sm text-primary flex gap-1">
+							<Link to={'/'}>Beranda</Link>
+							<p>/</p>
+							<Link to={'/products'}>Produk</Link>
+							{path ? (
+								<>
+									<p>/</p>
+									<Link to={`/products/${path}`}>
+										{path.replace('%20', ' ')}
+									</Link>
+								</>
+							) : subCategoryId.id ? (
+								<>
+									<p>/</p>
+									<Link to={`/products/${subCategoryId.id}}`}>
+										{product[0].subCategory.category.name}
+									</Link>
+									<p>/</p>
+									<Link to={`/products/${subCategoryId.id}}`}>
+										{product[0].subCategory.name}
+									</Link>
+								</>
+							) : null}
+						</div>
+
 						<h1 className="font-semibold text-lg mb-3">
 							{path
 								? `Menampilkan hasil untuk "${path.replace('%20', ' ')}"`
