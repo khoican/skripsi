@@ -4,23 +4,23 @@ import { getAppUrl } from '../config/app';
 export const getProductCount = async () => {
 	const response = await axios.get(`${getAppUrl()}api/productscount`);
 	return response.data.data;
-}
+};
 
 export const getBestSeller = async () => {
 	const response = await axios.get(`${getAppUrl()}api/products/bestseller`);
 	return response.data.data;
-}
+};
 
 export const postProduct = async (body) => {
 	const formData = new FormData();
 
-	formData.append('name', body.name)
-	formData.append('description', body.description)
-	formData.append('stock', body.stock)
-	formData.append('subCategoryId', body.subCategoryId)
-	formData.append('price', body.price)
-	formData.append('purchasePrice', body.purchasePrice)
-	
+	formData.append('name', body.name);
+	formData.append('description', body.description);
+	formData.append('stock', body.stock);
+	formData.append('subCategoryId', body.subCategoryId);
+	formData.append('price', body.price);
+	formData.append('purchasePrice', body.purchasePrice);
+
 	if (body.images && body.images.length > 0) {
 		body.images.forEach((images) => {
 			formData.append('images', images);
@@ -45,7 +45,7 @@ export const postProduct = async (body) => {
 
 		return false;
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		return false;
 	}
 };
