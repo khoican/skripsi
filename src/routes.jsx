@@ -45,6 +45,14 @@ export const router = createBrowserRouter([
 				element: <ProductPage />,
 			},
 			{
+				path: '/products?category=:query',
+				element: <ProductPage />,
+			},
+			{
+				path: '/products?category=:query&subCategory=:query',
+				element: <ProductPage />,
+			},
+			{
 				path: '/products/show/:id',
 				element: <ProductDetail />,
 			},

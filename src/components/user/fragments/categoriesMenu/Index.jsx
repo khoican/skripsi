@@ -2,13 +2,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import CategoriesDropdown from '../../elements/categoriesDropdown/Index';
 import { useEffect } from 'react';
 import { fetchCategories } from '../../../../redux/actions/categoryAction';
+import { fetchSubCategories } from '../../../../redux/actions/subCategoryAction';
 
 const CategoriesMenu = () => {
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.fetchCategories.category);
+	const subCategories = useSelector(
+		(state) => state.fetchSubCategories.category,
+	);
 
 	useEffect(() => {
 		dispatch(fetchCategories());
+		dispatch(fetchSubCategories());
 	}, [dispatch]);
 
 	return (
@@ -17,13 +22,22 @@ const CategoriesMenu = () => {
 				Kategori
 			</h1>
 			{categories.length > 0 &&
-				categories.map((item, index) => (
-					<CategoriesDropdown
-						key={index}
-						name={item.name}
-						id={item.id}
-					/>
-				))}
+				categories.map((item, index) => {
+					const filteredSubCategories = subCategories
+						? subCategories.filter(
+								(sub) => sub.categoryId === item.id,
+							)
+						: [];
+
+					return (
+						<CategoriesDropdown
+							key={index}
+							name={item.name}
+							id={item.id}
+							sub={filteredSubCategories}
+						/>
+					);
+				})}
 		</div>
 	);
 };
