@@ -9,19 +9,25 @@ import Alert from '../../components/user/elements/alert/Index';
 import { searchProductByName } from '../../../services/product';
 
 const ProductPage = () => {
-	const subCategoryId = useParams();
-	const path = useLocation().search.split('=')[1];
 	const dispatch = useDispatch();
 	const [status, setStatus] = useState();
-	let products = useSelector((state) => state.fetchProducts.products);
 	const [search, setSearch] = useState('');
+	const location = useLocation();
+	let products = useSelector((state) => state.fetchProducts.products);
+
+	const searchQuery =
+		new URLSearchParams(location.search).get('search') || '';
+	const categoryQuery =
+		new URLSearchParams(location.search).get('category') || '';
+	const subCategoryQuery =
+		new URLSearchParams(location.search).get('subCategory') || '';
 
 	useEffect(() => {
 		dispatch(fetchProducts());
 	}, [dispatch]);
 
 	const getProductBySearch = async () => {
-		const response = await searchProductByName(path);
+		const response = await searchProductByName(searchQuery);
 
 		return response;
 	};
@@ -33,15 +39,8 @@ const ProductPage = () => {
 		};
 
 		fetchSearchProduct();
-	}, [path]);
-
-	let product = path
-		? search
-		: subCategoryId.id
-			? products.filter(
-					(product) => product.subCategoryId === subCategoryId.id,
-				)
-			: products;
+	}, [searchQuery]);
+	console.log(products);
 
 	const handleStatus = (message) => {
 		setStatus(message);
@@ -54,6 +53,20 @@ const ProductPage = () => {
 	const handleClose = () => {
 		setStatus('');
 	};
+
+	let product = products;
+
+	if (searchQuery) {
+		product = search;
+	} else if (categoryQuery) {
+		product = products.filter(
+			(product) => product.categoryId === categoryQuery,
+		);
+	} else if (subCategoryQuery) {
+		product = products.filter(
+			(product) => product.subCategoryId === subCategoryQuery,
+		);
+	}
 
 	return (
 		<>
@@ -71,10 +84,53 @@ const ProductPage = () => {
 
 				<div className="w-full md:w-3/4">
 					<div className="">
+						<div className="mb-5 text-sm text-primary flex gap-1">
+							<Link to={'/'}>Beranda</Link>
+							<p>/</p>
+							<Link to={'/products'}>Produk</Link>
+							{searchQuery ? (
+								<>
+									<p>/</p>
+									<Link
+										to={`/products?search=${searchQuery}`}
+									>
+										{searchQuery.replace('%20', ' ')}
+									</Link>
+								</>
+							) : subCategoryQuery && product.length > 0 ? (
+								<>
+									<p>/</p>
+									<Link
+										to={`/products?category=${categoryQuery}`}
+									>
+										{product[0]?.subCategory?.category
+											?.name || 'Kategori'}
+									</Link>
+									<p>/</p>
+									<Link
+										to={`/products?category=${categoryQuery}&subCategory=${subCategoryQuery}`}
+									>
+										{product[0]?.subCategory?.name ||
+											'Subkategori'}
+									</Link>
+								</>
+							) : categoryQuery && product.length > 0 ? (
+								<>
+									<p>/</p>
+									<Link
+										to={`/products?category=${categoryQuery}`}
+									>
+										{product[0]?.subCategory?.category
+											?.name || 'Kategori'}
+									</Link>
+								</>
+							) : null}
+						</div>
+
 						<h1 className="font-semibold text-lg mb-3">
-							{path
-								? `Menampilkan hasil untuk "${path.replace('%20', ' ')}"`
-								: subCategoryId.id
+							{searchQuery
+								? `Menampilkan hasil untuk "${searchQuery.replace('%20', ' ')}"`
+								: subCategoryQuery || categoryQuery
 									? 'Menampilkan ' +
 										product.length +
 										' Produk'

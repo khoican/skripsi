@@ -293,7 +293,7 @@ const CategoriesDropdown = (props) => {
 				</div>
 			) : (
 				<Link
-					to={`/products/${id}`}
+					to={`/products?category=${id}`}
 					className="ms-4 flex justify-between items-center cursor-pointer hover:text-green-900"
 				>
 					<div className="flex items-center gap-5">
@@ -306,7 +306,7 @@ const CategoriesDropdown = (props) => {
 			{open === id &&
 				handleSubCategory.map((item, index) => (
 					<Link
-						to={`/products/${item.id}`}
+						to={`/products?category=${item.categoryId}&subCategory=${item.id}`}
 						key={index}
 						className="flex items-center gap-5 ms-8"
 					>

@@ -7,7 +7,6 @@ import {
 } from '../../../services/orderProduct';
 import moment from 'moment/moment';
 import 'moment/locale/id';
-import Loading from '../../components/user/fragments/loading/Index';
 import LoadingScreen from '../../components/user/fragments/LoadingScreen/Index';
 import { Helmet } from 'react-helmet';
 
@@ -16,6 +15,7 @@ const InvoicePage = () => {
 	const [order, setOrder] = useState(null);
 	const [products, setProducts] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [showLoadingScreen, setShowLoadingScreen] = useState(true);
 
 	useEffect(() => {
 		const fetchOrder = async () => {
@@ -31,16 +31,18 @@ const InvoicePage = () => {
 				const response = await getOrderHistoryProduct(id);
 				setProducts(response.data);
 			} catch (error) {
-				console.error('Failed to fetch order:', error);
+				console.error('Failed to fetch products:', error);
 			}
 		};
 
-		fetchOrder();
-		fetchProducts();
+		Promise.all([fetchOrder(), fetchProducts()]).then(() => {
+			setLoading(false);
+			setTimeout(() => setShowLoadingScreen(false), 500);
+		});
 	}, [id]);
 
-	if (!order) {
-		return <LoadingScreen />;
+	if (loading) {
+		return <LoadingScreen hide={!showLoadingScreen} />;
 	}
 
 	const getDate = order && moment(order.createdAt);
@@ -55,6 +57,15 @@ const InvoicePage = () => {
 			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-40 gap-5 mt-5">
 				<div className="mb-10">
 					<h1 className="font-semibold text-2xl">Invoice</h1>
+					<div className="mb-5 text-sm text-primary flex gap-1">
+						<Link to={'/'}>Beranda</Link>
+						<p>/</p>
+						<Link to={'/orderhistory'}>Riwayar Transaksi</Link>
+						<p>/</p>
+						<Link to={`/invoice/${order.id}`}>
+							#{order.invoice}
+						</Link>
+					</div>
 
 					<div className="mt-10 w-full md:w-1/2 px-5 flex flex-col text-md gap-3 text-xs md:text-base">
 						<div className="flex w-full">
@@ -110,7 +121,7 @@ const InvoicePage = () => {
 							</thead>
 							<tbody>
 								{products &&
-									products.map((products, index) => (
+									products.map((product, index) => (
 										<tr
 											className="text-center border-collapse border-b border-gray-400 text-xs md:text-base"
 											key={index}
@@ -119,22 +130,22 @@ const InvoicePage = () => {
 												{index + 1}
 											</th>
 											<td className="py-2 pl-5 text-start">
-												{products.productName}
+												{product.productName}
 											</td>
 											<td className="py-2 pl-5">
 												<NumericFormat
-													value={products.price}
+													value={product.price}
 													displayType="text"
 													thousandSeparator={true}
 													prefix={'Rp. '}
 												/>
 											</td>
 											<td className="py-2">
-												{products.quantity}
+												{product.quantity}
 											</td>
 											<td className="py-2">
 												<NumericFormat
-													value={products.totalPrice}
+													value={product.totalPrice}
 													displayType="text"
 													thousandSeparator={true}
 													prefix={'Rp. '}

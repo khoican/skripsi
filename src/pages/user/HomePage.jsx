@@ -98,12 +98,14 @@ const HomePage = () => {
 									/>
 								))}
 							</div>
-							<Link
-								to={'/products'}
-								className="text-sm text-green-700"
-							>
-								Lihat produk lainnya...
-							</Link>
+							{products.length >= 12 && (
+								<Link
+									to={'/products'}
+									className="text-sm text-green-700"
+								>
+									Lihat produk lainnya...
+								</Link>
+							)}
 						</div>
 					</div>
 				</main>

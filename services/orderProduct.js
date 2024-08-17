@@ -1,12 +1,17 @@
 import { getAppUrl } from '../config/app';
 import axios from 'axios';
 
-export const getAllOrderByUserId = async (id) => {
+export const getAllOrderByUserId = async (id, status) => {
 	try {
-		const response = await axios.get(
-			`${getAppUrl()}api/orders?userId=${id}`,
-		);
-		console.log(response.data);
+		let response;
+
+		status != 'all'
+			? (response = await axios.get(
+					`${getAppUrl()}api/orders?status=${status}&userid=${id}`,
+				))
+			: (response = await axios.get(
+					`${getAppUrl()}api/orders?userid=${id}`,
+				));
 
 		return response.data;
 	} catch (error) {

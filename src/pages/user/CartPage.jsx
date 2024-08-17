@@ -107,6 +107,11 @@ const CartPage = () => {
 					/>
 				)}
 				<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-20 gap-5 mt-5">
+					<div className="mb-5 text-sm text-primary flex gap-1">
+						<Link to={'/'}>Beranda</Link>
+						<p>/</p>
+						<Link to={'/cart'}>keranjang</Link>
+					</div>
 					<div className="mb-10 text-center">
 						<h1 className="font-semibold text-2xl">
 							Keranjang Kosong
@@ -160,6 +165,12 @@ const CartPage = () => {
 				<div className="mb-10">
 					<h1 className="font-semibold text-2xl">Keranjang Anda</h1>
 					<p>Segera checkout barang anda sebelum kehabisan</p>
+				</div>
+
+				<div className="mb-5 text-sm text-primary flex gap-1">
+					<Link to={'/'}>Beranda</Link>
+					<p>/</p>
+					<Link to={'/cart'}>keranjang</Link>
 				</div>
 
 				<div className="flex justify-between gap-6">

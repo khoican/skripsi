@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { fetchProductDetail } from '../../redux/actions/productDetailAction';
 import { NumericFormat } from 'react-number-format';
 import Carousel from '../../components/user/fragments/carousel/Index';
@@ -11,9 +11,9 @@ import { faBox } from '@fortawesome/free-solid-svg-icons';
 import { updateCart } from '../../../helper/updateCart';
 import Button from '../../components/user/elements/button/Index';
 import Alert from '../../components/user/elements/alert/Index';
-import Loading from '../../components/user/fragments/loading/Index';
 import { Helmet } from 'react-helmet';
 import { decryptData } from '../../../helper/cryptoData';
+import LoadingScreen from '../../components/user/fragments/LoadingScreen/Index';
 
 const ProductDetail = (product, error) => {
 	const user = localStorage.getItem('user') && decryptData('user');
@@ -24,6 +24,7 @@ const ProductDetail = (product, error) => {
 	const [status, setStatus] = useState();
 	const [loading, setLoading] = useState(false);
 	const [note, setNote] = useState('');
+	const [showLoadingScreen, setShowLoadingScreen] = useState(true);
 
 	const products = useSelector((state) => state.fetchProductDetail.product);
 
@@ -36,7 +37,7 @@ const ProductDetail = (product, error) => {
 	}, [dispatch]);
 
 	if (!products) {
-		return <Loading />;
+		return <LoadingScreen hide={!showLoadingScreen} />;
 	}
 
 	useEffect(() => {
@@ -55,6 +56,7 @@ const ProductDetail = (product, error) => {
 						notes: item.notes,
 					};
 				});
+
 		setExistingProduct(existing[0]);
 	}, [productId]);
 
@@ -78,6 +80,7 @@ const ProductDetail = (product, error) => {
 
 				if (response.status !== 'success') {
 					setLoading(false);
+					setTimeout(() => setShowLoadingScreen(false), 500);
 					setStatus(response);
 				} else {
 					navigate('/cart');
@@ -89,6 +92,7 @@ const ProductDetail = (product, error) => {
 				});
 
 				setLoading(false);
+				setTimeout(() => setShowLoadingScreen(false), 500);
 			}
 		} else {
 			setStatus({
@@ -116,7 +120,6 @@ const ProductDetail = (product, error) => {
 				<title>{products.name}</title>
 			</Helmet>
 
-			{loading && <Loading />}
 			<main className="min-h-screen p-5 max-w-screen-xl mx-auto px-5 md:px-20 flex flex-col md:flex-row gap-5 md:mt-5">
 				<div className="w-full md:w-5/12">
 					<div className="w-full">
@@ -124,6 +127,15 @@ const ProductDetail = (product, error) => {
 					</div>
 				</div>
 				<div className="w-full md:w-7/12">
+					<div className="mb-5 text-sm text-primary flex gap-1">
+						<Link to={'/'}>Beranda</Link>
+						<p>/</p>
+						<Link to={'/products'}>Produk</Link>
+						<p>/</p>
+						<Link to={'/products/' + products.id + ''}>
+							{products.name}
+						</Link>
+					</div>
 					<div className="p-3">
 						<div className="flex justify-between pb-1 border-b border-gray-300">
 							<div className="flex flex-col">
