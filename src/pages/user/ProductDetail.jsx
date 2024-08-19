@@ -274,7 +274,7 @@ const ProductDetail = (product, error) => {
 			)}
 
 			{isMobile && !modal && (
-				<div className="sticky bottom-0 w-full bg-white p-5 drop-shadow-lg flex justify-end">
+				<div className="sticky bottom-0 w-full bg-white p-5 drop-shadow-top flex justify-end">
 					<Button
 						text={
 							loading
