@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/user/fragments/modal/Index';
 import { getCartByUserId } from '../../../services/cartProduct';
 import { decryptData } from '../../../helper/cryptoData';
+import LoadingScreen from '../../components/user/fragments/LoadingScreen/Index';
 
 const CheckoutPage = () => {
 	const user = decryptData('user');
@@ -26,26 +27,12 @@ const CheckoutPage = () => {
 		notes: '',
 	});
 	const [total, setTotal] = useState(0);
-
-	const handleOpenAddress = () => {
-		setOpenAddress(true);
-	};
-	const handleCloseAddress = () => {
-		setOpenAddress(false);
-	};
-
-	const input = (e) => {
-		setOrderInput({
-			...orderInput,
-			[e.target.name]: e.target.value,
-		});
-	};
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchCart = async () => {
 			try {
 				const response = await getCartByUserId(user.id);
-
 				setCarts(response);
 			} catch (error) {
 				console.error('Failed to fetch cart:', error);
@@ -64,20 +51,37 @@ const CheckoutPage = () => {
 		setTotal(totalPrice);
 	}, [carts]);
 
+	const input = (e) => {
+		setOrderInput({
+			...orderInput,
+			[e.target.name]: e.target.value,
+		});
+	};
+
 	const handleSubmit = async () => {
 		const data = {
 			name: orderInput.name,
-			address:
-				openAddress === true ? orderInput.address : 'Ambil di toko',
+			address: openAddress ? orderInput.address : 'Ambil di toko',
 			phoneNumber: phone,
 			notes: orderInput.notes,
 			totalPrice: total,
 		};
 
-		const response = await postOrder(data);
-		console.log(response);
-		navigate(`/invoice/${response.id}`);
+		setLoading(true);
+
+		try {
+			const response = await postOrder(data);
+			navigate(`/invoice/${response.id}`);
+		} catch (error) {
+			console.error('Failed to submit order:', error);
+		} finally {
+			setLoading(false);
+		}
 	};
+
+	if (loading) {
+		return <LoadingScreen />;
+	}
 
 	return (
 		<>
@@ -87,7 +91,7 @@ const CheckoutPage = () => {
 					onClose={() => setOpenModal(false)}
 					onSave={handleSubmit}
 				>
-					<p className={'text-xs md:text-sm'}>
+					<p className="text-xs md:text-sm">
 						Klik lanjutkan jika semua data pemesanan sudah benar
 					</p>
 				</Modal>
@@ -139,7 +143,6 @@ const CheckoutPage = () => {
 								/>
 							</div>
 							<p className="text-xs">
-								{' '}
 								<span className="text-red-600 font-bold mr-1">
 									*
 								</span>
@@ -158,8 +161,8 @@ const CheckoutPage = () => {
 										'border border-primary text-primary hover:bg-primary hover:text-white mt-2 text-xs md:text-base'
 									}
 									icon={faTruckFast}
-									onClick={handleOpenAddress}
-									active={openAddress ? true : false}
+									onClick={() => setOpenAddress(true)}
+									active={openAddress}
 								/>
 								<Button
 									text={'Ambil di Toko'}
@@ -167,12 +170,12 @@ const CheckoutPage = () => {
 										'border border-primary text-primary hover:bg-primary hover:text-white mt-2 text-xs md:text-base'
 									}
 									icon={faStore}
-									onClick={handleCloseAddress}
-									active={!openAddress ? true : false}
+									onClick={() => setOpenAddress(false)}
+									active={!openAddress}
 								/>
 							</div>
 
-							{openAddress === true && (
+							{openAddress && (
 								<div className="mt-4">
 									<label
 										className="text-sm font-semibold"
@@ -190,7 +193,6 @@ const CheckoutPage = () => {
 										className="form-input w-full border border-primary rounded-md focus:border-primary mt-2 resize-none text-xs md:text-base"
 									></textarea>
 									<p className="text-xs">
-										{' '}
 										<span className="text-red-600 font-bold mr-1">
 											*
 										</span>
@@ -279,11 +281,12 @@ const CheckoutPage = () => {
 
 						<div className="flex justify-end">
 							<Button
-								text={'Pesan'}
+								text={loading ? 'Memproses...' : 'Pesan'}
 								style={
 									'bg-success text-white hover:bg-primary mt-5 text-sm md:text-base'
 								}
-								onClick={() => setOpenModal(true)}
+								onClick={() => !loading && setOpenModal(true)}
+								disabled={loading}
 							/>
 						</div>
 					</div>

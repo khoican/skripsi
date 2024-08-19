@@ -1,7 +1,7 @@
 import logo from '/logo.png';
 import { useEffect, useState } from 'react';
 
-const LoadingScreen = ({ hide }) => {
+const LoadingScreen = ({ hide = false }) => {
 	const [fade, setFade] = useState(false);
 
 	useEffect(() => {
