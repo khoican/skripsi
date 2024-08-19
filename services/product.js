@@ -70,7 +70,7 @@ export const deleteProduct = async (id) => {
 
 export const getAllProducts = async (skip, take) => {
 	const response = await axios.get(
-		`${getAppUrl()}api/products?${skip || take ? `skip=${skip}&take=${take}` : ''}`,
+		`${getAppUrl()}api/products${skip || take ? `?skip=${skip}&take=${take}` : ''}`,
 	);
 	return response.data.data;
 };
