@@ -1,4 +1,4 @@
-import { getAllOrders, getOrderCount, getOrderOmzet} from '../../../services/order';
+import { getAllOrders, getOrderCount, getOrderOmzet, editOrder} from '../../../services/order';
 
 export const FETCH_ORDER_REQUEST = 'FETCH_ORDER_REQUEST';
 export const FETCH_ORDER_SUCCESS = 'FETCH_ORDER_SUCCESS';
@@ -9,6 +9,23 @@ export const FETCH_ORDER_COUNT_ERROR = 'FETCH_ORDER_COUNT_ERROR';
 export const FETCH_ORDER_OMZET_REQUEST = 'FETCH_ORDER_OMZET_REQUEST';
 export const FETCH_ORDER_OMZET_SUCCESS = 'FETCH_ORDER_OMZET_SUCCESS';
 export const FETCH_ORDER_OMZET_ERROR = 'FETCH_ORDER_OMZET_ERROR';
+export const EDIT_ORDER_REQUEST = 'EDIT_ORDER_REQUEST'
+export const EDIT_ORDER_SUCCESS = 'EDIT_ORDER_SUCCESS'
+export const EDIT_ORDER_ERROR = 'EDIT_ORDER_ERROR'
+
+export const editOrderRequest = () => ({
+	type: 'EDIT_ORDER_REQUEST',
+})
+
+export const editOrderSuccess = (id, status) => ({
+	type: 'EDIT_ORDER_SUCCESS',
+	payload: [id, status]
+})
+
+export const editOrderError = (error) => ({
+	type: 'EDIT_ORDER_ERROR',
+	payload: error
+})
 
 export const fetchOrderOmzetRequest = () => ({
 	type: 'FETCH_ORDER_OMZET_REQUEST',
@@ -51,6 +68,10 @@ export const fetchOrdersError = (error) => ({
 	type: 'FETCH_ORDER_ERROR',
 	payload: error,
 });
+
+const editOrderStatus = () => {
+	
+}
 
 export const fetchOrderOmzet = () => {
 	return async (dispatch) => {

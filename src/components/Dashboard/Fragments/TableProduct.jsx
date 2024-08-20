@@ -106,12 +106,16 @@ const TableProduct = (props) => {
 	const datas = products.map((product, index) => {
 		return {
 			no: index + 1,
-			name: product.name,
+			name: product.name ?? 'N/A',
 			id: product.id,
-			stock: product.stock,
-			price: product.price,
-			category: product.subCategory.category.name,
-			subCategory: product.subCategory.name,
+			stock: product.stock ?? 'N/A',
+			price: product.price ?? 'N/A',
+			category:
+				product.subCategory != null
+					? product.subCategory.category.name
+					: 'N/A',
+			subCategory:
+				product.subCategory != null ? product.subCategory.name : 'N/A',
 		};
 	});
 
