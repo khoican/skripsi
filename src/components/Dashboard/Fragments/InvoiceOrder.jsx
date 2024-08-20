@@ -25,6 +25,13 @@ const InvoiceOrder = () => {
 		editOrder(orderId.id, status).then(() => window.location.reload());
 	};
 
+	const handleBatal = () => {
+		const status = {
+			status: 'BATAL',
+		};
+		editOrder(orderId.id, status).then(() => window.location.reload());
+	};
+
 	useEffect(() => {
 		getOrderDetails().then((data) => setOrderInvoice(data));
 	}, []);
@@ -115,7 +122,10 @@ const InvoiceOrder = () => {
 					</p>
 				</div>
 				<div className="mt-6 flex items-center justify-end gap-3 pb-3">
-					<Button variants="ring-1 ring-danger py-2 px-4 rounded-md text-red transition-all ease-in 3s hover:bg-red hover:text-white">
+					<Button
+						variants="ring-1 ring-danger py-2 px-4 rounded-md text-red transition-all ease-in 3s hover:bg-red hover:text-white"
+						onClick={handleBatal}
+					>
 						Cancel
 					</Button>
 					<Button
