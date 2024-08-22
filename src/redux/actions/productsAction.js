@@ -86,6 +86,7 @@ export const fetchProductCount = () => {
 		dispatch(fetchProductCountRequest());
 		try {
 			const data = await getProductCount();
+			log
 			dispatch(fetchProductCountSuccess(data));
 		} catch (error) {
 			dispatch(fetchProductCountError(error.message));
