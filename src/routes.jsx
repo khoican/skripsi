@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, useNavigate } from 'react-router-dom';
 import User from './layouts/User';
 import HomePage from './pages/user/HomePage';
 import ProductPage from './pages/user/ProductsPage';
@@ -22,6 +22,45 @@ import EditProfilePage from './pages/user/EditProfilePage';
 import EditProfile from './layouts/EditProfile';
 import ChangePasswordPage from './pages/user/ChangePasswordPage';
 import OrderHistoryPage from './pages/user/OrderHistoryPage';
+import { useEffect, useState } from 'react';
+import { decryptData } from '../helper/cryptoData';
+
+const ProtectedRoute = ({ authorized, children }) => {
+	const [isAuthorized, setIsAuthorized] = useState(null);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const user = sessionStorage.getItem('user') || null;
+
+		if (user) {
+			try {
+				const decodeUser = decryptData(user);
+				const userRole = decodeUser.role;
+
+				if (authorized.includes(userRole)) {
+					setIsAuthorized(true);
+				} else {
+					console.warn('Access denied: insufficient permissions');
+					navigate('/login');
+				}
+			} catch (error) {
+				console.error('Invalid token:', error);
+				navigate('/login');
+			}
+		} else if (user === null) {
+			console.warn('No token found. Redirecting to login.');
+			navigate('/login');
+		}
+
+		setLoading(false);
+	}, [authorized, navigate]);
+
+	if (isAuthorized === null) {
+		return null;
+	}
+
+	return isAuthorized ? children : null;
+};
 
 export const router = createBrowserRouter([
 	{
@@ -98,7 +137,11 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: '/dashboard',
-		element: <AdminLayout />,
+		element: (
+			<ProtectedRoute authorized={['ADMIN']}>
+				<AdminLayout />
+			</ProtectedRoute>
+		),
 		children: [
 			{
 				path: '',

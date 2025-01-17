@@ -45,9 +45,12 @@ const LoginPage = () => {
 
 		if (login.status !== 'success') {
 			setStatus(login.message);
+		} else if (login.status === 'success' && login.role === 'ADMIN') {
+			e.preventDefault();
+			navigate('/dashboard');
 		} else {
 			e.preventDefault();
-			navigate('/');
+			navigate(-1);
 		}
 	};
 
@@ -62,7 +65,7 @@ const LoginPage = () => {
 			setStatus(login.message);
 		} else {
 			setLoading(false);
-			navigate('/');
+			navigate(-1);
 		}
 	};
 

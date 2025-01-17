@@ -39,6 +39,7 @@ export const postLogin = async (username, password) => {
 		return {
 			status: response.status,
 			message: 'Login berhasil',
+			role: response.data.role,
 		};
 	} catch (error) {
 		return {
