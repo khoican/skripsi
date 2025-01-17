@@ -54,19 +54,23 @@ const ProductPage = () => {
 		setStatus('');
 	};
 
-	let product = products;
+	let product = [];
 
 	if (searchQuery) {
 		product = search;
+	} else if (categoryQuery && subCategoryQuery) {
+		product = products.filter(
+			(product) => product.subCategoryId == subCategoryQuery,
+		);
 	} else if (categoryQuery) {
 		product = products.filter(
-			(product) => product.categoryId === categoryQuery,
+			(product) => product.categoryId == categoryQuery,
 		);
-	} else if (subCategoryQuery) {
-		product = products.filter(
-			(product) => product.subCategoryId === subCategoryQuery,
-		);
+	} else {
+		product = products;
 	}
+
+	console.log(product);
 
 	return (
 		<>
