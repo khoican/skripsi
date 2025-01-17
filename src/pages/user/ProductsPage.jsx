@@ -70,8 +70,6 @@ const ProductPage = () => {
 		product = products;
 	}
 
-	console.log(product);
-
 	return (
 		<>
 			{status && (
