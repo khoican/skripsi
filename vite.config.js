@@ -8,4 +8,10 @@ export default defineConfig({
 	optimizeDeps: {
 		include: ['react', 'react-dom'],
 	},
+
+	server: {
+		mimeTypes: {
+			js: 'application/javascript',
+		},
+	},
 });

@@ -33,6 +33,7 @@
     "@reduxjs/toolkit": "^2.2.2",
     "axios": "^1.6.3",
     "chart.js": "^4.4.2",
+    "compressorjs": "^1.2.1",
     "crypto-js": "^4.2.0",
     "faker": "^5.5.3",
     "flowbite-react": "^0.7.8",

@@ -29,34 +29,30 @@ const ProtectedRoute = ({ authorized, children }) => {
 	const [isAuthorized, setIsAuthorized] = useState(null);
 	const navigate = useNavigate();
 
+	const decodeUser = decryptData('user');
+
 	useEffect(() => {
-		const user = sessionStorage.getItem('user') || null;
-
-		if (user) {
-			try {
-				const decodeUser = decryptData(user);
-				const userRole = decodeUser.role;
-
-				if (authorized.includes(userRole)) {
-					setIsAuthorized(true);
-				} else {
-					console.warn('Access denied: insufficient permissions');
-					navigate('/login');
-				}
-			} catch (error) {
-				console.error('Invalid token:', error);
-				navigate('/login');
-			}
-		} else if (user === null) {
-			console.warn('No token found. Redirecting to login.');
+		if (!decodeUser) {
+			console.warn('Invalid or missing token. Redirecting to login.');
 			navigate('/login');
+			return;
 		}
 
-		setLoading(false);
-	}, [authorized, navigate]);
+		try {
+			if (authorized.includes(decodeUser.role)) {
+				setIsAuthorized(true);
+			} else {
+				console.warn('Access denied: insufficient permissions');
+				navigate('/login');
+			}
+		} catch (error) {
+			console.error('Error processing user role:', error);
+			navigate('/login');
+		}
+	}, [authorized, navigate, decodeUser]);
 
 	if (isAuthorized === null) {
-		return null;
+		return <div>Loading...</div>;
 	}
 
 	return isAuthorized ? children : null;
@@ -73,22 +69,6 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/products',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products/:id',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products?search=:query',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products?category=:query',
-				element: <ProductPage />,
-			},
-			{
-				path: '/products?category=:query&subCategory=:query',
 				element: <ProductPage />,
 			},
 			{

@@ -5,6 +5,7 @@ import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 import { getAppUrl } from '../../../../../config/app';
 import logo from '/logo.png';
+import { useEffect, useState } from 'react';
 
 const CartProduct = (props) => {
 	const {
@@ -18,17 +19,52 @@ const CartProduct = (props) => {
 		image,
 		onDelete,
 	} = props;
+	const [optimizedImage, setOptimizedImage] = useState(null);
+
+	useEffect(() => {
+		const resizeImage = (fileUrl, width, callback) => {
+			const img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.onload = () => {
+				const canvas = document.createElement('canvas');
+				const ctx = canvas.getContext('2d');
+
+				const scale = width / img.width;
+				canvas.width = width;
+				canvas.height = img.height * scale;
+
+				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+				callback(canvas.toDataURL('image/webp', 0.8));
+			};
+			img.onerror = () => {
+				console.error('Gagal memuat gambar:', fileUrl);
+				callback(null);
+			};
+			img.src = fileUrl;
+		};
+
+		if (image) {
+			resizeImage(`${getAppUrl()}${image}`, 800, setOptimizedImage);
+		}
+	}, [image]);
 
 	let totalPrice = price * quantity;
 
 	return (
 		<div className="flex justify-between rounded-md shadow-lg w-full overflow-hidden">
 			<div className="flex gap-5">
-				<img
-					src={image !== null ? getAppUrl() + image : logo}
-					alt=""
-					className="h-24 md:h-32 w-auto my-auto"
-				/>
+				{optimizedImage ? (
+					<img
+						src={optimizedImage || logo}
+						alt={`gambar ${name}`}
+						className="w-auto h-24 md:h-32 object-cover"
+						loading="lazy"
+					/>
+				) : (
+					<div className="w-52 h-full md:h-32 bg-gray-50 overflow-hidden relative animate-pulse">
+						<div className="w-full h-full bg-gray-300"></div>
+					</div>
+				)}
 				<Link to={`/products/show/${productId}`} className="w-full">
 					<div className="my-3 flex flex-col justify-between w-full">
 						<div>

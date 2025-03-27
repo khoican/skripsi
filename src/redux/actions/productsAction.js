@@ -1,10 +1,17 @@
-import { getAllProducts, getAllProductsDashboard, getBestSeller, getProductCount } from '../../../services/product';
+import {
+	getAllProducts,
+	getAllProductsDashboard,
+	getBestSeller,
+	getProductCount,
+} from '../../../services/product';
 
 export const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCT_REQUEST';
 export const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
-export const FETCH_PRODUCT_DASHBOARD_REQUEST = 'FETCH_PRODUCT_DASHBOARD_REQUEST';
-export const FETCH_PRODUCT_DASHBOARD_SUCCESS = 'FETCH_PRODUCT_DASHBOARD_SUCCESS';
+export const FETCH_PRODUCT_DASHBOARD_REQUEST =
+	'FETCH_PRODUCT_DASHBOARD_REQUEST';
+export const FETCH_PRODUCT_DASHBOARD_SUCCESS =
+	'FETCH_PRODUCT_DASHBOARD_SUCCESS';
 export const FETCH_PRODUCT_DASHBOARD_ERROR = 'FETCH_PRODUCT_DASHBOARD_ERROR';
 export const FETCH_PRODUCT_COUNT_REQUEST = 'FETCH_PRODUCT_COUNT_REQUEST';
 export const FETCH_PRODUCT_COUNT_SUCCESS = 'FETCH_PRODUCT_COUNT_SUCCESS';
@@ -15,17 +22,17 @@ export const FETCH_BEST_SELLER_ERROR = 'FETCH_BEST_SELLER_ERROR';
 
 export const fetchBestSellerRequest = () => ({
 	type: 'FETCH_BEST_SELLER_REQUEST',
-})
+});
 
 export const fetchBestSellerSuccess = (products) => ({
 	type: 'FETCH_BEST_SELLER_SUCCESS',
-	payload: products
-})
+	payload: products,
+});
 
 export const fetchBestSellerError = (error) => ({
 	type: 'FETCH_BEST_SELLER_ERROR',
-	payload: error
-})
+	payload: error,
+});
 
 export const fetchProductCountRequest = () => ({
 	type: 'FETCH_PRODUCT_COUNT_REQUEST',
@@ -86,7 +93,7 @@ export const fetchProductCount = () => {
 		dispatch(fetchProductCountRequest());
 		try {
 			const data = await getProductCount();
-			log
+			log;
 			dispatch(fetchProductCountSuccess(data));
 		} catch (error) {
 			dispatch(fetchProductCountError(error.message));
@@ -94,7 +101,7 @@ export const fetchProductCount = () => {
 	};
 };
 
-export const fetchProducts = (skip, take) => {
+export const fetchProducts = (skip = 1, take = 100) => {
 	return async (dispatch) => {
 		dispatch(fetchProductsRequest());
 		try {
