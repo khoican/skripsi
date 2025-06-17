@@ -101,7 +101,7 @@ export const fetchProductCount = () => {
 	};
 };
 
-export const fetchProducts = (skip = 1, take = 100) => {
+export const fetchProducts = (skip = 1, take = 1000) => {
 	return async (dispatch) => {
 		dispatch(fetchProductsRequest());
 		try {
