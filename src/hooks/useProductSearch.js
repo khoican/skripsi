@@ -17,7 +17,7 @@ export const useProductSearch = () => {
     const initializeWorker = async () => {
       try {
         // Use absolute path from public folder or relative to current component
-        const workerPath = new URL('/helper/search/worker.js', window.location.origin);
+        const workerPath = new URL('search/worker.js', window.location.origin);
         workerRef.current = new Worker(workerPath);
         
         workerRef.current.onmessage = (e) => {
