@@ -6,12 +6,21 @@ const textProcessor = {
   removePunctuation: (text) => text.replace(/[^\w\s]/g, ' '),
   tokenize: (text) => text.split(/\s+/).filter(token => token.length > 0),
   
+  stopwords: new Set([
+    'dan', 'atau', 'dengan', 'untuk', 'pada', 'di', 'ke', 'dari', 'yang', 'ini', 'itu',
+    'adalah', 'akan', 'dapat', 'bisa', 'tidak', 'ya', 'juga', 'sudah', 'masih',
+    'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by'
+  ]),
+  
+  removeStopwords: (tokens) => tokens.filter(token => !textProcessor.stopwords.has(token)),
+  
   preprocess: (text) => {
     if (!text) return [];
     let processed = textProcessor.caseFold(text);
     processed = textProcessor.clean(processed);
     processed = textProcessor.removePunctuation(processed);
-    return tokens = textProcessor.tokenize(processed);
+    const tokens = textProcessor.tokenize(processed);
+    return textProcessor.removeStopwords(tokens);
   }
 };
 

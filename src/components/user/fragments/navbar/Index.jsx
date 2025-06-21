@@ -107,7 +107,6 @@ const Navbar = () => {
 				className={` ${navbar ? 'shadow' : ''} bg-white py-5 px-5 md:px-20 sticky top-0 flex justify-between items-center z-10`}
 			>
 				<Logo />
-				
 				<div className="w-5/12 md:w-1/3 text-center relative">
 					<input
 						type="text"
